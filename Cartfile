@@ -10,6 +10,6 @@ github "UseSweet/SweetFoundation" ~> 1.2.0
 github "UseSweet/SweetSwift" ~> 1.0
 github "tokenbrowser/AwesomeCache" "master"
 github "hyperoslo/ImagePicker"
-github "UseSweet/SweetUIKit" "956c06d01c6578bad451e58832bb0b056e3e0d01"
+github "UseSweet/SweetUIKit" "fixup/accessor"
 github "mxcl/PromiseKit" ~> 4.0
 github "bakkenbaeck/EtherealCereal" ~> 0.0.3

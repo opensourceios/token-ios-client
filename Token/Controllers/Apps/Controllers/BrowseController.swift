@@ -16,72 +16,48 @@
 import UIKit
 import SweetUIKit
 
-class BrowseController: UIViewController {
+class BrowseController: SearchableCollectionController {
     static let cellHeight = CGFloat(220)
     static let cellWidth = CGFloat(90)
 
-    lazy var latestTitleLabel: UILabel = {
-        let label = UILabel(withAutoLayout: true)
-        label.text = "Latest"
-        label.font = Theme.regular(size: 14)
-        label.textColor = Theme.greyTextColor
-
-        return label
-    }()
-
-    lazy var recommendedTitleLabel: UILabel = {
-        let label = UILabel(withAutoLayout: true)
-        label.text = "Recommended"
-        label.font = Theme.regular(size: 14)
-        label.textColor = Theme.greyTextColor
-
-        return label
-    }()
-
-    lazy var recommendedCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: BrowseController.cellWidth, height: BrowseController.cellHeight)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-        layout.minimumLineSpacing = 15
-
-        let view = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.showsHorizontalScrollIndicator = false
-        view.showsVerticalScrollIndicator = false
-
-        return view
-    }()
-
-    lazy var searchResultsView: SearchResultsView = {
-        let view = SearchResultsView(withAutoLayout: true)
-        view.selectionDelegate = self
-
-        return view
-    }()
-
-    fileprivate lazy var searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.delegate = self
-
-        searchController.searchBar.sizeToFit()
-        searchController.searchBar.tintColor = Theme.tintColor
-        searchController.searchBar.delegate = self
-
-        return searchController
-    }()
-
-    lazy var containerView: UIView = {
-        let view = UIView(withAutoLayout: true)
-
-        return view
-    }()
+//    lazy var recommendedCollectionView: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal
+//        layout.itemSize = CGSize(width: BrowseController.cellWidth, height: BrowseController.cellHeight)
+//        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+//        layout.minimumLineSpacing = 15
+//
+//        let view = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.showsHorizontalScrollIndicator = false
+//        view.showsVerticalScrollIndicator = false
+//
+//        return view
+//    }()
+//
+//    lazy var searchResultsView: SearchResultsView = {
+//        let view = SearchResultsView(withAutoLayout: true)
+//        view.selectionDelegate = self
+//
+//        return view
+//    }()
+//
+//    fileprivate lazy var searchController: UISearchController = {
+//        let searchController = UISearchController(searchResultsController: nil)
+//        searchController.dimsBackgroundDuringPresentation = false
+//        searchController.hidesNavigationBarDuringPresentation = false
+//        searchController.delegate = self
+//
+//        searchController.searchBar.sizeToFit()
+//        searchController.searchBar.tintColor = Theme.tintColor
+//        searchController.searchBar.delegate = self
+//
+//        return searchController
+//    }()
 
     var recommendedApps = [TokenContact]() {
         didSet {
-            self.recommendedCollectionView.reloadData()
+            self.collectionView.reloadData()
         }
     }
 
@@ -99,45 +75,17 @@ class BrowseController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.showsVerticalScrollIndicator = true
+        self.collectionView.alwaysBounceVertical = true
+
+        self.collectionView.register(AppCell.self)
+
         self.title = "Browse"
-
-        self.view.addSubview(self.searchResultsView)
-        self.searchResultsView.fillSuperview()
-        self.searchResultsView.isHidden = true
-
-        self.view.addSubview(self.containerView)
-        self.containerView.fillSuperview()
-
-        let separatorView = UIView(withAutoLayout: true)
-        separatorView.backgroundColor = UIColor.gray
-
-        self.containerView.addSubview(separatorView)
-        self.containerView.addSubview(self.recommendedCollectionView)
-        self.containerView.addSubview(self.recommendedTitleLabel)
-
-        self.recommendedCollectionView.backgroundColor = Theme.viewBackgroundColor
-        self.recommendedCollectionView.dataSource = self
-        self.recommendedCollectionView.delegate = self
-        self.recommendedCollectionView.register(AppCell.self)
-
-        self.recommendedTitleLabel.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 20).isActive = true
-        self.recommendedTitleLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 15).isActive = true
-        self.recommendedTitleLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -15).isActive = true
-
-        self.recommendedCollectionView.topAnchor.constraint(equalTo: self.recommendedTitleLabel.bottomAnchor, constant: 20).isActive = true
-        self.recommendedCollectionView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.recommendedCollectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        self.recommendedCollectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: BrowseController.cellHeight).isActive = true
-
-        separatorView.topAnchor.constraint(equalTo: self.recommendedCollectionView.bottomAnchor, constant: -15).isActive = true
-        separatorView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 15).isActive = true
-        separatorView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -15).isActive = true
-
-        self.navigationItem.titleView = self.searchController.searchBar
-
         self.appsAPIClient.getFeaturedApps { apps, error in
             if let error = error {
                 let alertController = UIAlertController.errorAlert(error as NSError)
@@ -148,10 +96,10 @@ class BrowseController: UIViewController {
         }
     }
 
-    func showSearchResultsView(shouldShow: Bool) {
-        self.containerView.isHidden = shouldShow
-        self.searchResultsView.isHidden = !shouldShow
-    }
+//    func showSearchResultsView(shouldShow: Bool) {
+//        self.containerView.isHidden = shouldShow
+//        self.searchResultsView.isHidden = !shouldShow
+//    }
 
     func reload(searchText: String) {
         self.appsAPIClient.search(searchText) { apps, error in
@@ -160,7 +108,7 @@ class BrowseController: UIViewController {
                 self.present(alertController, animated: true, completion: nil)
             }
 
-            self.searchResultsView.results = apps
+//            self.searchResultsView.results = apps
         }
     }
 }
@@ -181,7 +129,7 @@ extension BrowseController: UICollectionViewDataSource {
     }
 }
 
-extension BrowseController: UICollectionViewDelegate {
+extension BrowseController {
 
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let app = self.recommendedApps[indexPath.row]
@@ -190,13 +138,27 @@ extension BrowseController: UICollectionViewDelegate {
     }
 }
 
+extension BrowseController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 60, height: 80)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+}
+
 extension BrowseController: UISearchBarDelegate {
 
     func searchBar(_: UISearchBar, textDidChange searchText: String) {
-        if searchText.length == 0 {
-            self.searchResultsView.results = [TokenContact]()
-        }
-        self.showSearchResultsView(shouldShow: searchText.length > 0)
+//        if searchText.length == 0 {
+//            self.searchResultsView.results = [TokenContact]()
+//        }
+//        self.showSearchResultsView(shouldShow: searchText.length > 0)
 
         // Throttles search to delay performing a search while the user is typing.
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reload(searchText:)), object: searchText)
@@ -207,7 +169,7 @@ extension BrowseController: UISearchBarDelegate {
 extension BrowseController: UISearchControllerDelegate {
 
     func didDismissSearchController(_: UISearchController) {
-        self.showSearchResultsView(shouldShow: false)
+//        self.showSearchResultsView(shouldShow: false)
     }
 }
 

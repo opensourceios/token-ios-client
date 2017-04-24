@@ -30,6 +30,8 @@ public extension Jiggly {
         let options = UIViewAnimationOptions(arrayLiteral: .allowUserInteraction, .repeat, .autoreverse)
         UIView.animate(withDuration: 0.15, delay: 0.0, options: options, animations: {
             self.transform = rightWobble
+        }, completion: { _ in
+
         })
     }
 
