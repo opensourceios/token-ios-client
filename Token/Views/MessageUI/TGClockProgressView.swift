@@ -41,7 +41,7 @@ class TGClockProgressView: UIView {
     }
 
     func startAnimating() {
-        if isAnimating {
+        if self.isAnimating {
             return
         }
 

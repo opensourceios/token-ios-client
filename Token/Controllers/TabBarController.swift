@@ -53,7 +53,6 @@ open class TabBarController: UITabBarController {
         return controller
     }()
 
-
     internal var browseController: BrowseNavigationController!
     internal var messagingController: ChatsNavigationController!
     internal var favoritesController: FavoritesNavigationController!
@@ -121,7 +120,7 @@ open class TabBarController: UITabBarController {
 
 extension TabBarController: UITabBarControllerDelegate {
 
-    public func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+    public func tabBarController(_: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController == self.placeholderScannerController {
             SoundPlayer.playSound(type: .menuButton)
             self.present(self.scannerController, animated: true)

@@ -29,9 +29,9 @@ class ActionButton: UIControl {
 
         subscript(state: ButtonState) -> UIColor? {
             get {
-                return color[state.key]
+                return self.color[state.key]
             } set {
-                color[state.key] = newValue
+                self.color[state.key] = newValue
             }
         }
     }

@@ -148,7 +148,7 @@ public class EthereumAPIClient: NSObject {
         self.teapot.get("/v1/balance/\(address)") { (result: NetworkResult) in
             switch result {
             case .success(let json, let response):
-                let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedFailureReasonErrorKey : "Could not fetch balance."])
+                let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedFailureReasonErrorKey: "Could not fetch balance."])
                 guard response.statusCode == 200 else { completion(0, error); return }
                 guard let json = json?.dictionary else { completion(0, error); return }
 

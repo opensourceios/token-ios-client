@@ -187,10 +187,10 @@ public struct BaseConverter {
     }
 
     public static func decToHex(_ decStr: String) -> String {
-        return convertBase(decStr, fromBase: 10, toBase: 16)
+        return self.convertBase(decStr, fromBase: 10, toBase: 16)
     }
 
     public static func hexToDec(_ hexStr: String) -> String {
-        return convertBase(hexStr, fromBase: 16, toBase: 10)
+        return self.convertBase(hexStr, fromBase: 16, toBase: 10)
     }
 }

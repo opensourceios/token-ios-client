@@ -100,7 +100,7 @@ class ReputationView: UIView {
 
     func addSubviewsAndConstraints() {
 
-        for guide in guides {
+        for guide in self.guides {
             self.addLayoutGuide(guide)
         }
 

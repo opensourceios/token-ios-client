@@ -178,7 +178,7 @@ extension BackupPhraseVerifyController: VerificationDelegate {
             return .tooShort
         }
 
-        if originalPhrase == phrase.map { word in word.text} {
+        if originalPhrase == phrase.map { word in word.text } {
             DispatchQueue.main.asyncAfter(seconds: 0.5) {
                 _ = self.navigationController?.popToRootViewController(animated: true)
             }

@@ -22,7 +22,7 @@ public struct KeyboardInfo {
     public let animationDuration: TimeInterval
 
     public var animationOptions: UIViewAnimationOptions {
-        switch animationCurve {
+        switch self.animationCurve {
         case .easeInOut: return .curveEaseInOut
         case .easeIn: return .curveEaseIn
         case .easeOut: return .curveEaseOut

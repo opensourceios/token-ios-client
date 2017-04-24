@@ -159,7 +159,7 @@ open class ProfileController: UIViewController {
             self.nameLabel.text = username
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(avatarDidUpdate), name: .CurrentUserDidUpdateAvatarNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.avatarDidUpdate), name: .CurrentUserDidUpdateAvatarNotification, object: nil)
 
         self.aboutContentLabel.text = User.current?.about
         self.locationContentLabel.text = User.current?.location
@@ -197,7 +197,7 @@ open class ProfileController: UIViewController {
         self.avatarImageView.set(width: avatarSize)
         self.avatarImageView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 26).isActive = true
         self.avatarImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        
+
         self.nameLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
         self.nameLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 24).isActive = true
         self.nameLabel.topAnchor.constraint(equalTo: self.avatarImageView.bottomAnchor, constant: marginVertical).isActive = true
@@ -254,7 +254,6 @@ open class ProfileController: UIViewController {
     func avatarDidUpdate() {
         self.avatarImageView.image = User.current?.avatar
     }
-
 
     func displayQRCode() {
         let controller = QRCodeController(add: User.current!.displayUsername)

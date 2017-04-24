@@ -119,7 +119,7 @@ class AppController: UIViewController {
 
         self.edgesForExtendedLayout = .bottom
 
-        NotificationCenter.default.addObserver(self, selector: #selector(avatarDidUpdate), name: .TokenContactDidUpdateAvatarNotification, object: self.app)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.avatarDidUpdate), name: .TokenContactDidUpdateAvatarNotification, object: self.app)
     }
 
     public required init?(coder _: NSCoder) {

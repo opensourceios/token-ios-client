@@ -26,7 +26,7 @@ class RateUserControllerTransition: NSObject, UIViewControllerAnimatedTransition
     let operation: ControllerTransitionOperation
 
     var duration: TimeInterval {
-        switch operation {
+        switch self.operation {
         case .present: return 0.8
         case .dismiss: return 0.4
         }
@@ -38,7 +38,7 @@ class RateUserControllerTransition: NSObject, UIViewControllerAnimatedTransition
     }
 
     func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return duration
+        return self.duration
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

@@ -19,7 +19,7 @@ class SearchResultCell: UITableViewCell {
     var app: TokenContact? {
         didSet {
             if let app = self.app {
-                NotificationCenter.default.addObserver(self, selector: #selector(avatarDidUpdate), name: .TokenContactDidUpdateAvatarNotification, object: app)
+                NotificationCenter.default.addObserver(self, selector: #selector(self.avatarDidUpdate), name: .TokenContactDidUpdateAvatarNotification, object: app)
 
                 self.usernameLabel.text = app.category
                 self.nameLabel.text = app.name

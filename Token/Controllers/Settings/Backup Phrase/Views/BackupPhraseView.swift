@@ -19,7 +19,7 @@ import SweetUIKit
 struct Word {
     let index: Int
     let text: String
-    
+
     init(_ index: Int, _ text: String) {
         self.index = index
         self.text = text
@@ -87,10 +87,10 @@ class BackupPhraseView: UIView {
     convenience init(with originalPhrase: [String], for type: BackupPhraseType) {
         self.init(withAutoLayout: true)
         self.type = type
-        
+
         assert(originalPhrase.count <= 12, "Too large")
 
-        self.originalPhrase = originalPhrase.enumerated().map { (index, text) in Word(index, text) }
+        self.originalPhrase = originalPhrase.enumerated().map { index, text in Word(index, text) }
         self.wordViews = self.wordViews(for: self.originalPhrase)
 
         for wordView in self.wordViews {
@@ -128,7 +128,7 @@ class BackupPhraseView: UIView {
                 return false
             }
         }.forEach { wordView in
-            
+
             if word.index == wordView.word?.index {
                 self.sendSubview(toBack: wordView)
                 wordView.alpha = 0
@@ -152,13 +152,13 @@ class BackupPhraseView: UIView {
         self.animateLayout()
 
         self.wordViews.filter { wordView in
-            
+
             if let index = wordView.word?.index {
                 return !self.currentPhrase.map { word in word.index }.contains(index)
             } else {
                 return false
             }
-            
+
         }.forEach { wordView in
             wordView.alpha = 0
         }
@@ -277,13 +277,13 @@ class BackupPhraseView: UIView {
         guard let lastContainer = containers.last else { return }
 
         self.wordViews.filter { wordView in
-            
+
             if let index = wordView.word?.index {
                 return !self.currentPhrase.map { word in word.index }.contains(index)
             } else {
                 return false
             }
-            
+
         }.forEach { wordView in
             wordView.alpha = 0
 
