@@ -1,5 +1,6 @@
 #import "TSThread+Additions.h"
 #import <objc/runtime.h>
+#import "Token-Swift.h"
 
 @implementation TSThread (Additions)
 @dynamic cachedContactIdentifier;
@@ -13,7 +14,7 @@ static char _internalPropertyKey;
             NSString *body = ((TSMessage *)interaction).body;
             // We use hard-coded strings here since the constants for them are declared inside a swift enum
             // hence inaccessible through Objective C. Since we only use it here, I left them as literals.g
-            if ([body hasPrefix:@"SOFA::Message:"] || [body hasPrefix:@"SOFA::PaymentRequest:"]) {
+            if ([body hasPrefix:[SofaTypes message]] || [body hasPrefix:[SofaTypes paymentRequest]]) {
                 [visible addObject:interaction];
             }
         }
