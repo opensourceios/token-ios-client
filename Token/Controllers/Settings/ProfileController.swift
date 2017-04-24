@@ -197,8 +197,7 @@ open class ProfileController: UIViewController {
         self.avatarImageView.set(width: avatarSize)
         self.avatarImageView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 26).isActive = true
         self.avatarImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.avatarImageView.cornerRadius = avatarSize / 2
-
+        
         self.nameLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
         self.nameLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 24).isActive = true
         self.nameLabel.topAnchor.constraint(equalTo: self.avatarImageView.bottomAnchor, constant: marginVertical).isActive = true

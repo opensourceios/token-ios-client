@@ -79,9 +79,6 @@ class SearchResultCell: UITableViewCell {
         let imageSize: CGFloat = 44.0
         let height: CGFloat = 24.0
 
-        self.avatarImageView.clipsToBounds = true
-        self.avatarImageView.cornerRadius = imageSize / 2
-
         self.avatarImageView.set(height: imageSize)
         self.avatarImageView.set(width: imageSize)
         self.avatarImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true

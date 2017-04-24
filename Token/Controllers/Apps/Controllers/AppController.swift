@@ -23,8 +23,8 @@ class AppController: UIViewController {
 
     public var app: TokenContact
 
-    lazy var avatarImageView: UIImageView = {
-        let view = UIImageView(withAutoLayout: true)
+    lazy var avatarImageView: AvatarImageView = {
+        let view = AvatarImageView(withAutoLayout: true)
 
         return view
     }()

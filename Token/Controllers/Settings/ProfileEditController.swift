@@ -121,7 +121,6 @@ open class ProfileEditController: UIViewController {
         self.toolbar.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         self.toolbar.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
 
-        self.avatarImageView.cornerRadius = 40
         self.avatarImageView.set(height: 80)
         self.avatarImageView.set(width: 80)
         self.avatarImageView.topAnchor.constraint(equalTo: self.toolbar.bottomAnchor, constant: 24).isActive = true

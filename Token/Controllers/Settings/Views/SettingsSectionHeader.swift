@@ -54,7 +54,6 @@ class SettingsSectionHeader: UIView {
         self.addSubview(self.titleLabel)
 
         if let error = error {
-
             self.errorLabel.text = error
             self.addSubview(self.errorLabel)
             self.addSubview(self.errorImage)
@@ -80,7 +79,6 @@ class SettingsSectionHeader: UIView {
     }
 
     func setErrorHidden(_ hidden: Bool, animated: Bool) {
-
         if animated {
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .easeOut, animations: {
                 self.errorLabel.transform = hidden ? CGAffineTransform(translationX: 0, y: 25) : .identity

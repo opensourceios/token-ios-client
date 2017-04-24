@@ -69,20 +69,14 @@ class BaseCell: UITableViewCell {
         return view
     }()
 
-    lazy var disclosureIndicator: UIImageView = {
-        let view = UIImageView(withAutoLayout: true)
-        view.image = #imageLiteral(resourceName: "disclosure_indicator")
-
-        return view
-    }()
-
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        self.accessoryType = .disclosureIndicator
 
         self.contentView.addSubview(self.topSeparatorView)
         self.contentView.addSubview(self.shortBottomSeparatorView)
         self.contentView.addSubview(self.bottomSeparatorView)
-        self.contentView.addSubview(self.disclosureIndicator)
 
         self.topSeparatorView.set(height: 1 / UIScreen.main.scale)
         NSLayoutConstraint.activate([
@@ -103,11 +97,6 @@ class BaseCell: UITableViewCell {
             self.bottomSeparatorView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
             self.bottomSeparatorView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
             self.bottomSeparatorView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
-        ])
-
-        NSLayoutConstraint.activate([
-            self.disclosureIndicator.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            self.disclosureIndicator.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -18),
         ])
     }
 

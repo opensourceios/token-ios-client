@@ -94,9 +94,6 @@ class ProfileCell: BaseCell {
 
         self.contentView.addSubview(self.avatarImageView)
 
-        self.avatarImageView.clipsToBounds = true
-        self.avatarImageView.cornerRadius = imageSize / 2
-
         self.avatarImageView.set(height: imageSize)
         self.avatarImageView.set(width: imageSize)
         NSLayoutConstraint.activate([
