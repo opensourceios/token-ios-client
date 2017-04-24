@@ -78,8 +78,6 @@ class BrowseController: SearchableCollectionController {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
         self.collectionView.showsVerticalScrollIndicator = true
         self.collectionView.alwaysBounceVertical = true
 
@@ -92,7 +90,11 @@ class BrowseController: SearchableCollectionController {
                 self.present(alertController, animated: true, completion: nil)
             }
 
-            self.recommendedApps = apps
+            var appss = apps
+            appss.append(contentsOf: apps)
+            appss.append(contentsOf: apps)
+            appss.append(contentsOf: apps)
+            self.recommendedApps = appss
         }
     }
 
@@ -113,13 +115,13 @@ class BrowseController: SearchableCollectionController {
     }
 }
 
-extension BrowseController: UICollectionViewDataSource {
+extension BrowseController {
 
-    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+    override func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return self.recommendedApps.count
     }
 
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(AppCell.self, for: indexPath)
 
         let app = self.recommendedApps[indexPath.row]
@@ -127,24 +129,35 @@ extension BrowseController: UICollectionViewDataSource {
 
         return cell
     }
-}
-
-extension BrowseController {
 
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let app = self.recommendedApps[indexPath.row]
         let appController = AppController(app: app)
         self.navigationController?.pushViewController(appController, animated: true)
     }
+
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate _: Bool) {
+        let adjustedContentOffset = scrollView.contentOffset.y + scrollView.contentInset.top
+
+        if adjustedContentOffset <= SearchBarView.height / 2 {
+            scrollView.setContentOffset(CGPoint(x: 0.0, y: -scrollView.contentInset.top), animated: true)
+        } else if adjustedContentOffset > SearchBarView.height / 2 && adjustedContentOffset < SearchBarView.height {
+            scrollView.setContentOffset(CGPoint(x: 0.0, y: SearchBarView.height - scrollView.contentInset.top), animated: true)
+        }
+    }
 }
 
 extension BrowseController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 80)
+        return CGSize(width: 100, height: 220)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -153,7 +166,6 @@ extension BrowseController: UICollectionViewDelegateFlowLayout {
 }
 
 extension BrowseController: UISearchBarDelegate {
-
     func searchBar(_: UISearchBar, textDidChange searchText: String) {
 //        if searchText.length == 0 {
 //            self.searchResultsView.results = [TokenContact]()

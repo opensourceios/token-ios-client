@@ -200,6 +200,13 @@ SWIFT_CLASS("_TtC10SweetUIKit30SearchableCollectionController")
 - (void)scrollViewDidEndDragging:(UIScrollView * _Nonnull)scrollView willDecelerate:(BOOL)_;
 @end
 
+@class UICollectionViewCell;
+
+@interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UICollectionViewDataSource>
+- (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (NSInteger)collectionView:(UICollectionView * _Nonnull)collectionView numberOfItemsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+@end
+
 @class UICollectionViewLayoutAttributes;
 
 SWIFT_CLASS("_TtC10SweetUIKit30SearchableCollectionViewLayout")
@@ -280,7 +287,6 @@ SWIFT_CLASS("_TtC10SweetUIKit20SweetTableController")
 @interface UICollectionReusableView (SWIFT_EXTENSION(SweetUIKit))
 @end
 
-@class UICollectionViewCell;
 
 @interface UICollectionView (SWIFT_EXTENSION(SweetUIKit))
 - (void)register:(SWIFT_METATYPE(UICollectionViewCell) _Nonnull)cellClass;
