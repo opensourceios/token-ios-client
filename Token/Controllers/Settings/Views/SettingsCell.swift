@@ -43,6 +43,8 @@ class SettingsCell: BaseCell {
 
         let margin: CGFloat = 16
 
+        self.disclosureIndicator.image = nil
+
         self.contentView.addSubview(self.titleLabel)
 
         self.titleLabel.text = "Local currency"

@@ -30,13 +30,19 @@ open class SettingsController: SweetTableController {
     public var idAPIClient: IDAPIClient
 
     let numberOfSections = 3
-    let numberOfRows = [1, 1, 1]
+    let numberOfRows = [1, 1, 2]
     let cellTypes: [BaseCell.Type] = [ProfileCell.self, SecurityCell.self, SettingsCell.self]
     let sectionTitles = ["Your profile", "Security", "Settings"]
     let sectionErrors = [nil, "Your account is at risk", nil]
 
-    let securityTitles = ["Store backup phrase" /* , "Choose trusted friends" */ ]
-    let settingsTitles = [ /* "Local currency", "About", "Sign in on another device", */ "Sign out"]
+    let securityTitles = ["Store backup phrase"]
+
+    lazy var settingsTitles: [String] = {
+        let info = Bundle.main.infoDictionary!
+        let version = info["CFBundleShortVersionString"] as! String
+
+        return ["Sign out", "Version \(version)"]
+    }()
 
     public required init?(coder _: NSCoder) {
         fatalError("")
@@ -141,7 +147,7 @@ extension SettingsController: UITableViewDataSource {
     }
 
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeue(cellTypes[indexPath.section], for: indexPath)
+        return tableView.dequeue(self.cellTypes[indexPath.section], for: indexPath)
     }
 
     open func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
