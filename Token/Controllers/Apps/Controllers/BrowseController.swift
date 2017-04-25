@@ -20,41 +20,6 @@ class BrowseController: SearchableCollectionController {
     static let cellHeight = CGFloat(220)
     static let cellWidth = CGFloat(90)
 
-//    lazy var recommendedCollectionView: UICollectionView = {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .horizontal
-//        layout.itemSize = CGSize(width: BrowseController.cellWidth, height: BrowseController.cellHeight)
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-//        layout.minimumLineSpacing = 15
-//
-//        let view = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.showsHorizontalScrollIndicator = false
-//        view.showsVerticalScrollIndicator = false
-//
-//        return view
-//    }()
-//
-//    lazy var searchResultsView: SearchResultsView = {
-//        let view = SearchResultsView(withAutoLayout: true)
-//        view.selectionDelegate = self
-//
-//        return view
-//    }()
-//
-//    fileprivate lazy var searchController: UISearchController = {
-//        let searchController = UISearchController(searchResultsController: nil)
-//        searchController.dimsBackgroundDuringPresentation = false
-//        searchController.hidesNavigationBarDuringPresentation = false
-//        searchController.delegate = self
-//
-//        searchController.searchBar.sizeToFit()
-//        searchController.searchBar.tintColor = Theme.tintColor
-//        searchController.searchBar.delegate = self
-//
-//        return searchController
-//    }()
-
     var recommendedApps = [TokenContact]() {
         didSet {
             self.collectionView.reloadData()
@@ -66,7 +31,7 @@ class BrowseController: SearchableCollectionController {
     init(appsAPIClient: AppsAPIClient = .shared) {
         self.appsAPIClient = appsAPIClient
 
-        super.init(nibName: nil, bundle: nil)
+        super.init()
 
         self.loadViewIfNeeded()
     }
@@ -80,7 +45,11 @@ class BrowseController: SearchableCollectionController {
 
         self.collectionView.showsVerticalScrollIndicator = true
         self.collectionView.alwaysBounceVertical = true
+        self.collectionView.backgroundColor = Theme.viewBackgroundColor
+
         self.searchBar.delegate = self
+        self.searchBar.barTintColor = Theme.viewBackgroundColor
+        self.searchBar.tintColor = Theme.tintColor
 
         self.collectionView.register(AppCell.self)
 
@@ -95,11 +64,6 @@ class BrowseController: SearchableCollectionController {
         }
     }
 
-//    func showSearchResultsView(shouldShow: Bool) {
-//        self.containerView.isHidden = shouldShow
-//        self.searchResultsView.isHidden = !shouldShow
-//    }
-
     func reload(searchText: String) {
         self.appsAPIClient.search(searchText) { apps, error in
             if let error = error {
@@ -107,7 +71,7 @@ class BrowseController: SearchableCollectionController {
                 self.present(alertController, animated: true, completion: nil)
             }
 
-//            self.searchResultsView.results = apps
+            self.recommendedApps = apps
         }
     }
 }
@@ -132,9 +96,7 @@ extension BrowseController {
         let appController = AppController(app: app)
         self.navigationController?.pushViewController(appController, animated: true)
     }
-}
 
-extension BrowseController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
@@ -154,21 +116,13 @@ extension BrowseController: UICollectionViewDelegateFlowLayout {
 
 extension BrowseController: UISearchBarDelegate {
     func searchBar(_: UISearchBar, textDidChange searchText: String) {
-//        if searchText.length == 0 {
-//            self.searchResultsView.results = [TokenContact]()
-//        }
-//        self.showSearchResultsView(shouldShow: searchText.length > 0)
+        if searchText.length == 0 {
+            self.recommendedApps = [TokenContact]()
+        }
 
         // Throttles search to delay performing a search while the user is typing.
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reload(searchText:)), object: searchText)
         self.perform(#selector(reload(searchText:)), with: searchText, afterDelay: 0.5)
-    }
-}
-
-extension BrowseController: UISearchControllerDelegate {
-
-    func didDismissSearchController(_: UISearchController) {
-//        self.showSearchResultsView(shouldShow: false)
     }
 }
 

@@ -164,47 +164,9 @@ SWIFT_CLASS("_TtC10SweetUIKit20OpenInSafariActivity")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UISearchBar;
 @class UICollectionView;
-@class UIColor;
-@class NSBundle;
-
-SWIFT_CLASS("_TtC10SweetUIKit30SearchableCollectionController")
-@interface SearchableCollectionController : UIViewController
-@property (nonatomic, readonly, strong) UISearchBar * _Nonnull searchBar;
-@property (nonatomic, strong) UICollectionView * _Nonnull collectionView;
-@property (nonatomic, strong) UIColor * _Nullable searchBackgroundColor;
-- (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class UIScrollView;
-
-@interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UICollectionViewDelegate>
-- (void)scrollViewDidEndDragging:(UIScrollView * _Nonnull)scrollView willDecelerate:(BOOL)_;
-@end
-
-@class UICollectionViewCell;
-
-@interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UICollectionViewDataSource>
-- (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (NSInteger)collectionView:(UICollectionView * _Nonnull)collectionView numberOfItemsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class UICollectionViewLayoutAttributes;
-
-SWIFT_CLASS("_TtC10SweetUIKit30SearchableCollectionViewLayout")
-@interface SearchableCollectionViewLayout : UICollectionViewFlowLayout
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)_ OBJC_DESIGNATED_INITIALIZER;
-- (NSArray<UICollectionViewLayoutAttributes *> * _Nullable)layoutAttributesForElementsInRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
-- (UICollectionViewLayoutAttributes * _Nullable)layoutAttributesForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (UICollectionViewLayoutAttributes * _Nullable)layoutAttributesForDecorationViewOfKind:(NSString * _Nonnull)_ atIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-@end
-
 @class UICollectionViewLayout;
+@class NSBundle;
 
 SWIFT_CLASS("_TtC10SweetUIKit25SweetCollectionController")
 @interface SweetCollectionController : UIViewController
@@ -214,6 +176,46 @@ SWIFT_CLASS("_TtC10SweetUIKit25SweetCollectionController")
 - (void)viewDidLoad;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
+
+@class UISearchBar;
+@class UISearchController;
+
+SWIFT_CLASS("_TtC10SweetUIKit30SearchableCollectionController")
+@interface SearchableCollectionController : SweetCollectionController
+@property (nonatomic, readonly, strong) UISearchBar * _Nonnull searchBar;
+@property (nonatomic, strong) UISearchController * _Nonnull searchController;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (nonnull instancetype)initWithCollectionViewLayout:(UICollectionViewLayout * _Nonnull)layout OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)argument OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UICollectionViewDelegateFlowLayout>
+@end
+
+@class UICollectionViewCell;
+
+@interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UICollectionViewDataSource>
+- (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (NSInteger)collectionView:(UICollectionView * _Nonnull)collectionView numberOfItemsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class UIScrollView;
+
+@interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UICollectionViewDelegate, UIScrollViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
+- (void)scrollViewDidEndDragging:(UIScrollView * _Nonnull)scrollView willDecelerate:(BOOL)decelerate;
+@end
+
+
+@interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UISearchControllerDelegate>
+- (void)willPresentSearchController:(UISearchController * _Nonnull)searchController;
+- (void)didPresentSearchController:(UISearchController * _Nonnull)searchController;
+- (void)willDismissSearchController:(UISearchController * _Nonnull)searchController;
+- (void)didDismissSearchController:(UISearchController * _Nonnull)searchController;
+@end
+
 
 @class UITableView;
 
@@ -441,6 +443,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 - (void)fillSuperviewWith:(UIEdgeInsets)insets;
 - (void)setWithHeight:(CGFloat)height;
 - (void)setWithWidth:(CGFloat)width;
+/// Attach a view to the top of its superview or view controller’s top layout guide, if one is supplied
+/// \param viewController If not nil, attach the view to the bottom of its top layout guide.
+///
 - (void)attachToTopWithViewController:(UIViewController * _Nullable)viewController;
 @end
 

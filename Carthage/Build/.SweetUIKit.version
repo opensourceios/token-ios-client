@@ -1,9 +1,9 @@
 {
   "xcodeVersion" : "Xcode 8.3.2\nBuild version 8E2002",
-  "commitish" : "64ab55d920316270e37c79202c02ac98da951a8f",
+  "commitish" : "d2d4c8f69bbcd4b5cef27e433be0292c85666886",
   "iOS" : [
     {
-      "hash" : "a51d37a4832e992e0979bd86e6571127a5441da6a19ef5339034c58506b97f3c",
+      "hash" : "06b37b3617cf2efa803ed3ef06f80a16719395b6e00036aad82542c3eec3758e",
       "name" : "SweetUIKit"
     }
   ]

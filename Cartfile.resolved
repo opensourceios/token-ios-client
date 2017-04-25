@@ -1,6 +1,6 @@
 github "UseSweet/SweetFoundation" "1.2.1"
 github "UseSweet/SweetSwift" "1.2.0"
-github "UseSweet/SweetUIKit" "64ab55d920316270e37c79202c02ac98da951a8f"
+github "UseSweet/SweetUIKit" "d2d4c8f69bbcd4b5cef27e433be0292c85666886"
 github "bakkenbaeck/CameraScanner" "0.0.1"
 github "bakkenbaeck/EtherealCereal" "0.0.3"
 github "bakkenbaeck/Formulaic" "0.0.2"
