@@ -164,28 +164,14 @@ SWIFT_CLASS("_TtC10SweetUIKit20OpenInSafariActivity")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIColor;
 @class UISearchBar;
-
-SWIFT_CLASS("_TtC10SweetUIKit13SearchBarView")
-@interface SearchBarView : UICollectionReusableView
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) CGFloat height;)
-+ (CGFloat)height SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull kind;)
-+ (NSString * _Nonnull)kind SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UIColor * _Nonnull defaultSearchBackgroundColor;)
-+ (UIColor * _Nonnull)defaultSearchBackgroundColor SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, strong) UIColor * _Nullable searchBackgroundColor;
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)_ OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, strong) UISearchBar * _Nonnull searchBar;
-@end
-
 @class UICollectionView;
+@class UIColor;
 @class NSBundle;
 
 SWIFT_CLASS("_TtC10SweetUIKit30SearchableCollectionController")
 @interface SearchableCollectionController : UIViewController
+@property (nonatomic, readonly, strong) UISearchBar * _Nonnull searchBar;
 @property (nonatomic, strong) UICollectionView * _Nonnull collectionView;
 @property (nonatomic, strong) UIColor * _Nullable searchBackgroundColor;
 - (void)viewDidLoad;

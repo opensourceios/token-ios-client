@@ -80,6 +80,7 @@ class BrowseController: SearchableCollectionController {
 
         self.collectionView.showsVerticalScrollIndicator = true
         self.collectionView.alwaysBounceVertical = true
+        self.searchBar.delegate = self
 
         self.collectionView.register(AppCell.self)
 
@@ -90,11 +91,7 @@ class BrowseController: SearchableCollectionController {
                 self.present(alertController, animated: true, completion: nil)
             }
 
-            var appss = apps
-            appss.append(contentsOf: apps)
-            appss.append(contentsOf: apps)
-            appss.append(contentsOf: apps)
-            self.recommendedApps = appss
+            self.recommendedApps = apps
         }
     }
 
@@ -134,16 +131,6 @@ extension BrowseController {
         let app = self.recommendedApps[indexPath.row]
         let appController = AppController(app: app)
         self.navigationController?.pushViewController(appController, animated: true)
-    }
-
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate _: Bool) {
-        let adjustedContentOffset = scrollView.contentOffset.y + scrollView.contentInset.top
-
-        if adjustedContentOffset <= SearchBarView.height / 2 {
-            scrollView.setContentOffset(CGPoint(x: 0.0, y: -scrollView.contentInset.top), animated: true)
-        } else if adjustedContentOffset > SearchBarView.height / 2 && adjustedContentOffset < SearchBarView.height {
-            scrollView.setContentOffset(CGPoint(x: 0.0, y: SearchBarView.height - scrollView.contentInset.top), animated: true)
-        }
     }
 }
 
