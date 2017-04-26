@@ -110,7 +110,7 @@ open class SettingsController: SweetTableController {
     }
 
     func handleSignOut() {
-        guard let currentUser = User.current else {
+        guard let currentUser = TokenUser.current else {
             let alert = UIAlertController(title: "No user found!", message: "This is an error. Please report this.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
                 fatalError()
@@ -190,7 +190,7 @@ extension SettingsController: UITableViewDelegate {
         }
 
         if let cell = cell as? ProfileCell {
-            cell.user = User.current
+            cell.user = TokenUser.current
         } else if let cell = cell as? SecurityCell {
             cell.title = securityTitles[indexPath.row]
 

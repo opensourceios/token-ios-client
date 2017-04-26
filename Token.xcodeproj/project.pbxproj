@@ -21,7 +21,6 @@
 		149F9A621E72E29A00FB74AA /* ProfileEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE18B2A1E2D1FD300940DC8 /* ProfileEditController.swift */; };
 		149F9A631E72E29A00FB74AA /* SignalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2433D31E5F46F6003D95A1 /* SignalNotificationHandler.swift */; };
 		149F9A641E72E29A00FB74AA /* BackgroundNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2162611E5EF76000292B14 /* BackgroundNotificationHandler.swift */; };
-		149F9A651E72E29A00FB74AA /* TokenContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBAF41E2CDDB100A70E07 /* TokenContact.swift */; };
 		149F9A661E72E29A00FB74AA /* MessageFetcherJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB8C871E682FD80088D5A6 /* MessageFetcherJob.swift */; };
 		149F9A671E72E29A00FB74AA /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAACCD61E310C1100FB871D /* SettingsNavigationController.swift */; };
 		149F9A681E72E29A00FB74AA /* BaseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4A6D1E4CC04300126217 /* BaseConverter.swift */; };
@@ -74,7 +73,6 @@
 		149F9A9B1E72E29A00FB74AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9238B81E24F1D2004BEEE0 /* AppDelegate.m */; };
 		149F9A9C1E72E29A00FB74AA /* MessageCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F40F3BF1E59FE97007A7DE7 /* MessageCellLayout.swift */; };
 		149F9A9D1E72E29A00FB74AA /* ControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDB3B161E6D640900EE5FD7 /* ControlCell.swift */; };
-		149F9A9E1E72E29A00FB74AA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBADC1E28E57100A70E07 /* User.swift */; };
 		149F9A9F1E72E29A00FB74AA /* DateTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F844BD61E30D8DE001C5498 /* DateTimeFormatter.swift */; };
 		149F9AA01E72E29A00FB74AA /* SofaWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8EA461E323B4000505441 /* SofaWrapper.swift */; };
 		149F9AA11E72E29A00FB74AA /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F40F3BA1E59FE97007A7DE7 /* MessageCell.swift */; };
@@ -136,6 +134,7 @@
 		14ED3ABD1E4A2B3400DF8079 /* BrowseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ED3ABC1E4A2B3400DF8079 /* BrowseController.swift */; };
 		14ED3ABF1E4A347400DF8079 /* BrowseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ED3ABE1E4A347400DF8079 /* BrowseNavigationController.swift */; };
 		14EE6B4D1E72E54A000B07DA /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F8D1C71E72B4AA003F5749 /* Checkbox.swift */; };
+		2B355BDA1EAE356C0093FA8F /* TokenUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B355BD91EAE356C0093FA8F /* TokenUser.swift */; };
 		79C8B9332AAF618B6185BC82 /* libPods-CocoaPods-Development.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A763C19118469E7169C9F72 /* libPods-CocoaPods-Development.a */; };
 		9F04A7231E38D1400043534A /* QRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F04A7221E38D1400043534A /* QRCodeController.swift */; };
 		9F1852AD1E93D7A3001C5C13 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1852AC1E93D7A3001C5C13 /* ImagePicker.framework */; };
@@ -254,12 +253,10 @@
 		9FC72A441E252CFA00EF1141 /* ContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC72A431E252CFA00EF1141 /* ContactsManager.m */; };
 		9FCDBAD41E27DE8800A70E07 /* Yap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBAD31E27DE8800A70E07 /* Yap.swift */; };
 		9FCDBAD91E28D7D800A70E07 /* idAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBAD81E28D7D800A70E07 /* idAPIClient.swift */; };
-		9FCDBADD1E28E57100A70E07 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBADC1E28E57100A70E07 /* User.swift */; };
 		9FCDBADF1E28E6DC00A70E07 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBADE1E28E6DC00A70E07 /* TabBarController.swift */; };
 		9FCDBAE31E28E71900A70E07 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBAE01E28E71900A70E07 /* FavoritesController.swift */; };
 		9FCDBAE51E28E71900A70E07 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBAE21E28E71900A70E07 /* ProfileController.swift */; };
 		9FCDBAEA1E28FD5C00A70E07 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBAE91E28FD5C00A70E07 /* Theme.swift */; };
-		9FCDBAF51E2CDDB100A70E07 /* TokenContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBAF41E2CDDB100A70E07 /* TokenContact.swift */; };
 		9FCF13281E52FC2A0078FF7F /* TSThread+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FCF13271E52FC2A0078FF7F /* TSThread+Additions.m */; };
 		9FCF132D1E531B4F0078FF7F /* PaymentRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCF132C1E531B4E0078FF7F /* PaymentRequestController.swift */; };
 		9FD25D3C1E813C3F0011F164 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD25D3B1E813C3F0011F164 /* Navigator.swift */; };
@@ -370,6 +367,7 @@
 		14ED3ABC1E4A2B3400DF8079 /* BrowseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseController.swift; sourceTree = "<group>"; };
 		14ED3ABE1E4A347400DF8079 /* BrowseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrowseNavigationController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		21C18022E25A13D670BB406A /* Pods-CocoaPods-Distribution.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoaPods-Distribution.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CocoaPods-Distribution/Pods-CocoaPods-Distribution.debug.xcconfig"; sourceTree = "<group>"; };
+		2B355BD91EAE356C0093FA8F /* TokenUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenUser.swift; sourceTree = "<group>"; };
 		2D5CDC5628EC8E3A581DB43C /* libPods-CocoaPods-Distribution.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaPods-Distribution.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3792EEE42F397342AA67CF7D /* Pods-CocoaPods-Development.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoaPods-Development.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CocoaPods-Development/Pods-CocoaPods-Development.debug.xcconfig"; sourceTree = "<group>"; };
 		626847A05B6B231F02E4B0A9 /* Pods-CocoaPods-Distribution.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoaPods-Distribution.release.xcconfig"; path = "Pods/Target Support Files/Pods-CocoaPods-Distribution/Pods-CocoaPods-Distribution.release.xcconfig"; sourceTree = "<group>"; };
@@ -477,12 +475,10 @@
 		9FC848301E5DB1B600568F1B /* Token.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Token.entitlements; sourceTree = "<group>"; };
 		9FCDBAD31E27DE8800A70E07 /* Yap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Yap.swift; sourceTree = "<group>"; };
 		9FCDBAD81E28D7D800A70E07 /* idAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = idAPIClient.swift; sourceTree = "<group>"; };
-		9FCDBADC1E28E57100A70E07 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9FCDBADE1E28E6DC00A70E07 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9FCDBAE01E28E71900A70E07 /* FavoritesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		9FCDBAE21E28E71900A70E07 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		9FCDBAE91E28FD5C00A70E07 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		9FCDBAF41E2CDDB100A70E07 /* TokenContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenContact.swift; sourceTree = "<group>"; };
 		9FCF13261E52FB160078FF7F /* TSThread+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TSThread+Additions.h"; sourceTree = "<group>"; };
 		9FCF13271E52FC2A0078FF7F /* TSThread+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TSThread+Additions.m"; sourceTree = "<group>"; };
 		9FCF132C1E531B4E0078FF7F /* PaymentRequestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentRequestController.swift; sourceTree = "<group>"; };
@@ -684,8 +680,7 @@
 		9F489BE21E76AEE800902046 /* Users */ = {
 			isa = PBXGroup;
 			children = (
-				9FCDBADC1E28E57100A70E07 /* User.swift */,
-				9FCDBAF41E2CDDB100A70E07 /* TokenContact.swift */,
+				2B355BD91EAE356C0093FA8F /* TokenUser.swift */,
 				9FC72A421E252CFA00EF1141 /* ContactsManager.h */,
 				9FC72A431E252CFA00EF1141 /* ContactsManager.m */,
 			);
@@ -1487,7 +1482,6 @@
 				149F9A631E72E29A00FB74AA /* SignalNotificationHandler.swift in Sources */,
 				9FAC46EE1E800C13005F76A9 /* UIColor+Additions.swift in Sources */,
 				149F9A641E72E29A00FB74AA /* BackgroundNotificationHandler.swift in Sources */,
-				149F9A651E72E29A00FB74AA /* TokenContact.swift in Sources */,
 				149F9A661E72E29A00FB74AA /* MessageFetcherJob.swift in Sources */,
 				149F9A671E72E29A00FB74AA /* SettingsNavigationController.swift in Sources */,
 				149F9A681E72E29A00FB74AA /* BaseConverter.swift in Sources */,
@@ -1567,7 +1561,6 @@
 				A9BF33B81E76F918009A51AA /* CheckboxControl.swift in Sources */,
 				149F9A9C1E72E29A00FB74AA /* MessageCellLayout.swift in Sources */,
 				149F9A9D1E72E29A00FB74AA /* ControlCell.swift in Sources */,
-				149F9A9E1E72E29A00FB74AA /* User.swift in Sources */,
 				9FB36EA51E7C272400DB6F86 /* NSLayoutConstraint+Additions.swift in Sources */,
 				149F9A9F1E72E29A00FB74AA /* DateTimeFormatter.swift in Sources */,
 				149F9AA01E72E29A00FB74AA /* SofaWrapper.swift in Sources */,
@@ -1602,7 +1595,6 @@
 				9FAC46ED1E800C13005F76A9 /* UIColor+Additions.swift in Sources */,
 				A9AC740B1E77E62900365029 /* UIView+Additions.swift in Sources */,
 				9F2162621E5EF76000292B14 /* BackgroundNotificationHandler.swift in Sources */,
-				9FCDBAF51E2CDDB100A70E07 /* TokenContact.swift in Sources */,
 				9FEB8C881E682FD80088D5A6 /* MessageFetcherJob.swift in Sources */,
 				9FAACCD71E310C1100FB871D /* SettingsNavigationController.swift in Sources */,
 				9FAE4A6E1E4CC04300126217 /* BaseConverter.swift in Sources */,
@@ -1658,6 +1650,7 @@
 				A9AC74081E77E37500365029 /* ActionButton.swift in Sources */,
 				9FAACCB31E30E1EE00FB871D /* FavoritesNavigationController.swift in Sources */,
 				9FCDBAEA1E28FD5C00A70E07 /* Theme.swift in Sources */,
+				2B355BDA1EAE356C0093FA8F /* TokenUser.swift in Sources */,
 				14ED3ABF1E4A347400DF8079 /* BrowseNavigationController.swift in Sources */,
 				9F40F3CA1E59FE97007A7DE7 /* TGDeliveryStatusView.swift in Sources */,
 				9F5D639D1E9231BE00FED490 /* ActionableMessageCell.swift in Sources */,
@@ -1681,7 +1674,6 @@
 				A9AC740E1E78051F00365029 /* TitleLabel.swift in Sources */,
 				9F40F3CC1E59FE97007A7DE7 /* MessageCellLayout.swift in Sources */,
 				9FDB3B171E6D640900EE5FD7 /* ControlCell.swift in Sources */,
-				9FCDBADD1E28E57100A70E07 /* User.swift in Sources */,
 				9F844BD71E30D8DE001C5498 /* DateTimeFormatter.swift in Sources */,
 				9FB8EA471E323B4000505441 /* SofaWrapper.swift in Sources */,
 				A9ED6CCA1E82865600160637 /* SignInNavigationController.swift in Sources */,

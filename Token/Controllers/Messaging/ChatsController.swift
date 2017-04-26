@@ -81,7 +81,7 @@ open class ChatsController: SweetTableController {
     func registerNotifications() {
         let notificationController = NotificationCenter.default
         notificationController.addObserver(self, selector: #selector(yapDatabaseDidChange(notification:)), name: .YapDatabaseModified, object: nil)
-        notificationController.addObserver(self, selector: #selector(ChatsController.contactsDidUpdate), name: TokenContact.didUpdateContactInfoNotification, object: nil)
+        notificationController.addObserver(self, selector: #selector(ChatsController.contactsDidUpdate), name: TokenUser.didUpdateContactInfoNotification, object: nil)
     }
 
     func yapDatabaseDidChange(notification _: NSNotification) {

@@ -27,10 +27,10 @@ open class ProfileEditController: UIViewController {
         let usernameValidator = TextInputValidator(minLength: 2, maxLength: 60, validationPattern: IDAPIClient.usernameValidationPattern)
 
         dataSource.items = [
-            FormItem(title: "Username", value: User.current?.username, fieldName: "username", type: .input, textInputValidator: usernameValidator),
-            FormItem(title: "Display name", value: User.current?.name, fieldName: "name", type: .input),
-            FormItem(title: "About", value: User.current?.about, fieldName: "about", type: .input),
-            FormItem(title: "Location", value: User.current?.location, fieldName: "location", type: .input),
+            FormItem(title: "Username", value: TokenUser.current?.username, fieldName: "username", type: .input, textInputValidator: usernameValidator),
+            FormItem(title: "Display name", value: TokenUser.current?.name, fieldName: "name", type: .input),
+            FormItem(title: "About", value: TokenUser.current?.about, fieldName: "about", type: .input),
+            FormItem(title: "Location", value: TokenUser.current?.location, fieldName: "location", type: .input),
         ]
 
         return dataSource
@@ -107,7 +107,7 @@ open class ProfileEditController: UIViewController {
         self.view.backgroundColor = Theme.viewBackgroundColor
         self.addSubviewsAndConstraints()
 
-        guard let user = User.current else { return }
+        guard let user = TokenUser.current else { return }
         self.avatarImageView.image = user.avatar
     }
 
@@ -149,7 +149,7 @@ open class ProfileEditController: UIViewController {
     }
 
     func saveAndDismiss() {
-        guard let user = User.current else { return }
+        guard let user = TokenUser.current else { return }
 
         var username: String?
         var name: String?
@@ -159,7 +159,7 @@ open class ProfileEditController: UIViewController {
         for item in self.dataSource.items {
             if item.fieldName == "username" {
                 if item.validate() {
-                    username = item.value as? String ?? User.current!.username
+                    username = item.value as? String ?? TokenUser.current!.username
                 } else {
                     let alert = UIAlertController.dismissableAlert(title: "Error", message: "Username is invalid! Use numbers, letters, and underscores only.")
                     self.present(alert, animated: true)

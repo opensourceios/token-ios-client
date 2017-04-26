@@ -31,7 +31,7 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
 
     private var imageCache = try! Cache<UIImage>(name: "imageCache")
 
-    private var contactCache = try! Cache<TokenContact>(name: "tokenContactCache")
+    private var contactCache = try! Cache<TokenUser>(name: "tokenContactCache")
 
     let contactUpdateQueue = DispatchQueue(label: "token.updateContactsQueue")
 
@@ -50,14 +50,14 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
     /// once all the contacts have been processed.
     func updateContacts() {
         self.contactUpdateQueue.async {
-            guard let contactsData = Yap.sharedInstance.retrieveObjects(in: TokenContact.collectionKey) as? [Data] else { fatalError() }
+            guard let contactsData = Yap.sharedInstance.retrieveObjects(in: TokenUser.collectionKey) as? [Data] else { fatalError() }
             let semaphore = DispatchSemaphore(value: 0)
 
             for contactData in contactsData {
                 guard let dictionary = try? JSONSerialization.jsonObject(with: contactData, options: []) else { continue }
 
                 if let dictionary = dictionary as? [String: Any] {
-                    let tokenContact = TokenContact(json: dictionary)
+                    let tokenContact = TokenUser(json: dictionary)
                     self.findContact(name: tokenContact.address) { _ in
                         semaphore.signal()
                     }
@@ -68,7 +68,7 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
             }
 
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: TokenContact.didUpdateContactInfoNotification, object: self)
+                NotificationCenter.default.post(name: TokenUser.didUpdateContactInfoNotification, object: self)
             }
         }
     }
@@ -92,7 +92,7 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
     public func registerUserIfNeeded(_ success: @escaping (() -> Void)) {
         self.retrieveUser(username: Cereal.shared.address) { user in
             guard user == nil else {
-                User.current = user
+                TokenUser.current = user
 
                 return
             }
@@ -116,7 +116,7 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
                         guard response.statusCode == 200 else { return }
                         guard let json = json?.dictionary else { return }
 
-                        User.current = User(json: json)
+                        TokenUser.current = TokenUser(json: json)
                         print("Registered user with address: \(cereal.address)")
 
                         success()
@@ -147,7 +147,7 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
                 case .success(let json, _):
                     guard let userDict = json?.dictionary else { completion(false); return }
 
-                    User.current?.update(avatar: avatar, avatarPath: userDict["avatar"] as! String)
+                    TokenUser.current?.update(avatar: avatar, avatarPath: userDict["avatar"] as! String)
 
                     completion(true)
                 case .failure(_, _, let error):
@@ -159,7 +159,7 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
         }
     }
 
-    public func updateUser(_ user: User, completion: @escaping ((_ success: Bool, _ message: String?) -> Void)) {
+    public func updateUser(_ user: TokenUser, completion: @escaping ((_ success: Bool, _ message: String?) -> Void)) {
         self.fetchTimestamp { timestamp in
             let cereal = Cereal.shared
             let path = "/v1/user"
@@ -178,8 +178,8 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
                     guard response.statusCode == 200 else { fatalError() }
                     guard let json = json?.dictionary else { fatalError() }
 
-                    let user = User(json: json)
-                    User.current = user
+                    let user = TokenUser(json: json)
+                    TokenUser.current = user
 
                     completion(true, nil)
                 case .failure(let json, _, _):
@@ -191,14 +191,14 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
         }
     }
 
-    public func retrieveContact(username: String, completion: @escaping ((TokenContact?) -> Void)) {
+    public func retrieveContact(username: String, completion: @escaping ((TokenUser?) -> Void)) {
         self.teapot.get("/v1/user/\(username)", headerFields: ["Token-Timestamp": String(Int(Date().timeIntervalSince1970))]) { (result: NetworkResult) in
             switch result {
             case .success(let json, let response):
                 print(response)
                 // we know it's a dictionary for this API
                 guard let json = json?.dictionary else { completion(nil); return }
-                let contact = TokenContact(json: json)
+                let contact = TokenUser(json: json)
 
                 completion(contact)
             case .failure(let json, let response, let error):
@@ -211,14 +211,14 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
         }
     }
 
-    public func retrieveUser(username: String, completion: @escaping ((User?) -> Void)) {
+    public func retrieveUser(username: String, completion: @escaping ((TokenUser?) -> Void)) {
         self.teapot.get("/v1/user/\(username)", headerFields: ["Token-Timestamp": String(Int(Date().timeIntervalSince1970))]) { (result: NetworkResult) in
             switch result {
             case .success(let json, let response):
                 print(response)
                 // we know it's a dictionary for this API
                 guard let json = json?.dictionary else { completion(nil); return }
-                let user = User(json: json)
+                let user = TokenUser(json: json)
 
                 print("Current user with address: \(user.address)")
 
@@ -265,7 +265,7 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
         }
     }
 
-    public func findContact(name: String, completion: @escaping ((TokenContact?) -> Void)) {
+    public func findContact(name: String, completion: @escaping ((TokenUser?) -> Void)) {
         self.contactCache.setObject(forKey: name, cacheBlock: { success, failure in
             self.teapot.get("/v1/user/\(name)") { (result: NetworkResult) in
                 switch result {
@@ -273,14 +273,14 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
                     print(response)
                     guard let json = json?.dictionary else { completion(nil); return }
 
-                    let contact = TokenContact(json: json)
+                    let contact = TokenUser(json: json)
                     NotificationCenter.default.post(name: IDAPIClient.didFetchContactInfoNotification, object: contact)
 
                     success(contact, self.cacheExpiry)
                 case .failure(_, let response, let error):
                     if response.statusCode == 404 {
                         // contact was deleted from the server. If we don't have it locally, delete the signal thread.
-                        if !Yap.sharedInstance.containsObject(for: name, in: TokenContact.collectionKey) {
+                        if !Yap.sharedInstance.containsObject(for: name, in: TokenUser.collectionKey) {
                             TSStorageManager.shared().dbConnection.readWrite { transaction in
                                 let thread = TSContactThread.getOrCreateThread(withContactId: name, transaction: transaction)
                                 thread.archiveThread(with: transaction)
@@ -297,7 +297,7 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
         }
     }
 
-    public func searchContacts(name: String, completion: @escaping (([TokenContact]) -> Void)) {
+    public func searchContacts(name: String, completion: @escaping (([TokenUser]) -> Void)) {
         // /v1/search/user/?query=moxiemarl&offset=80&limit=20
         self.teapot.get("/v1/search/user?query=\(name)") { (result: NetworkResult) in
             switch result {
@@ -306,9 +306,9 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
 
                 guard let dictionary = json?.dictionary, let json = dictionary["results"] as? [[String: Any]] else { completion([]); return }
 
-                var contacts = [TokenContact]()
+                var contacts = [TokenUser]()
                 for item in json {
-                    contacts.append(TokenContact(json: item))
+                    contacts.append(TokenUser(json: item))
                 }
                 completion(contacts)
             case .failure(_, let response, let error):

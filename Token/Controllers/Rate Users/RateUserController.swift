@@ -18,7 +18,7 @@ import SweetUIKit
 import HPGrowingTextView
 
 protocol RateUserControllerDelegate: class {
-    func didRate(_ user: TokenContact, rating: Int, review: String)
+    func didRate(_ user: TokenUser, rating: Int, review: String)
 }
 
 class RateUserController: UIViewController {
@@ -28,7 +28,7 @@ class RateUserController: UIViewController {
 
     weak var delegate: RateUserControllerDelegate?
 
-    fileprivate var user: TokenContact
+    fileprivate var user: TokenUser
 
     fileprivate var review: String = ""
 
@@ -198,7 +198,7 @@ class RateUserController: UIViewController {
         }
     }
 
-    init(user: TokenContact) {
+    init(user: TokenUser) {
         self.user = user
 
         super.init(nibName: nil, bundle: nil)

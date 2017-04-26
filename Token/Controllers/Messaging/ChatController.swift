@@ -263,7 +263,7 @@ class ChatController: MessagesCollectionViewController {
         }
     }
 
-    func presentUserRatingPrompt(contact: TokenContact) {
+    func presentUserRatingPrompt(contact: TokenUser) {
         let rateUserController = RateUserController(user: contact)
         rateUserController.delegate = self
 
@@ -678,7 +678,7 @@ extension ChatController: ChatInputTextPanelDelegate {
 }
 
 extension ChatController: RateUserControllerDelegate {
-    func didRate(_ user: TokenContact, rating: Int, review: String) {
+    func didRate(_ user: TokenUser, rating: Int, review: String) {
         self.dismiss(animated: true) {
             let ratingsClient = RatingsClient.shared
             ratingsClient.submit(userId: user.address, rating: rating, review: review)

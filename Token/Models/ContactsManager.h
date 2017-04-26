@@ -24,7 +24,7 @@
  Get Signal or Token contacts. 
  */
 
-@class TokenContact;
+@class TokenUser;
 
 @interface ContactsManager : NSObject <ContactsManagerProtocol>
 
@@ -34,9 +34,9 @@
 
 - (NSArray<Contact *> * _Nonnull)signalContacts;
 
-- (NSArray<TokenContact *> * _Nonnull)tokenContacts;
+- (NSArray<TokenUser *> * _Nonnull)tokenContacts;
 
-- (TokenContact * _Nullable)tokenContactForAddress:(NSString * _Nullable)address;
+- (TokenUser * _Nullable)tokenContactForAddress:(NSString * _Nullable)address;
 
 - (UIImage * _Nullable)imageForPhoneIdentifier:(NSString * _Nullable)phoneNumber;
 

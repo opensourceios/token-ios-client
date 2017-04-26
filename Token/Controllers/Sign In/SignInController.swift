@@ -197,7 +197,7 @@ open class SignInController: UIViewController {
         let idClient = IDAPIClient.shared
         idClient.retrieveUser(username: cereal.address) { user in
             if let user = user {
-                User.current = user
+                TokenUser.current = user
                 ChatAPIClient.shared.registerUser()
                 Cereal.shared = cereal
                 UserDefaults.standard.set(false, forKey: "RequiresSignIn")

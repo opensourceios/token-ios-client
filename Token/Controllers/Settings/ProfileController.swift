@@ -28,7 +28,7 @@ open class ProfileController: UIViewController {
     }()
 
     lazy var qrCode: UIImage = {
-        let image = UIImage.imageQRCode(for: User.current?.address ?? "", resizeRate: 0.8)
+        let image = UIImage.imageQRCode(for: TokenUser.current?.address ?? "", resizeRate: 0.8)
         let filter = CIFilter(name: "CIMaskToAlpha")!
 
         filter.setDefaults()
@@ -151,19 +151,19 @@ open class ProfileController: UIViewController {
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let name = User.current?.name, name.length > 0, let username = User.current?.displayUsername {
+        if let name = TokenUser.current?.name, name.length > 0, let username = TokenUser.current?.displayUsername {
             self.nameLabel.text = name
             self.usernameLabel.text = username
-        } else if let username = User.current?.displayUsername {
+        } else if let username = TokenUser.current?.displayUsername {
             self.usernameLabel.text = nil
             self.nameLabel.text = username
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.avatarDidUpdate), name: .CurrentUserDidUpdateAvatarNotification, object: nil)
 
-        self.aboutContentLabel.text = User.current?.about
-        self.locationContentLabel.text = User.current?.location
-        if let image = User.current?.avatar {
+        self.aboutContentLabel.text = TokenUser.current?.about
+        self.locationContentLabel.text = TokenUser.current?.location
+        if let image = TokenUser.current?.avatar {
             self.avatarImageView.image = image
         }
 
@@ -252,11 +252,11 @@ open class ProfileController: UIViewController {
     }
 
     func avatarDidUpdate() {
-        self.avatarImageView.image = User.current?.avatar
+        self.avatarImageView.image = TokenUser.current?.avatar
     }
 
     func displayQRCode() {
-        let controller = QRCodeController(add: User.current!.displayUsername)
+        let controller = QRCodeController(add: TokenUser.current!.displayUsername)
         self.present(controller, animated: true)
     }
 

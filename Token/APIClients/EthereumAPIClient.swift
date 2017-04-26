@@ -155,7 +155,7 @@ public class EthereumAPIClient: NSObject {
                 let unconfirmedBalanceString = json["unconfirmed_balance"] as? String ?? "0"
                 let unconfirmedBalance = NSDecimalNumber(hexadecimalString: unconfirmedBalanceString)
 
-                User.current?.balance = unconfirmedBalance
+                TokenUser.current?.balance = unconfirmedBalance
 
                 completion(unconfirmedBalance, nil)
             case .failure(let json, let response, let error):
@@ -202,7 +202,7 @@ public class EthereumAPIClient: NSObject {
     public func registerForNotifications(_ completion: @escaping ((_ success: Bool) -> Void)) {
         self.timestamp { timestamp in
             let cereal = Cereal.shared
-            let address = User.current!.paymentAddress
+            let address = TokenUser.current!.paymentAddress
             let path = "/v1/register"
             let params = [
                 "addresses": [

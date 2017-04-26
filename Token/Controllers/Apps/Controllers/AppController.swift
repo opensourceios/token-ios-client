@@ -21,7 +21,7 @@ class AppController: UIViewController {
         return AppsAPIClient.shared
     }
 
-    public var app: TokenContact
+    public var app: TokenUser
 
     lazy var avatarImageView: AvatarImageView = {
         let view = AvatarImageView(withAutoLayout: true)
@@ -113,7 +113,7 @@ class AppController: UIViewController {
         fatalError()
     }
 
-    init(app: TokenContact) {
+    init(app: TokenUser) {
         self.app = app
         super.init(nibName: nil, bundle: nil)
 
@@ -242,12 +242,12 @@ class AppController: UIViewController {
     }
 
     func displayQRCode() {
-        let controller = QRCodeController(add: User.current!.displayUsername)
+        let controller = QRCodeController(add: TokenUser.current!.displayUsername)
         self.present(controller, animated: true)
     }
 
     func updateButton() {
-        let isContactAdded = Yap.sharedInstance.containsObject(for: self.app.address, in: TokenContact.collectionKey)
+        let isContactAdded = Yap.sharedInstance.containsObject(for: self.app.address, in: TokenUser.collectionKey)
         let fontColor = isContactAdded ? Theme.tintColor : Theme.darkTextColor
         let title = isContactAdded ? "✓ Added" : "Add app"
 
@@ -282,8 +282,8 @@ class AppController: UIViewController {
     }
 
     func didTapAddContactButton() {
-        if Yap.sharedInstance.containsObject(for: self.app.address, in: TokenContact.collectionKey) {
-            Yap.sharedInstance.removeObject(for: self.app.address, in: TokenContact.collectionKey)
+        if Yap.sharedInstance.containsObject(for: self.app.address, in: TokenUser.collectionKey) {
+            Yap.sharedInstance.removeObject(for: self.app.address, in: TokenUser.collectionKey)
 
             TSStorageManager.shared().dbConnection.readWrite { transaction in
                 let thread = TSContactThread.getOrCreateThread(withContactId: self.app.address, transaction: transaction)
@@ -292,7 +292,7 @@ class AppController: UIViewController {
 
             self.updateButton()
         } else {
-            Yap.sharedInstance.insert(object: self.app.JSONData, for: self.app.address, in: TokenContact.collectionKey)
+            Yap.sharedInstance.insert(object: self.app.JSONData, for: self.app.address, in: TokenUser.collectionKey)
             SoundPlayer.playSound(type: .addedContact)
             self.updateButton()
         }

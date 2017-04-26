@@ -30,12 +30,12 @@
     return @"";
 }
 
-- (NSArray<TokenContact *> *)tokenContacts {
-    NSMutableArray <TokenContact *> *contacts = [NSMutableArray array];
+- (NSArray<TokenUser *> *)tokenContacts {
+    NSMutableArray <TokenUser *> *contacts = [NSMutableArray array];
 
-    for (NSData *contactData in [Yap.sharedInstance retrieveObjectsIn:TokenContact.collectionKey]) {
+    for (NSData *contactData in [Yap.sharedInstance retrieveObjectsIn:TokenUser.collectionKey]) {
         NSDictionary<NSString *, id> *json = [NSJSONSerialization JSONObjectWithData:contactData options:0 error:0];
-        TokenContact *tokenContact = [[TokenContact alloc] initWithJson:json];
+        TokenUser *tokenContact = [[TokenUser alloc] initWithJson:json];
 
         [contacts addObject:tokenContact];
     }
@@ -43,10 +43,10 @@
     return contacts.copy;
 }
 
-- (TokenContact * _Nullable)tokenContactForAddress:(NSString * _Nullable)address {
+- (TokenUser * _Nullable)tokenContactForAddress:(NSString * _Nullable)address {
     if (!address) { return nil; }
 
-    for (TokenContact *contact in self.tokenContacts) {
+    for (TokenUser *contact in self.tokenContacts) {
         if ([contact.address isEqualToString:address]) {
             return contact;
         }
@@ -58,7 +58,7 @@
 - (NSArray<Contact *> * _Nonnull)signalContacts {
     NSMutableArray <Contact *> *contacts = [NSMutableArray array];
 
-    for (TokenContact *tokenContact in self.tokenContacts) {
+    for (TokenUser *tokenContact in self.tokenContacts) {
         Contact *contact = [[Contact alloc] initWithContactWithFirstName:tokenContact.username andLastName:tokenContact.name andUserTextPhoneNumbers:@[tokenContact.address] andImage:nil andContactID:(int)tokenContact.hash];
         [contacts addObject:contact];
     }
@@ -67,7 +67,7 @@
 }
 
 - (UIImage * _Nullable)imageForPhoneIdentifier:(NSString * _Nullable)phoneNumber {
-    TokenContact *contact = [self tokenContactForAddress:phoneNumber];
+    TokenUser *contact = [self tokenContactForAddress:phoneNumber];
 
     return contact.avatar;
 }

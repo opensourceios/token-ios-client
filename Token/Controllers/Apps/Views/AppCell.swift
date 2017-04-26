@@ -52,7 +52,7 @@ class AppCell: UICollectionViewCell {
         return view
     }()
 
-    var app: TokenContact? {
+    var app: TokenUser? {
         didSet {
             guard let app = self.app else {
                 self.nameLabel.text = nil

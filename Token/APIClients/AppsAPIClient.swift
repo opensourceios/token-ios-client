@@ -29,7 +29,7 @@ public class AppsAPIClient: NSObject, CacheExpiryDefault {
         self.teapot = Teapot(baseURL: URL(string: TokenDirectoryServiceBaseURLPath)!)
     }
 
-    func getFeaturedApps(completion: @escaping (_ apps: [TokenContact], _ error: Error?) -> Void) {
+    func getFeaturedApps(completion: @escaping (_ apps: [TokenUser], _ error: Error?) -> Void) {
         self.teapot.get("/v1/apps/featured") { (result: NetworkResult) in
             switch result {
             case .success(let json, let response):
@@ -37,8 +37,8 @@ public class AppsAPIClient: NSObject, CacheExpiryDefault {
                 guard let json = json?.dictionary else { fatalError("No apps json!") }
 
                 let appsJSON = json["results"] as! [[String: Any]]
-                let apps = appsJSON.map { json -> TokenContact in
-                    let app = TokenContact(json: json)
+                let apps = appsJSON.map { json -> TokenUser in
+                    let app = TokenUser(json: json)
 
                     return app
                 }
@@ -47,12 +47,12 @@ public class AppsAPIClient: NSObject, CacheExpiryDefault {
             case .failure(let json, let response, let error):
                 print(json ?? "")
                 print(response)
-                completion([TokenContact](), error)
+                completion([TokenUser](), error)
             }
         }
     }
 
-    func downloadImage(for app: TokenContact, completion: @escaping (_ image: UIImage?) -> Void) {
+    func downloadImage(for app: TokenUser, completion: @escaping (_ image: UIImage?) -> Void) {
         guard let pathURL = URL(string: app.avatarPath) else { return }
         self.imageCache.setObject(forKey: app.avatarPath, cacheBlock: { success, failure in
             Teapot(baseURL: pathURL).get { (result: NetworkImageResult) in
@@ -71,9 +71,9 @@ public class AppsAPIClient: NSObject, CacheExpiryDefault {
         }
     }
 
-    func search(_ searchTerm: String, completion: @escaping (_ apps: [TokenContact], _ error: Error?) -> Void) {
+    func search(_ searchTerm: String, completion: @escaping (_ apps: [TokenUser], _ error: Error?) -> Void) {
         guard searchTerm.length > 0 else {
-            completion([TokenContact](), nil)
+            completion([TokenUser](), nil)
             return
         }
 
@@ -87,17 +87,17 @@ public class AppsAPIClient: NSObject, CacheExpiryDefault {
                 }
 
                 guard let appsJSON = json["results"] as? [[String: Any]] else {
-                    completion([TokenContact](), nil)
+                    completion([TokenUser](), nil)
                     return
                 }
 
-                let apps = appsJSON.map { json -> TokenContact in
-                    return TokenContact(json: json)
+                let apps = appsJSON.map { json -> TokenUser in
+                    return TokenUser(json: json)
                 }
 
                 completion(apps, nil)
             case .failure(_, _, let error):
-                completion([TokenContact](), error)
+                completion([TokenUser](), error)
             }
         }
     }

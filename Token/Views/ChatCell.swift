@@ -169,7 +169,7 @@ class ChatCell: UITableViewCell {
         fatalError()
     }
 
-    func updateContact(_ contact: TokenContact) {
+    func updateContact(_ contact: TokenUser) {
         self.usernameLabel.text = contact.name.length > 0 ? contact.name : contact.displayUsername
         self.thread?.cachedContactIdentifier = self.usernameLabel.text
         self.avatarImageView.image = contact.avatar

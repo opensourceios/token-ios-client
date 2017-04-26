@@ -29,8 +29,8 @@ open class FavoritesController: SweetTableController {
     let selectedContactKey = "SelectedContact"
 
     lazy var mappings: YapDatabaseViewMappings = {
-        let mappings = YapDatabaseViewMappings(groups: [TokenContact.collectionKey], view: TokenContact.viewExtensionName)
-        mappings.setIsReversed(true, forGroup: TokenContact.collectionKey)
+        let mappings = YapDatabaseViewMappings(groups: [TokenUser.collectionKey], view: TokenUser.viewExtensionName)
+        mappings.setIsReversed(true, forGroup: TokenUser.collectionKey)
 
         return mappings
     }()
@@ -47,7 +47,7 @@ open class FavoritesController: SweetTableController {
 
     public var idAPIClient: IDAPIClient
 
-    var searchContacts = [TokenContact]()
+    var searchContacts = [TokenUser]()
 
     lazy var searchController: UISearchController = {
         let controller = UISearchController(searchResultsController: nil)
@@ -104,7 +104,7 @@ open class FavoritesController: SweetTableController {
         if let address = UserDefaults.standard.string(forKey: self.selectedContactKey) {
             // This doesn't restore a contact if they are not our contact, but a search result
             DispatchQueue.main.asyncAfter(seconds: 0.0) {
-                guard let contact = self.contact(withAddress: address) else { return }
+                guard let contact = self.contact(with: address) else { return }
 
                 if contact.isApp {
                     let appController = AppController(app: contact)
@@ -136,8 +136,8 @@ open class FavoritesController: SweetTableController {
             guard let data1 = object1 as? Data else { fatalError() }
             guard let data2 = object2 as? Data else { fatalError() }
 
-            let contact1 = TokenContact.contact(withData: data1)
-            let contact2 = TokenContact.contact(withData: data2)
+            let contact1 = TokenUser.user(with: data1)
+            let contact2 = TokenUser.user(with: data2)
 
             return contact1!.username.compare(contact2!.username)
         }
@@ -148,11 +148,11 @@ open class FavoritesController: SweetTableController {
     @discardableResult
     func registerTokenContactsDatabaseView() -> Bool {
         // Check if it's already registered.
-        guard Yap.sharedInstance.database.registeredExtension(TokenContact.viewExtensionName) == nil else { return true }
+        guard Yap.sharedInstance.database.registeredExtension(TokenUser.viewExtensionName) == nil else { return true }
 
         let viewGrouping = YapDatabaseViewGrouping.withObjectBlock { (_, _, _, object) -> String? in
             if let _ = object as? Data {
-                return TokenContact.collectionKey
+                return TokenUser.collectionKey
             }
 
             return nil
@@ -162,11 +162,11 @@ open class FavoritesController: SweetTableController {
 
         let options = YapDatabaseViewOptions()
         options.isPersistent = false
-        options.allowedCollections = YapWhitelistBlacklist(whitelist: Set([TokenContact.collectionKey]))
+        options.allowedCollections = YapWhitelistBlacklist(whitelist: Set([TokenUser.collectionKey]))
 
         let databaseView = YapDatabaseView(grouping: viewGrouping, sorting: viewSorting, versionTag: "1", options: options)
 
-        return Yap.sharedInstance.database.register(databaseView, withName: TokenContact.viewExtensionName)
+        return Yap.sharedInstance.database.register(databaseView, withName: TokenUser.viewExtensionName)
     }
 
     func displayContacts() {
@@ -245,26 +245,26 @@ open class FavoritesController: SweetTableController {
         }
     }
 
-    func contact(at indexPath: IndexPath) -> TokenContact {
-        var contact: TokenContact?
+    func contact(at indexPath: IndexPath) -> TokenUser {
+        var contact: TokenUser?
 
         self.uiDatabaseConnection.read { transaction in
-            guard let dbExtension: YapDatabaseViewTransaction = transaction.extension(TokenContact.viewExtensionName) as? YapDatabaseViewTransaction else { fatalError() }
+            guard let dbExtension: YapDatabaseViewTransaction = transaction.extension(TokenUser.viewExtensionName) as? YapDatabaseViewTransaction else { fatalError() }
 
             guard let data = dbExtension.object(at: indexPath, with: self.mappings) as? Data else { fatalError() }
 
-            contact = TokenContact.contact(withData: data)
+            contact = TokenUser.user(with: data)
         }
 
         return contact!
     }
 
-    func contact(withAddress address: String) -> TokenContact? {
-        var contact: TokenContact?
+    func contact(with address: String) -> TokenUser? {
+        var contact: TokenUser?
 
         self.uiDatabaseConnection.read { transaction in
-            if let data = transaction.object(forKey: address, inCollection: TokenContact.collectionKey) as? Data {
-                contact = TokenContact.contact(withData: data)
+            if let data = transaction.object(forKey: address, inCollection: TokenUser.collectionKey) as? Data {
+                contact = TokenUser.user(with: data)
             }
         }
 

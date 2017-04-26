@@ -17,13 +17,13 @@ import UIKit
 import SweetUIKit
 
 protocol SearchResultsViewDelegate: class {
-    func searchResultsView(_ searchResultsView: SearchResultsView, didTapApp app: TokenContact)
+    func searchResultsView(_ searchResultsView: SearchResultsView, didTapApp app: TokenUser)
 }
 
 class SearchResultsView: UITableView {
     weak var selectionDelegate: SearchResultsViewDelegate?
 
-    var results = [TokenContact]() {
+    var results = [TokenUser]() {
         didSet {
             self.reloadData()
         }

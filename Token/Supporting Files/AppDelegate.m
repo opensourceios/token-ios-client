@@ -89,13 +89,13 @@
 }
 
 - (void)createNewUser {
-    if (User.current == nil) {
+    if (TokenUser.current == nil) {
         [[IDAPIClient shared] registerUserIfNeeded:^{
             [[ChatAPIClient shared] registerUser];
             [self didCreateUser];
         }];
     } else {
-        [[IDAPIClient shared] retrieveUserWithUsername:[User.current username] completion:^(User * _Nullable user) {
+        [[IDAPIClient shared] retrieveUserWithUsername:[TokenUser.current username] completion:^(TokenUser * _Nullable user) {
             NSLog(@"%@", user);
             if (user == nil) {
                 [[IDAPIClient shared] registerUserIfNeeded:^{

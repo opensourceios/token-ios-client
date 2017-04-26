@@ -20,7 +20,7 @@ class BrowseController: SearchableCollectionController {
     static let cellHeight = CGFloat(220)
     static let cellWidth = CGFloat(90)
 
-    var recommendedApps = [TokenContact]() {
+    var recommendedApps = [TokenUser]() {
         didSet {
             self.collectionView.reloadData()
         }
@@ -40,7 +40,7 @@ class BrowseController: SearchableCollectionController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override open func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         self.collectionView.showsVerticalScrollIndicator = true
@@ -97,27 +97,28 @@ extension BrowseController {
         self.navigationController?.pushViewController(appController, animated: true)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, insetForSectionAt _: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {
         return 10
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 220)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumInteritemSpacingForSectionAt _: Int) -> CGFloat {
         return 10
     }
 }
 
 extension BrowseController: UISearchBarDelegate {
     func searchBar(_: UISearchBar, textDidChange searchText: String) {
+
         if searchText.length == 0 {
-            self.recommendedApps = [TokenContact]()
+            self.recommendedApps = [TokenUser]()
         }
 
         // Throttles search to delay performing a search while the user is typing.
@@ -128,7 +129,7 @@ extension BrowseController: UISearchBarDelegate {
 
 extension BrowseController: SearchResultsViewDelegate {
 
-    func searchResultsView(_: SearchResultsView, didTapApp app: TokenContact) {
+    func searchResultsView(_: SearchResultsView, didTapApp app: TokenUser) {
         let appController = AppController(app: app)
         self.navigationController?.pushViewController(appController, animated: true)
     }
