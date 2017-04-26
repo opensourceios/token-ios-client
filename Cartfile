@@ -1,15 +1,15 @@
-github "tokenbrowser/NoChat" "master"
-github "ibireme/YYText" "master"
-github "tokenbrowser/GrowingTextView"
-github "tokenbrowser/HDWallet" "master"
-github "bakkenbaeck/Formulaic" "master"
+github "tokenbrowser/NoChat" "6010896237977829294b394cc616951eeb8a36bd"
+github "ibireme/YYText" "02eba9ffd392892a2fca5ed98f6628d29003ef78"
+github "tokenbrowser/GrowingTextView" "9f2b44246bba060f7e3ca1e10c2d59dd6d3fbae5"
+github "tokenbrowser/HDWallet" "9dc214e2cf6fe5702cff11c09db156e8aee523c9"
+github "bakkenbaeck/Formulaic" "12d290e608d6da68d4956c265740621ce7d44f56"
 github "bakkenbaeck/Teapot" ~> 0.0.2
-github "bakkenbaeck/CameraScanner" "master"
+github "bakkenbaeck/CameraScanner" "9946019e5e342d7f365cf93d87a4ad3e037bbc2d"
 github "marketplacer/keychain-swift" ~> 7.0
 github "UseSweet/SweetFoundation" ~> 1.2.0
-github "UseSweet/SweetSwift" "master"
-github "tokenbrowser/AwesomeCache" "master"
-github "hyperoslo/ImagePicker"
-github "UseSweet/SweetUIKit" "master"
+github "UseSweet/SweetSwift" "0617917df37640934b9f2c742cbb60eedd2cbd48"
+github "tokenbrowser/AwesomeCache" "3178252704d169844ab8203ade6ca7b7f2e9503b"
+github "hyperoslo/ImagePicker" ~> 2.1.1
+github "UseSweet/SweetUIKit" "7aa4232"
 github "mxcl/PromiseKit" ~> 4.0
 github "bakkenbaeck/EtherealCereal" ~> 0.0.3
