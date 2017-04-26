@@ -137,6 +137,7 @@
 		2B355BDA1EAE356C0093FA8F /* TokenUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B355BD91EAE356C0093FA8F /* TokenUser.swift */; };
 		79C8B9332AAF618B6185BC82 /* libPods-CocoaPods-Development.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A763C19118469E7169C9F72 /* libPods-CocoaPods-Development.a */; };
 		9F04A7231E38D1400043534A /* QRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F04A7221E38D1400043534A /* QRCodeController.swift */; };
+		9F086CB71EB10A7A00055DB3 /* TokenUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B355BD91EAE356C0093FA8F /* TokenUser.swift */; };
 		9F1852AD1E93D7A3001C5C13 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1852AC1E93D7A3001C5C13 /* ImagePicker.framework */; };
 		9F1852AE1E93D7A3001C5C13 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1852AC1E93D7A3001C5C13 /* ImagePicker.framework */; };
 		9F1852AF1E93D7A7001C5C13 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1852AC1E93D7A3001C5C13 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -1581,6 +1582,7 @@
 				149F9AAC1E72E29A00FB74AA /* AppsAPIClient.swift in Sources */,
 				149F9AAD1E72E29A00FB74AA /* QRCodeController.swift in Sources */,
 				149F9AAE1E72E29A00FB74AA /* PaymentController.swift in Sources */,
+				9F086CB71EB10A7A00055DB3 /* TokenUser.swift in Sources */,
 				149F9AAF1E72E29A00FB74AA /* ActionableMessageCellLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
