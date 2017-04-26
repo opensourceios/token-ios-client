@@ -20,7 +20,7 @@ public class ChatsNavigationController: UINavigationController {
     let selectedThreadAddressKey = "SelectedThread"
 
     public override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
 
     public override init(rootViewController: UIViewController) {

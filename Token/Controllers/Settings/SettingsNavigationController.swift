@@ -18,7 +18,7 @@ import UIKit
 public class SettingsNavigationController: UINavigationController {
 
     public override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
 
     public override init(rootViewController: UIViewController) {

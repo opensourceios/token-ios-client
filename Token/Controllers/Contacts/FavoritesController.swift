@@ -54,9 +54,17 @@ open class FavoritesController: SweetTableController {
         controller.searchResultsUpdater = self
         controller.dimsBackgroundDuringPresentation = false
         controller.hidesNavigationBarDuringPresentation = false
-        controller.searchBar.barTintColor = Theme.tintColor
-        controller.searchBar.tintColor = Theme.greyTextColor
+
         controller.searchBar.delegate = self
+        controller.searchBar.barTintColor = Theme.viewBackgroundColor
+        controller.searchBar.tintColor = Theme.tintColor
+        controller.searchBar.searchBarStyle = .minimal
+
+        controller.searchBar.layer.borderWidth = 1.0 / UIScreen.main.scale
+        controller.searchBar.layer.borderColor = Theme.borderColor.cgColor
+
+        let searchField = controller.searchBar.value(forKey: "searchField") as? UITextField
+        searchField?.backgroundColor = Theme.inputFieldBackgroundColor
 
         return controller
     }()

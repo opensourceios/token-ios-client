@@ -77,11 +77,15 @@ extension Theme {
     }
 
     public static var inputFieldBackgroundColor: UIColor {
-        return UIColor(hex: "FAFAFA")
+        return UIColor(hex: "F1F1F1")
     }
 
     public static var navigationTitleTextColor: UIColor {
-        return .white
+        return .black
+    }
+
+    public static var navigationBarColor: UIColor {
+        return UIColor(hex: "FBFAFB")
     }
 
     public static var borderColor: UIColor {

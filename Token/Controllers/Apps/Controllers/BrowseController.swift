@@ -48,12 +48,19 @@ class BrowseController: SearchableCollectionController {
         self.collectionView.backgroundColor = Theme.viewBackgroundColor
 
         self.searchBar.delegate = self
-        self.searchBar.barTintColor = Theme.tintColor
+        self.searchBar.barTintColor = Theme.viewBackgroundColor
         self.searchBar.tintColor = Theme.tintColor
+        self.searchBar.searchBarStyle = .minimal
+
+        self.searchBar.layer.borderWidth = 1.0 / UIScreen.main.scale
+        self.searchBar.layer.borderColor = Theme.borderColor.cgColor
+
+        let searchField = self.searchBar.value(forKey: "searchField") as? UITextField
+        searchField?.backgroundColor = Theme.inputFieldBackgroundColor
 
         self.collectionView.register(AppCell.self)
 
-        self.title = "Browse"
+        self.title = "Explore"
         self.appsAPIClient.getFeaturedApps { apps, error in
             if let error = error {
                 let alertController = UIAlertController.errorAlert(error as NSError)

@@ -18,7 +18,7 @@ import UIKit
 public class SignInNavigationController: UINavigationController {
 
     public override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
 
     convenience init() {
