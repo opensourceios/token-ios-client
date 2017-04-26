@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
   "commitish" : "1.2.1",
   "iOS" : [
     {
-      "hash" : "a2bd8897f4c99aea07c4a84b476a2a75e3d4430e4af942c59efcc2f8078fd346",
+      "hash" : "f384c64a84ea6b0b1cde91469da2f8cd0ccbb29076134f6ec4696271d2f1abf6",
       "name" : "SweetFoundation"
     }
   ]

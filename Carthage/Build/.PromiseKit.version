@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
-  "commitish" : "4.1.8",
+  "commitish" : "4.2.0",
   "iOS" : [
     {
-      "hash" : "63142513cb00067adba1c0194b307ef16a2f995b21440958fe693ea24cd2cabc",
+      "hash" : "29315fe3fb6069eaa115b0cebdefce0208cec0522f13099adcbaa4ba73989e75",
       "name" : "PromiseKit"
     }
   ]

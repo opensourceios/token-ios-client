@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
   "commitish" : "6010896237977829294b394cc616951eeb8a36bd",
   "iOS" : [
     {
-      "hash" : "88e3720dd5f67a606c08dd283efeba30ff65e74dc3b30e69b8ac0b38bbf72380",
+      "hash" : "5bbaef0025a09782524c1b593b0555e88d94c198d78eadcbab1ec169e69ae12a",
       "name" : "NoChat"
     }
   ]

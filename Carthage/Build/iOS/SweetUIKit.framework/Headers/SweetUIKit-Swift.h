@@ -180,12 +180,18 @@ SWIFT_CLASS("_TtC10SweetUIKit25SweetCollectionController")
 @class UISearchBar;
 @class UISearchController;
 
+/// SearchableCollectionController is a subclass of SweetCollectionController
+/// SearchableCollectionController replicates the behaviour and features of a UITableViewController with a UISearchController
+/// combined, with a UISearchBar as the headerView.
+/// The UISearchBar can be customised directly, as it’s accessible through the <code>searchBar</code> property.
+/// The same applies to the UISearchController.
 SWIFT_CLASS("_TtC10SweetUIKit30SearchableCollectionController")
 @interface SearchableCollectionController : SweetCollectionController
+/// The search bar from the backing UISearchController
 @property (nonatomic, readonly, strong) UISearchBar * _Nonnull searchBar;
+/// The installed UISearchController. Override the delegate methods (call super) if necessary.
 @property (nonatomic, strong) UISearchController * _Nonnull searchController;
 - (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
 - (nonnull instancetype)initWithCollectionViewLayout:(UICollectionViewLayout * _Nonnull)layout OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)argument OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -197,23 +203,23 @@ SWIFT_CLASS("_TtC10SweetUIKit30SearchableCollectionController")
 @class UICollectionViewCell;
 
 @interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UICollectionViewDataSource>
-- (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (NSInteger)collectionView:(UICollectionView * _Nonnull)collectionView numberOfItemsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)_ cellForItemAtIndexPath:(NSIndexPath * _Nonnull)_ SWIFT_WARN_UNUSED_RESULT;
+- (NSInteger)collectionView:(UICollectionView * _Nonnull)_ numberOfItemsInSection:(NSInteger)_ SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @class UIScrollView;
 
-@interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UICollectionViewDelegate, UIScrollViewDelegate>
+@interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UICollectionViewDelegate>
 - (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
-- (void)scrollViewDidEndDragging:(UIScrollView * _Nonnull)scrollView willDecelerate:(BOOL)decelerate;
+- (void)scrollViewDidEndDragging:(UIScrollView * _Nonnull)scrollView willDecelerate:(BOOL)_;
 @end
 
 
 @interface SearchableCollectionController (SWIFT_EXTENSION(SweetUIKit)) <UISearchControllerDelegate>
-- (void)willPresentSearchController:(UISearchController * _Nonnull)searchController;
-- (void)didPresentSearchController:(UISearchController * _Nonnull)searchController;
-- (void)willDismissSearchController:(UISearchController * _Nonnull)searchController;
-- (void)didDismissSearchController:(UISearchController * _Nonnull)searchController;
+- (void)willPresentSearchController:(UISearchController * _Nonnull)_;
+- (void)didPresentSearchController:(UISearchController * _Nonnull)_;
+- (void)willDismissSearchController:(UISearchController * _Nonnull)_;
+- (void)didDismissSearchController:(UISearchController * _Nonnull)_;
 @end
 
 

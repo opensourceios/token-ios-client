@@ -2,14 +2,14 @@ github "tokenbrowser/NoChat" "master"
 github "ibireme/YYText" "master"
 github "tokenbrowser/GrowingTextView"
 github "tokenbrowser/HDWallet" "master"
-github "bakkenbaeck/Formulaic" ~> 0.0
+github "bakkenbaeck/Formulaic" "master"
 github "bakkenbaeck/Teapot" ~> 0.0.2
-github "bakkenbaeck/CameraScanner" ~> 0.0
+github "bakkenbaeck/CameraScanner" "master"
 github "marketplacer/keychain-swift" ~> 7.0
 github "UseSweet/SweetFoundation" ~> 1.2.0
-github "UseSweet/SweetSwift" ~> 1.0
+github "UseSweet/SweetSwift" "master"
 github "tokenbrowser/AwesomeCache" "master"
 github "hyperoslo/ImagePicker"
-github "UseSweet/SweetUIKit" "fixup/accessor"
+github "UseSweet/SweetUIKit" "master"
 github "mxcl/PromiseKit" ~> 4.0
 github "bakkenbaeck/EtherealCereal" ~> 0.0.3

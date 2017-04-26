@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
   "commitish" : "0.0.2",
   "iOS" : [
     {
-      "hash" : "cc6d795c9131924faf5cb8ddeaf50e8c8f43586b6e62f5d8965acb6902247565",
+      "hash" : "d60d65f9614c936ff678b046718a91587749c0a005ab693eb8f5b2fa78fe16e0",
       "name" : "Teapot"
     }
   ]

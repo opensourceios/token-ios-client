@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
   "commitish" : "7.0.1",
   "iOS" : [
     {
-      "hash" : "165ba291088f2f09c3df4ed2f89d36e8b9e03f19ffb5a80743db116d7fc5935b",
+      "hash" : "78a00189a7cfb0411b07d0e6af6975a8f2e3c9283c1683e8211943e076a7f35c",
       "name" : "KeychainSwift"
     }
   ]

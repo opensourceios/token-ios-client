@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
   "commitish" : "3178252704d169844ab8203ade6ca7b7f2e9503b",
   "iOS" : [
     {
-      "hash" : "b0a8aa82825d3d2b5e2ce6e2246df9d570536df10569c9d3af7787b51a126ceb",
+      "hash" : "48f623d524f5693f10310f63dd8dfe29831e0856fc4aa7593b5a14dd76cacab6",
       "name" : "AwesomeCache"
     }
   ]

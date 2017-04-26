@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
   "commitish" : "2.1.1",
   "iOS" : [
     {
-      "hash" : "8317c83b68b06915a0c0d78bebb3e66fbfb95f29f7674960b409b24a51805f32",
+      "hash" : "6b5286aad72f7df30d1d8286b56daa4b8f96a4cd4910b63ba633199fba8b35e0",
       "name" : "ImagePicker"
     }
   ]

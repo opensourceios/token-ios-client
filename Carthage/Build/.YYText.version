@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
   "commitish" : "02eba9ffd392892a2fca5ed98f6628d29003ef78",
   "iOS" : [
     {
-      "hash" : "f0ae365061a6e02d01d2acaf3291d07da8eb9771761b11717bb179cdcf90e46b",
+      "hash" : "312e85650583a0486f7f6f14c3ddbdde549c8dd7419ed435bc765a373bc8126d",
       "name" : "YYText"
     }
   ]

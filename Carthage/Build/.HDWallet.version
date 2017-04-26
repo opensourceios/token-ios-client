@@ -1,9 +1,8 @@
 {
-  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
   "commitish" : "9dc214e2cf6fe5702cff11c09db156e8aee523c9",
   "iOS" : [
     {
-      "hash" : "44dd9cd5878c3b9762e70228e2b4953d3026f9729c0c60bcdc7641725185649d",
+      "hash" : "8e44344eab0305828aac9c8dfcda125d2491a22792eb4f1b74006c4f33de042d",
       "name" : "HDWallet"
     }
   ]
