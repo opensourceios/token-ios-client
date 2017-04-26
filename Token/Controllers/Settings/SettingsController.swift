@@ -103,10 +103,6 @@ open class SettingsController: SweetTableController {
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
-
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        self.navigationItem.backBarButtonItem = backItem
     }
 
     func handleSignOut() {

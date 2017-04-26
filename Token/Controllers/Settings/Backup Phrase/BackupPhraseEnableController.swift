@@ -96,10 +96,6 @@ class BackupPhraseEnableController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        self.navigationItem.backBarButtonItem = backItem
     }
 
     func checked(_ checkboxControl: CheckboxControl) {

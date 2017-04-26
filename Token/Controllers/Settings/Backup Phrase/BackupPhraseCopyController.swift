@@ -105,10 +105,6 @@ class BackupPhraseCopyController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        self.navigationItem.backBarButtonItem = backItem
     }
 
     func proceed(_: ActionButton) {

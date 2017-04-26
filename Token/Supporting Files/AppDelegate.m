@@ -125,7 +125,7 @@
 
     UINavigationBar *navBarAppearance = [UINavigationBar appearance];
     [navBarAppearance setTitleTextAttributes:attributtes];
-    [navBarAppearance setTintColor:[Theme navigationTitleTextColor]];
+    [navBarAppearance setTintColor:[Theme tintColor]];
     [navBarAppearance setBarTintColor:[Theme navigationBarColor]];
 
     attributtes = @{NSForegroundColorAttributeName: [Theme tintColor], NSFontAttributeName: [Theme regularWithSize:17]};
