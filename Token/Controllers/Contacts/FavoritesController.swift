@@ -91,6 +91,7 @@ open class FavoritesController: SweetTableController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
 
+        self.tableView.backgroundColor = Theme.viewBackgroundColor
         self.tableView.separatorStyle = .none
         self.tableView.tableHeaderView = self.searchController.searchBar
 

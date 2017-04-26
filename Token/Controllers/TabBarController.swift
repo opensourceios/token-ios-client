@@ -48,7 +48,7 @@ open class TabBarController: UITabBarController {
 
     internal lazy var placeholderScannerController: UIViewController = {
         let controller = UIViewController()
-        controller.tabBarItem = UITabBarItem(title: "Scan", image: UIImage(), tag: 0)
+        controller.tabBarItem = UITabBarItem(title: "Scan", image: #imageLiteral(resourceName: "scan"), tag: 0)
 
         return controller
     }()

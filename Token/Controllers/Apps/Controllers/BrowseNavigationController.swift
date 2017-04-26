@@ -28,7 +28,8 @@ public class BrowseNavigationController: UINavigationController {
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
-        self.tabBarItem = UITabBarItem(title: "Browse", image: #imageLiteral(resourceName: "apps"), tag: 0)
+        self.tabBarItem = UITabBarItem(title: "Browse", image: #imageLiteral(resourceName: "browse"), tag: 0)
+        self.tabBarItem.selectedImage = #imageLiteral(resourceName: "browse-selected")
         self.tabBarItem.titlePositionAdjustment.vertical = TabBarItemTitleOffset
     }
 

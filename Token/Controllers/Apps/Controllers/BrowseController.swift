@@ -48,7 +48,7 @@ class BrowseController: SearchableCollectionController {
         self.collectionView.backgroundColor = Theme.viewBackgroundColor
 
         self.searchBar.delegate = self
-        self.searchBar.barTintColor = Theme.viewBackgroundColor
+        self.searchBar.barTintColor = Theme.tintColor
         self.searchBar.tintColor = Theme.tintColor
 
         self.collectionView.register(AppCell.self)
@@ -106,7 +106,7 @@ extension BrowseController {
     }
 
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 220)
+        return CGSize(width: 100, height: 120)
     }
 
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumInteritemSpacingForSectionAt _: Int) -> CGFloat {
