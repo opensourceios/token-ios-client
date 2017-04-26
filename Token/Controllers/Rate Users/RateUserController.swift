@@ -174,7 +174,7 @@ class RateUserController: UIViewController {
     }()
 
     fileprivate lazy var contentViewVerticalCenter: NSLayoutConstraint = {
-        self.contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        self.contentView.centerYAnchor.constraint(equalTo: self.background.centerYAnchor)
     }()
 
     private lazy var feedbackGenerator: UIImpactFeedbackGenerator = {

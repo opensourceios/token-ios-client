@@ -15,6 +15,7 @@
 
 import UIKit
 import SweetUIKit
+import KeychainSwift
 
 public extension NSNotification.Name {
     public static let UserDidSignOut = NSNotification.Name(rawValue: "UserDidSignOut")
@@ -24,7 +25,18 @@ open class SettingsController: SweetTableController {
 
     public static let verificationStatusChanged = Notification.Name(rawValue: "VerificationStatusChanged")
 
-    private var verificationStatus: VerificationStatus = .unverified
+    private let backupPhraseVerified = "BackupPhraseVerified"
+
+    private var verificationStatus: VerificationStatus = .unverified {
+        didSet {
+            switch verificationStatus {
+            case .correct:
+                KeychainSwift().set(true, forKey: self.backupPhraseVerified)
+            case .unverified, .tooShort, .incorrect:
+                KeychainSwift().set(false, forKey: self.backupPhraseVerified)
+            }
+        }
+    }
 
     public var chatAPIClient: ChatAPIClient
     public var idAPIClient: IDAPIClient
@@ -65,6 +77,12 @@ open class SettingsController: SweetTableController {
     }
 
     var didVerifyBackupPhrase: Bool {
+        if let backupPhraseVerified = KeychainSwift().getBool(self.backupPhraseVerified) {
+            self.verificationStatus = backupPhraseVerified ? .correct : .incorrect
+        } else {
+            self.verificationStatus = .unverified
+        }
+
         return self.verificationStatus == .correct
     }
 
@@ -102,7 +120,7 @@ open class SettingsController: SweetTableController {
             return
         }
 
-        let alert = self.alertController(verificationStatus: self.verificationStatus, balance: currentUser.balance)
+        let alert = self.alertController(balance: currentUser.balance)
         // We dispatch it back to the main thread here, even tho we are already inside the main thread
         // to avoid some weird issue where the alert controller will take seconds to present, instead of being instant.
         DispatchQueue.main.async {
@@ -110,10 +128,10 @@ open class SettingsController: SweetTableController {
         }
     }
 
-    func alertController(verificationStatus status: VerificationStatus, balance: NSDecimalNumber) -> UIAlertController {
+    func alertController(balance: NSDecimalNumber) -> UIAlertController {
         var alert: UIAlertController
 
-        if status == .correct {
+        if self.didVerifyBackupPhrase {
             alert = UIAlertController(title: "Have you secured your backup phrase?", message: "Without this you will not be able to recover your account or sign back in.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
