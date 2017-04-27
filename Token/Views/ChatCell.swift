@@ -15,6 +15,7 @@
 
 import UIKit
 import SweetUIKit
+import SweetSwift
 import SweetFoundation
 
 /// ChatsTableController cells.
@@ -174,7 +175,7 @@ class ChatCell: UITableViewCell {
         self.thread?.cachedContactIdentifier = self.usernameLabel.text
         self.avatarImageView.image = contact.avatar
 
-        if contact.avatar == nil {
+        if contact.avatarPath.length > 0 {
             IDAPIClient.shared.downloadAvatar(path: contact.avatarPath) { image in
                 self.avatarImageView.image = image
             }
