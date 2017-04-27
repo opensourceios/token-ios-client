@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) TSNetworkManager *networkManager;
 @property (nonatomic, readonly) NSArray<TSAttachmentPointer *> *supportedAttachmentPointers;
+@property (nonatomic, readonly) NSArray<TSAttachmentPointer *> *unsupportedAttachmentPointers;
 
 @end
 
@@ -54,26 +55,32 @@ NS_ASSUME_NONNULL_BEGIN
     if (!self) {
         return self;
     }
-
+    
     _networkManager = networkManager;
-
+    
     NSMutableArray<NSString *> *attachmentIds = [NSMutableArray new];
     NSMutableArray<TSAttachmentPointer *> *supportedAttachmentPointers = [NSMutableArray new];
     NSMutableArray<NSString *> *supportedAttachmentIds = [NSMutableArray new];
-
+    NSMutableArray<TSAttachmentPointer *> *unsupportedAttachmentPointers = [NSMutableArray new];
+    NSMutableArray<NSString *> *unsupportedAttachmentIds = [NSMutableArray new];
+    
     for (OWSSignalServiceProtosAttachmentPointer *attachmentProto in attachmentProtos) {
         TSAttachmentPointer *pointer = [[TSAttachmentPointer alloc] initWithServerId:attachmentProto.id
                                                                                  key:attachmentProto.key
                                                                          contentType:attachmentProto.contentType
                                                                                relay:relay];
-
+        
         [attachmentIds addObject:pointer.uniqueId];
-
+        
+        [pointer save];
+        
         if ([MIMETypeUtil isSupportedMIMEType:pointer.contentType]) {
-            [pointer save];
             [supportedAttachmentPointers addObject:pointer];
             [supportedAttachmentIds addObject:pointer.uniqueId];
         } else {
+            [unsupportedAttachmentPointers addObject:pointer];
+            [unsupportedAttachmentIds addObject:pointer.uniqueId];
+            
             DDLogError(@"%@ Received unsupported attachment of type: %@", self.tag, pointer.contentType);
             TSInfoMessage *infoMessage = [[TSInfoMessage alloc] initWithTimestamp:timestamp
                                                                          inThread:thread
@@ -81,11 +88,13 @@ NS_ASSUME_NONNULL_BEGIN
             [infoMessage save];
         }
     }
-
+    
     _attachmentIds = [attachmentIds copy];
     _supportedAttachmentPointers = [supportedAttachmentPointers copy];
     _supportedAttachmentIds = [supportedAttachmentIds copy];
-
+    _unsupportedAttachmentPointers = [unsupportedAttachmentPointers copy];
+    _unsupportedAttachmentIds = [unsupportedAttachmentIds copy];
+    
     return self;
 }
 
@@ -241,6 +250,23 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)tag
 {
     return self.class.tag;
+}
+
+@end
+
+@implementation OWSAttachmentsProcessor (SupportedAttachment)
+
+- (void)fetchAllAttachmentsForMessage:(nullable TSMessage *)message
+                              success:(void (^)(TSAttachmentStream *attachmentStream))successHandler
+                              failure:(void (^)(NSError *error))failureHandler
+{
+    for (TSAttachmentPointer *attachmentPointer in self.supportedAttachmentPointers) {
+        [self retrieveAttachment:attachmentPointer message:message success:successHandler failure:failureHandler];
+    }
+    
+    for (TSAttachmentPointer *attachmentPointer in self.unsupportedAttachmentIds) {
+        [self retrieveAttachment:attachmentPointer message:message success:successHandler failure:failureHandler];
+    }
 }
 
 @end

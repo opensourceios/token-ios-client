@@ -309,31 +309,30 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)handleReceivedMediaWithEnvelope:(OWSSignalServiceProtosEnvelope *)envelope
                             dataMessage:(OWSSignalServiceProtosDataMessage *)dataMessage
 {
+    OWSAssert([NSThread isMainThread]);
     TSThread *thread = [self threadForEnvelope:envelope dataMessage:dataMessage];
     OWSAttachmentsProcessor *attachmentsProcessor =
-        [[OWSAttachmentsProcessor alloc] initWithAttachmentProtos:dataMessage.attachments
-                                                        timestamp:envelope.timestamp
-                                                            relay:envelope.relay
-                                                           thread:thread
-                                                   networkManager:self.networkManager];
-    if (!attachmentsProcessor.hasSupportedAttachments) {
-        DDLogWarn(@"%@ received unsupported media envelope", self.tag);
-        return;
-    }
-
+    [[OWSAttachmentsProcessor alloc] initWithAttachmentProtos:dataMessage.attachments
+                                                    timestamp:envelope.timestamp
+                                                        relay:envelope.relay
+                                                       thread:thread
+                                               networkManager:self.networkManager];
     TSIncomingMessage *createdMessage = [self handleReceivedEnvelope:envelope
                                                      withDataMessage:dataMessage
-                                                       attachmentIds:attachmentsProcessor.supportedAttachmentIds];
-
-    [attachmentsProcessor fetchAttachmentsForMessage:createdMessage
-        success:^(TSAttachmentStream *_Nonnull attachmentStream) {
-            DDLogDebug(
-                @"%@ successfully fetched attachment: %@ for message: %@", self.tag, attachmentStream, createdMessage);
-        }
-        failure:^(NSError *_Nonnull error) {
-            DDLogError(
-                @"%@ failed to fetch attachments for message: %@ with error: %@", self.tag, createdMessage, error);
-        }];
+                                                       attachmentIds:attachmentsProcessor.attachmentIds];
+    if (attachmentsProcessor.unsupportedAttachmentIds.count > 0) {
+        createdMessage.body = NSLocalizedString(@"Not supported attachment", nil);
+    }
+    
+    [attachmentsProcessor fetchAllAttachmentsForMessage:createdMessage
+                                                success:^(TSAttachmentStream *_Nonnull attachmentStream) {
+                                                    DDLogDebug(
+                                                               @"%@ successfully fetched attachment: %@ for message: %@", self.tag, attachmentStream, createdMessage);
+                                                }
+                                                failure:^(NSError *_Nonnull error) {
+                                                    DDLogError(
+                                                               @"%@ failed to fetch attachments for message: %@ with error: %@", self.tag, createdMessage, error);
+                                                }];
 }
 
 - (void)handleIncomingEnvelope:(OWSSignalServiceProtosEnvelope *)messageEnvelope

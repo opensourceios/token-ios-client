@@ -1,6 +1,12 @@
-//  Copyright © 2016 Open Whisper Systems. All rights reserved.
+//
+//  Copyright (c) 2017 Open Whisper Systems. All rights reserved.
+//
 
 NS_ASSUME_NONNULL_BEGIN
+
+extern NSString *const kAttachmentDownloadProgressNotification;
+extern NSString *const kAttachmentDownloadProgressKey;
+extern NSString *const kAttachmentDownloadAttachmentIDKey;
 
 @class TSMessage;
 @class TSThread;
@@ -17,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, readonly) NSArray<NSString *> *attachmentIds;
 @property (nonatomic, readonly) NSArray<NSString *> *supportedAttachmentIds;
+@property (nonatomic, readonly) NSArray<NSString *> *unsupportedAttachmentIds;
 @property (nonatomic, readonly) BOOL hasSupportedAttachments;
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -36,6 +43,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchAttachmentsForMessage:(nullable TSMessage *)message
                            success:(void (^)(TSAttachmentStream *attachmentStream))successHandler
                            failure:(void (^)(NSError *error))failureHandler;
+@end
+
+@interface OWSAttachmentsProcessor (SupportedAttachment)
+
+- (void)fetchAllAttachmentsForMessage:(nullable TSMessage *)message
+                              success:(void (^)(TSAttachmentStream *attachmentStream))successHandler
+                              failure:(void (^)(NSError *error))failureHandler;
+
 @end
 
 NS_ASSUME_NONNULL_END
