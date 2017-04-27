@@ -46,4 +46,9 @@ class AvatarImageView: UIImageView {
     required init?(coder _: NSCoder) {
         fatalError()
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.cornerRadius = self.frame.width / 2
+    }
 }
