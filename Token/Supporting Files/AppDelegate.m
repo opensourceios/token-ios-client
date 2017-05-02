@@ -64,7 +64,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"RequiresSignIn"]) {
         [self presentSignIn];
     } else {
-        [self createNewUser];
+        [self createNewUserOrMigrateIfNeeded];
     }
 
     return YES;
@@ -103,11 +103,20 @@
     }];
 }
 
-- (void)createNewUser {
+- (void)createNewUserOrMigrateIfNeeded {
     if (TokenUser.current == nil) {
         [[IDAPIClient shared] registerUserIfNeeded:^{
             [[ChatAPIClient shared] registerUser];
             [self didCreateUser];
+        }];
+    } if (TokenUser.current.needsMigration) {
+        // migrate
+        [[IDAPIClient shared] retrieveUserWithUsername:[TokenUser.current username] completion:^(TokenUser * _Nullable user) {
+            if (user == nil) {
+                exit(-1);
+            } else {
+
+            }
         }];
     } else {
         [[IDAPIClient shared] retrieveUserWithUsername:[TokenUser.current username] completion:^(TokenUser * _Nullable user) {
@@ -118,7 +127,7 @@
                     [self didCreateUser];
                 }];
             } else {
-                [self didCreateUser];
+                [[ChatAPIClient shared] registerUser];
                 [self handleFirstLaunch];
             }
         }];

@@ -54,15 +54,15 @@ public final class Yap: NSObject, Singleton {
             }
         }
 
-        let info = Bundle.main.infoDictionary!
-        let version = info["CFBundleShortVersionString"] as! String
-        let dbVersion = keychain.get("DBVersion")
-
-        if version != dbVersion {
-            keychain.set(version, forKey: "DBVersion")
-
-            try? FileManager.default.removeItem(atPath: self.path)
-        }
+//        let info = Bundle.main.infoDictionary!
+//        let version = info["CFBundleShortVersionString"] as! String
+//        let dbVersion = keychain.get("DBVersion")
+//
+//        if version != dbVersion {
+//            keychain.set(version, forKey: "DBVersion")
+//
+//            try? FileManager.default.removeItem(atPath: self.path)
+//        }
 
         self.databasePassword = databasePassword
         self.database = YapDatabase(path: self.path, options: options)

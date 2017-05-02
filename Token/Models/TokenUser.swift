@@ -64,6 +64,10 @@ extension Notification.Name {
         }
     }
 
+    public var needsMigration: Bool {
+        return self.address == Cereal.shared.legacyAddress
+    }
+
     private static var _current: TokenUser?
     static var current: TokenUser? {
         get {

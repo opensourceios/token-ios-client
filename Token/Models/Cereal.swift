@@ -27,10 +27,10 @@ public class Cereal: NSObject {
     lazy var cereal: EtherealCereal = {
         // Base path is m/44'/60'/0'/0/, we use m/44'/60'/0'/0/0 as the id address.
         // If we add support for multiple addresses, we just move on to the next one, m/44'/60'/0'/0/1, m/44'/60'/0'/0/2 and so on.
-        let idKeychain = self.mnemonic.keychain.derivedKeychain(withPath: "m/44'/60'/0'/0/0")
-        let idPrivateKey = idKeychain.key.privateKey.hexadecimalString()
+        let keychain = self.mnemonic.keychain.derivedKeychain(withPath: "m/44'/60'/0'/0/0")
+        let privateKey = keychain.key.privateKey.hexadecimalString()
 
-        return EtherealCereal(privateKey: idPrivateKey)
+        return EtherealCereal(privateKey: privateKey)
     }()
 
     var mnemonic: BTCMnemonic
@@ -39,6 +39,13 @@ public class Cereal: NSObject {
 
     public var address: String {
         return self.cereal.address
+    }
+
+    public var legacyAddress: String {
+        let keychain = self.mnemonic.keychain.derivedKeychain(withPath: "0'/1/0")
+        let privateKey = keychain.key.privateKey.hexadecimalString()
+
+        return EtherealCereal(privateKey: privateKey).address
     }
 
     // restore from words
