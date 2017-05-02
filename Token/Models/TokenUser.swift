@@ -211,23 +211,21 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
     }
 
     var asDict: [String: Any] {
-        get {
-            var imageDataString = ""
-            if let image = self.avatar, let data = (UIImagePNGRepresentation(image) ?? UIImageJPEGRepresentation(image, 1.0)) {
-                imageDataString = data.hexadecimalString
-            }
-
-            return [
-                Constants.address: self.address,
-                Constants.paymentAddress: self.paymentAddress,
-                Constants.username: self.username,
-                Constants.about: self.about,
-                Constants.location: self.location,
-                Constants.name: self.name,
-                Constants.avatar: self.avatarPath,
-                Constants.avatarDataHex: imageDataString,
-                Constants.isApp: self.isApp,
-            ]
+        var imageDataString = ""
+        if let image = self.avatar, let data = (UIImagePNGRepresentation(image) ?? UIImageJPEGRepresentation(image, 1.0)) {
+            imageDataString = data.hexadecimalString
         }
+
+        return [
+            Constants.address: self.address,
+            Constants.paymentAddress: self.paymentAddress,
+            Constants.username: self.username,
+            Constants.about: self.about,
+            Constants.location: self.location,
+            Constants.name: self.name,
+            Constants.avatar: self.avatarPath,
+            Constants.avatarDataHex: imageDataString,
+            Constants.isApp: self.isApp,
+        ]
     }
 }
