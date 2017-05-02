@@ -167,7 +167,7 @@
 - (void)setupTSKitEnv {
     self.networkManager = [TSNetworkManager sharedManager];
     self.contactsManager = [[ContactsManager alloc] init];
-    self.contactsUpdater = [[ContactsUpdater alloc] init];
+    self.contactsUpdater = [ContactsUpdater sharedUpdater];
 
     TSStorageManager *storageManager = [TSStorageManager sharedManager];
     [storageManager setupDatabase];
