@@ -51,7 +51,7 @@ NSCAssert(0, @"Assertion failed: %s", CONVERT_EXPR_TO_STRING(X)); \
 // 2. Use OWSSingletonAssertInit() in each initializer.
 #ifdef DEBUG
 
-#define OWSSingletonAssertFlag() static BOOL _isSingletonCreated = YES;
+#define OWSSingletonAssertFlag() static BOOL _isSingletonCreated = NO;
 
 #define OWSSingletonAssertInit()                                                                                       \
     @synchronized([self class])                                                                                        \
@@ -61,7 +61,6 @@ NSCAssert(0, @"Assertion failed: %s", CONVERT_EXPR_TO_STRING(X)); \
     }
 
 #define OWSSingletonAssert() OWSSingletonAssertFlag() OWSSingletonAssertInit()
-#define OWSSingletonAssert() YES
 
 #else
 
