@@ -83,7 +83,7 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
             return self._current
         }
         set {
-            guard let newPaymentAddress = newValue?.paymentAddress, Cereal.shared.paymentAddress == newPaymentAddress else {
+            guard let newAddress = newValue?.address, Cereal.shared.address == newAddress else {
                 fatalError("Tried to set contact as current user.")
             }
 

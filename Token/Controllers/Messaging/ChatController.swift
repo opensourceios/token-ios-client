@@ -201,7 +201,7 @@ class ChatController: MessagesCollectionViewController {
     }
 
     func fetchAndUpdateBalance() {
-        self.ethereumAPIClient.getBalance(address: Cereal.shared.paymentAddress) { balance, error in
+        self.ethereumAPIClient.getBalance(address: Cereal.shared.address) { balance, error in
             if let error = error {
                 let alertController = UIAlertController.errorAlert(error as NSError)
                 self.present(alertController, animated: true, completion: nil)
@@ -632,7 +632,7 @@ extension ChatController: ActionableCellDelegate {
         // TODO: prevent concurrent calls
         // Also, extract this.
         self.etherAPIClient.createUnsignedTransaction(to: destination, value: value) { transaction, error in
-            let signedTransaction = "0x\(Cereal.shared.signWithWallet(hex: transaction!))"
+            let signedTransaction = "0x\(Cereal.shared.sign(hex: transaction!))"
 
             self.etherAPIClient.sendSignedTransaction(originalTransaction: transaction!, transactionSignature: signedTransaction) { json, error in
                 if error != nil {
@@ -751,7 +751,7 @@ extension ChatController: PaymentSendControllerDelegate {
         self.idAPIClient.retrieveContact(username: tokenId) { user in
             if let user = user {
                 self.etherAPIClient.createUnsignedTransaction(to: user.paymentAddress, value: value) { transaction, error in
-                    let signedTransaction = "0x\(Cereal.shared.signWithWallet(hex: transaction!))"
+                    let signedTransaction = "0x\(Cereal.shared.sign(hex: transaction!))"
 
                     self.etherAPIClient.sendSignedTransaction(originalTransaction: transaction!, transactionSignature: signedTransaction) { json, error in
                         if error != nil {
@@ -785,7 +785,7 @@ extension ChatController: PaymentRequestControllerDelegate {
         let request: [String: Any] = [
             "body": "Payment request: \(EthereumConverter.balanceAttributedString(forWei: valueInWei).string).",
             "value": valueInWei.toHexString,
-            "destinationAddress": Cereal.shared.paymentAddress,
+            "destinationAddress": Cereal.shared.address,
         ]
 
         let paymentRequest = SofaPaymentRequest(content: request)

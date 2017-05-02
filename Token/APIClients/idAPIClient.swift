@@ -100,17 +100,10 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
             self.fetchTimestamp { timestamp in
                 let cereal = Cereal.shared
                 let path = "/v1/user"
-                let parameters = [
-                    "payment_address": cereal.paymentAddress,
-                ]
-                let parametersString = String(data: try! JSONSerialization.data(withJSONObject: parameters, options: []), encoding: .utf8)!
-                let hashedParameters = cereal.sha3WithID(string: parametersString)
-                let signature = "0x\(cereal.signWithID(message: "POST\n\(path)\n\(timestamp)\n\(hashedParameters)"))"
-
+                let signature = "0x\(cereal.sign(message: "POST\n\(path)\n\(timestamp)\n"))"
                 let fields: [String: String] = ["Token-ID-Address": cereal.address, "Token-Signature": signature, "Token-Timestamp": String(timestamp)]
 
-                let json = RequestParameter(parameters)
-                self.teapot.post(path, parameters: json, headerFields: fields) { result in
+                self.teapot.post(path, headerFields: fields) { result in
                     switch result {
                     case .success(let json, let response):
                         guard response.statusCode == 200 else { return }
@@ -136,8 +129,8 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
             let path = "/v1/user"
             let boundary = "teapot.boundary"
             let payload = self.teapot.multipartData(from: avatar, boundary: boundary, filename: "avatar.png")
-            let hashedPayload = cereal.sha3WithID(data: payload)
-            let signature = "0x\(cereal.signWithID(message: "PUT\n\(path)\n\(timestamp)\n\(hashedPayload)"))"
+            let hashedPayload = cereal.sha3(data: payload)
+            let signature = "0x\(cereal.sign(message: "PUT\n\(path)\n\(timestamp)\n\(hashedPayload)"))"
 
             let fields: [String: String] = ["Token-ID-Address": cereal.address, "Token-Signature": signature, "Token-Timestamp": String(timestamp), "Content-Length": String(describing: payload.count), "Content-Type": "multipart/form-data; boundary=\(boundary)"]
             let json = RequestParameter(payload)
@@ -166,8 +159,8 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
             let payload = user.JSONData
             let payloadString = String(data: payload, encoding: .utf8)!
 
-            let hashedPayload = cereal.sha3WithID(string: payloadString)
-            let signature = "0x\(cereal.signWithID(message: "PUT\n\(path)\n\(timestamp)\n\(hashedPayload)"))"
+            let hashedPayload = cereal.sha3(string: payloadString)
+            let signature = "0x\(cereal.sign(message: "PUT\n\(path)\n\(timestamp)\n\(hashedPayload)"))"
 
             let fields: [String: String] = ["Token-ID-Address": cereal.address, "Token-Signature": signature, "Token-Timestamp": String(timestamp)]
             let json = RequestParameter(user.asDict)

@@ -115,8 +115,8 @@ class RatingsClient: NSObject {
 
             let payloadData = try! JSONSerialization.data(withJSONObject: payload, options: [])
             let payloadString = String(data: payloadData, encoding: .utf8)!
-            let hashedPayload = cereal.sha3WithID(string: payloadString)
-            let signature = "0x\(cereal.signWithID(message: "POST\n\(path)\n\(timestamp)\n\(hashedPayload)"))"
+            let hashedPayload = cereal.sha3(string: payloadString)
+            let signature = "0x\(cereal.sign(message: "POST\n\(path)\n\(timestamp)\n\(hashedPayload)"))"
 
             let fields: [String: String] = ["Token-ID-Address": cereal.address, "Token-Signature": signature, "Token-Timestamp": String(describing: timestamp)]
             let json = RequestParameter(payload)
