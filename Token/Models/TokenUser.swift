@@ -46,6 +46,8 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
 
     private static let storedUserKey = "StoredUser"
 
+    private static let storedContactKey = "storedContactKey"
+
     var category = ""
 
     var balance = NSDecimalNumber.zero
@@ -81,6 +83,10 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
             return self._current
         }
         set {
+            guard let newPaymentAddress = newValue?.paymentAddress, Cereal.shared.paymentAddress == newPaymentAddress else {
+                fatalError("Tried to set contact as current user.")
+            }
+
             newValue?.update()
 
             if let user = newValue {
@@ -128,11 +134,8 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
             }
         }
 
-        if isCurrentUser {
-            self.update()
-        } else {
-            self.setupNotifications()
-        }
+        self.update()
+        self.setupNotifications()
     }
 
     static func name(from username: String) -> String {
@@ -157,7 +160,8 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         self.name = name ?? self.name
         self.about = about ?? self.about
         self.location = location ?? self.location
-        saveIfNeeded()
+
+        self.saveIfNeeded()
     }
 
     public required convenience init?(coder aDecoder: NSCoder) {
@@ -187,24 +191,26 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
             return
         }
 
-        update(username: tokenContact.username, name: tokenContact.name, about: tokenContact.about, location: tokenContact.location)
+        self.update(username: tokenContact.username, name: tokenContact.name, about: tokenContact.about, location: tokenContact.location)
     }
 
     private func saveIfNeeded() {
-        if isApp == false {
+        if self.isCurrentUser {
             Yap.sharedInstance.insert(object: self.JSONData, for: TokenUser.storedUserKey)
+        } else {
+            Yap.sharedInstance.insert(object: self.JSONData, for: TokenUser.storedContactKey)
         }
     }
 
     private func postAvatarUpdateNotification() {
-        if isCurrentUser {
+        if self.isCurrentUser {
             NotificationCenter.default.post(name: .CurrentUserDidUpdateAvatarNotification, object: self)
         } else {
             NotificationCenter.default.post(name: .TokenContactDidUpdateAvatarNotification, object: self)
         }
     }
 
-    private(set) var asDict: [String: Any] {
+    var asDict: [String: Any] {
         get {
             var imageDataString = ""
             if let image = self.avatar, let data = (UIImagePNGRepresentation(image) ?? UIImageJPEGRepresentation(image, 1.0)) {
@@ -222,6 +228,6 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
                 Constants.avatarDataHex: imageDataString,
                 Constants.isApp: self.isApp,
             ]
-        } set {}
+        }
     }
 }
