@@ -76,7 +76,7 @@ class EthereumNotificationHandler: NSObject {
                 let content = UNMutableNotificationContent()
                 content.title = "Payment"
 
-                if sofa.recipientAddress == TokenUser.current?.paymentAddress {
+                if sofa.recipientAddress == TokenUser.current?.address {
                     content.body = "Payment received: \(EthereumConverter.fiatValueString(forWei: sofa.value))."
                 } else {
                     content.body = "Payment sent: \(EthereumConverter.fiatValueString(forWei: sofa.value))."

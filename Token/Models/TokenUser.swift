@@ -17,22 +17,17 @@ import Foundation
 import SweetSwift
 import KeychainSwift
 
-public protocol JSONDataSerialization {
-    var JSONData: Data { get }
-}
-
 extension Notification.Name {
     public static let CurrentUserDidUpdateAvatarNotification = Notification.Name(rawValue: "CurrentUserDidUpdateAvatarNotification")
     public static let TokenContactDidUpdateAvatarNotification = Notification.Name(rawValue: "TokenContactDidUpdateAvatarNotification")
 }
 
-public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
+@objc public class TokenUser: NSObject, NSCoding {
 
     struct Constants {
         static let name = "name"
         static let username = "username"
         static let address = "token_id"
-        static let paymentAddress = "payment_address"
         static let location = "location"
         static let about = "about"
         static let avatar = "avatar"
@@ -61,7 +56,6 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
     private(set) var location = ""
     private(set) var avatarPath = ""
     private(set) var address = ""
-    private(set) var paymentAddress = ""
     private(set) var isApp: Bool = false
 
     private(set) var avatar: UIImage? {
@@ -89,12 +83,6 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
 
             newValue?.update()
 
-            if let user = newValue {
-                let keychain = KeychainSwift()
-                keychain.set(user.paymentAddress, forKey: "CurrentUserPaymentAddress")
-                user.saveIfNeeded()
-            }
-
             self._current = newValue
         }
     }
@@ -111,7 +99,6 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         super.init()
 
         self.address = json[Constants.address] as! String
-        self.paymentAddress = (json[Constants.paymentAddress] as? String) ?? (json[Constants.address] as! String)
         self.username = json[Constants.username] as! String
         self.name = json[Constants.name] as? String ?? ""
         self.location = json[Constants.location] as? String ?? ""
@@ -176,7 +163,7 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
     }
 
     public override var description: String {
-        return "<User: address: \(self.address), payment address: \(self.paymentAddress), name: \(self.name), username: \(username)>"
+        return "<User: address: \(self.address), name: \(self.name), username: \(username)>"
     }
 
     private func setupNotifications() {
@@ -218,7 +205,6 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
 
         return [
             Constants.address: self.address,
-            Constants.paymentAddress: self.paymentAddress,
             Constants.username: self.username,
             Constants.about: self.about,
             Constants.location: self.location,

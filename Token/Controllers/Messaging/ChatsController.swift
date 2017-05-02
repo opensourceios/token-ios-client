@@ -66,6 +66,7 @@ open class ChatsController: SweetTableController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(ChatCell.self)
+
         NotificationCenter.default.post(name: IDAPIClient.updateContactsNotification, object: nil, userInfo: nil)
     }
 

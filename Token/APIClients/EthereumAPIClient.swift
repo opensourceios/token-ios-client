@@ -202,7 +202,7 @@ public class EthereumAPIClient: NSObject {
     public func registerForNotifications(_ completion: @escaping ((_ success: Bool) -> Void)) {
         self.timestamp { timestamp in
             let cereal = Cereal.shared
-            let address = TokenUser.current!.paymentAddress
+            let address = TokenUser.current!.address
             let path = "/v1/register"
             let params = [
                 "addresses": [

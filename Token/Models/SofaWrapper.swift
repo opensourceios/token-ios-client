@@ -271,7 +271,7 @@ open class SofaMetadataResponse: SofaWrapper {
         var response = [String: Any]()
         for value in metadataRequest.values {
             if value == "paymentAddress" {
-                response[value] = TokenUser.current?.paymentAddress ?? ""
+                response[value] = TokenUser.current?.address ?? ""
             } else if value == "language" {
                 let locale = Locale.current
                 response[value] = locale.identifier

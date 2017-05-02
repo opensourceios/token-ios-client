@@ -204,7 +204,6 @@
 		9F5D63A61E92331800FED490 /* ImageMessageCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D63A41E92331800FED490 /* ImageMessageCellLayout.swift */; };
 		9F5F297A1E26774100C652A3 /* ChatsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F29781E26774100C652A3 /* ChatsNavigationController.swift */; };
 		9F5F297E1E2677F200C652A3 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F297D1E2677F200C652A3 /* ChatController.swift */; };
-		9F65E0231EB226C100B12819 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		9F66BBB91E7FCE2C00C4148A /* HomeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F66BBB81E7FCE2C00C4148A /* HomeButton.swift */; };
 		9F66BBBA1E7FCE2C00C4148A /* HomeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F66BBB81E7FCE2C00C4148A /* HomeButton.swift */; };
 		9F7B896D1E51C6DA009C192E /* TSInteraction+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7B896C1E51C6DA009C192E /* TSInteraction+Additions.swift */; };
@@ -593,7 +592,6 @@
 				9F3FF82F1EB36A7F002D0293 /* WebRTC.framework in Frameworks */,
 				9F3FF8211EB36A7F002D0293 /* KeychainSwift.framework in Frameworks */,
 				9F3FF8271EB36A7F002D0293 /* SweetFoundation.framework in Frameworks */,
-				9F65E0231EB226C100B12819 /* (null) in Frameworks */,
 				149F9AB91E72E29A00FB74AA /* UIKit.framework in Frameworks */,
 				9F3FF8131EB36A7F002D0293 /* AwesomeCache.framework in Frameworks */,
 				9F3FF81D1EB36A7F002D0293 /* HPGrowingTextView.framework in Frameworks */,

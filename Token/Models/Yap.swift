@@ -54,10 +54,18 @@ public final class Yap: NSObject, Singleton {
             }
         }
 
+        let info = Bundle.main.infoDictionary!
+        let version = info["CFBundleShortVersionString"] as! String
+        let dbVersion = keychain.get("DBVersion")
+
+        if version != dbVersion {
+            keychain.set(version, forKey: "DBVersion")
+
+            try? FileManager.default.removeItem(atPath: self.path)
+        }
+
         self.databasePassword = databasePassword
-
         self.database = YapDatabase(path: self.path, options: options)
-
         self.mainConnection = self.database.newConnection()
     }
 
@@ -74,6 +82,10 @@ public final class Yap: NSObject, Singleton {
     ///   - collection: Optional. The name of the collection the object belongs to. Helps with organisation.
     ///   - metadata: Optional. Any serialisable object. Could be a related object, a description, a timestamp, a dictionary, and so on.
     public final func insert(object: Any?, for key: String, in collection: String? = nil, with metadata: Any? = nil) {
+        if let new = object as? NSObject, let old = self.retrieveObject(for: key, in: collection) as? NSObject, old == new {
+            return
+        }
+
         self.mainConnection.readWrite { transaction in
             transaction.setObject(object, forKey: key, inCollection: collection, withMetadata: metadata)
         }

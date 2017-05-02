@@ -750,7 +750,7 @@ extension ChatController: PaymentSendControllerDelegate {
 
         self.idAPIClient.retrieveContact(username: tokenId) { user in
             if let user = user {
-                self.etherAPIClient.createUnsignedTransaction(to: user.paymentAddress, value: value) { transaction, error in
+                self.etherAPIClient.createUnsignedTransaction(to: user.address, value: value) { transaction, error in
                     let signedTransaction = "0x\(Cereal.shared.sign(hex: transaction!))"
 
                     self.etherAPIClient.sendSignedTransaction(originalTransaction: transaction!, transactionSignature: signedTransaction) { json, error in
