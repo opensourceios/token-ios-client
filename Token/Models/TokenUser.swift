@@ -53,6 +53,7 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
     var balance = NSDecimalNumber.zero
 
     private(set) var name = ""
+
     var displayUsername: String {
         return "@\(self.username)"
     }

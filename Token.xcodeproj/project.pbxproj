@@ -132,6 +132,8 @@
 		9F21E0631E546A03000E90C6 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F21E0621E546A03000E90C6 /* PaymentController.swift */; };
 		9F21E0661E546C4E000E90C6 /* PaymentSendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F21E0651E546C4E000E90C6 /* PaymentSendController.swift */; };
 		9F2433D41E5F46F6003D95A1 /* SignalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2433D31E5F46F6003D95A1 /* SignalNotificationHandler.swift */; };
+		9F27525E1EB9CA7A00050C08 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F27525D1EB9CA7A00050C08 /* Settings.storyboard */; };
+		9F27525F1EB9CA7A00050C08 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F27525D1EB9CA7A00050C08 /* Settings.storyboard */; };
 		9F3CFDE61E5F086200E8D632 /* EthereumConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3CFDE51E5F086200E8D632 /* EthereumConverter.swift */; };
 		9F3FF8001EB36122002D0293 /* TSOutgoingMessage+Addtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FF7FF1EB36122002D0293 /* TSOutgoingMessage+Addtions.m */; };
 		9F3FF8011EB36122002D0293 /* TSOutgoingMessage+Addtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FF7FF1EB36122002D0293 /* TSOutgoingMessage+Addtions.m */; };
@@ -415,6 +417,7 @@
 		9F21E0621E546A03000E90C6 /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 		9F21E0651E546C4E000E90C6 /* PaymentSendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentSendController.swift; sourceTree = "<group>"; };
 		9F2433D31E5F46F6003D95A1 /* SignalNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalNotificationHandler.swift; sourceTree = "<group>"; };
+		9F27525D1EB9CA7A00050C08 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9F3CFDE51E5F086200E8D632 /* EthereumConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumConverter.swift; sourceTree = "<group>"; };
 		9F3FF7FE1EB36122002D0293 /* TSOutgoingMessage+Addtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TSOutgoingMessage+Addtions.h"; sourceTree = "<group>"; };
 		9F3FF7FF1EB36122002D0293 /* TSOutgoingMessage+Addtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TSOutgoingMessage+Addtions.m"; sourceTree = "<group>"; };
@@ -1054,6 +1057,7 @@
 				E1A95D581E6F031F002762DA /* Views */,
 				9FAACCD61E310C1100FB871D /* SettingsNavigationController.swift */,
 				E1A95D541E6EF092002762DA /* SettingsController.swift */,
+				9F27525D1EB9CA7A00050C08 /* Settings.storyboard */,
 				9FCDBAE21E28E71900A70E07 /* ProfileController.swift */,
 				9FE18B2A1E2D1FD300940DC8 /* ProfileEditController.swift */,
 				9F04A7221E38D1400043534A /* QRCodeController.swift */,
@@ -1282,6 +1286,7 @@
 				9FB36EAB1E7C27A300DB6F86 /* scan.m4a in Resources */,
 				9FB36EA81E7C27A300DB6F86 /* menuButton.m4a in Resources */,
 				149F9AD21E72E29A00FB74AA /* SF-UI-Text-Medium.otf in Resources */,
+				9F27525F1EB9CA7A00050C08 /* Settings.storyboard in Resources */,
 				149F9AD31E72E29A00FB74AA /* SF-UI-Text-Bold.otf in Resources */,
 				149F9AD41E72E29A00FB74AA /* Localizable.strings in Resources */,
 				149F9AD51E72E29A00FB74AA /* SF-UI-Display-Bold.otf in Resources */,
@@ -1324,6 +1329,7 @@
 				9F9238C41E24F1D2004BEEE0 /* LaunchScreen.storyboard in Resources */,
 				9FAACD001E31120600FB871D /* SF-UI-Text-Medium.otf in Resources */,
 				9FAACCFA1E31120600FB871D /* SF-UI-Text-Bold.otf in Resources */,
+				9F27525E1EB9CA7A00050C08 /* Settings.storyboard in Resources */,
 				9FAACCB51E30F24100FB871D /* Localizable.strings in Resources */,
 				9FAACCF21E31120600FB871D /* SF-UI-Display-Bold.otf in Resources */,
 				9FAACCFC1E31120600FB871D /* SF-UI-Text-Heavy.otf in Resources */,

@@ -29,22 +29,31 @@ class AvatarImageView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.clipsToBounds = true
-        self.backgroundColor = .lightGray
-
-        self.contentMode = .scaleAspectFill
+        self.setup()
     }
 
     override init(image: UIImage?, highlightedImage: UIImage?) {
         super.init(image: image, highlightedImage: highlightedImage)
+
+        self.setup()
     }
 
     override init(image: UIImage?) {
         super.init(image: image)
+
+        self.setup()
     }
 
-    required init?(coder _: NSCoder) {
-        fatalError()
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setup()
+    }
+
+    private func setup() {
+        self.clipsToBounds = true
+        self.backgroundColor = .lightGray
+
+        self.contentMode = .scaleAspectFill
     }
 
     override func layoutSubviews() {

@@ -76,7 +76,7 @@ open class TabBarController: UITabBarController {
         self.messagingController = ChatsNavigationController(rootViewController: ChatsController(idAPIClient: self.idAPIClient, chatAPIClient: self.chatAPIClient))
 
         self.favoritesController = FavoritesNavigationController(rootViewController: FavoritesController(idAPIClient: self.idAPIClient, chatAPIClient: self.chatAPIClient))
-        self.settingsController = SettingsNavigationController(rootViewController: SettingsController(idAPIClient: self.idAPIClient, chatAPIClient: self.chatAPIClient))
+        self.settingsController = SettingsNavigationController(rootViewController: SettingsController.instantiateFromNib())
 
         self.viewControllers = [
             self.browseController,
