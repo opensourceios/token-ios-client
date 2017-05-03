@@ -21,8 +21,21 @@ import ImagePicker
 
 class ChatController: MessagesCollectionViewController {
 
-    let etherAPIClient = EthereumAPIClient.shared
-    let idAPIClient = IDAPIClient.shared
+    fileprivate var etherAPIClient: EthereumAPIClient {
+        return EthereumAPIClient.shared
+    }
+
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
+    }
+
+    fileprivate var chatAPIClient: ChatAPIClient {
+        return ChatAPIClient.shared
+    }
+
+    fileprivate var ethereumAPIClient: EthereumAPIClient {
+        return EthereumAPIClient.shared
+    }
 
     var textLayoutQueue = DispatchQueue(label: "com.tokenbrowser.token.layout", qos: DispatchQoS(qosClass: .default, relativePriority: 0))
 
@@ -85,10 +98,6 @@ class ChatController: MessagesCollectionViewController {
 
     var thread: TSThread
 
-    var chatAPIClient: ChatAPIClient
-
-    var ethereumAPIClient: EthereumAPIClient
-
     var messageSender: MessageSender
 
     var contactsManager: ContactsManager
@@ -120,9 +129,7 @@ class ChatController: MessagesCollectionViewController {
 
     // MARK: - Init
 
-    init(thread: TSThread, chatAPIClient: ChatAPIClient, ethereumAPIClient: EthereumAPIClient = .shared) {
-        self.chatAPIClient = chatAPIClient
-        self.ethereumAPIClient = ethereumAPIClient
+    init(thread: TSThread) {
         self.thread = thread
 
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { fatalError("Could not retrieve app delegate") }

@@ -20,8 +20,8 @@ class SettingsSectionHeader: UIView {
 
     lazy var titleLabel: UILabel = {
         let view = UILabel(withAutoLayout: true)
-        view.textColor = Theme.greyTextColor
-        view.font = Theme.regular(size: 14)
+        view.textColor = Theme.sectionTitleColor
+        view.font = Theme.sectionTitleFont
 
         return view
     }()
@@ -29,7 +29,7 @@ class SettingsSectionHeader: UIView {
     lazy var errorLabel: UILabel = {
         let view = UILabel(withAutoLayout: true)
         view.textColor = Theme.errorColor
-        view.font = Theme.regular(size: 14)
+        view.font = Theme.regular(size: 12)
         view.textAlignment = .right
 
         return view
@@ -48,10 +48,12 @@ class SettingsSectionHeader: UIView {
         self.init()
         self.clipsToBounds = true
 
-        let margin: CGFloat = 16
+        let margin: CGFloat = 20
 
-        self.titleLabel.text = title
+        self.titleLabel.text = title.uppercased()
         self.addSubview(self.titleLabel)
+
+        self.titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
 
         if let error = error {
             self.errorLabel.text = error
@@ -59,19 +61,17 @@ class SettingsSectionHeader: UIView {
             self.addSubview(self.errorImage)
 
             NSLayoutConstraint.activate([
-                self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
                 self.titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: margin),
 
-                self.errorLabel.topAnchor.constraint(equalTo: self.topAnchor),
+                self.errorLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
                 self.errorLabel.leftAnchor.constraint(greaterThanOrEqualTo: self.titleLabel.rightAnchor),
                 self.errorLabel.rightAnchor.constraint(equalTo: self.errorImage.leftAnchor, constant: -5),
 
-                self.errorImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 3),
+                self.errorImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
                 self.errorImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -margin),
             ])
         } else {
             NSLayoutConstraint.activate([
-                self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
                 self.titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: margin),
                 self.titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -margin),
             ])

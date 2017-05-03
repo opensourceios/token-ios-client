@@ -35,14 +35,15 @@ open class ChatsController: SweetTableController {
         return dbConnection
     }()
 
-    public var chatAPIClient: ChatAPIClient
+    fileprivate var chatAPIClient: ChatAPIClient {
+        return ChatAPIClient.shared
+    }
 
-    public var idAPIClient: IDAPIClient
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
+    }
 
-    public init(idAPIClient: IDAPIClient, chatAPIClient: ChatAPIClient) {
-        self.chatAPIClient = chatAPIClient
-        self.idAPIClient = idAPIClient
-
+    public init() {
         super.init()
 
         self.title = "Chats"
@@ -198,7 +199,7 @@ extension ChatsController: UITableViewDelegate {
 
     open func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let thread = self.thread(at: indexPath)
-        let chatController = ChatController(thread: thread, chatAPIClient: self.chatAPIClient)
+        let chatController = ChatController(thread: thread)
         self.navigationController?.pushViewController(chatController, animated: true)
     }
 }

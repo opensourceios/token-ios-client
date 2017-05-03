@@ -56,6 +56,10 @@ extension Theme {
         return UIColor(hex: "01C236")
     }
 
+    public static var sectionTitleColor: UIColor {
+        return UIColor(hex: "FF6D6D72")
+    }
+
     public static var viewBackgroundColor: UIColor {
         return .white
     }
@@ -126,6 +130,10 @@ extension Theme {
 }
 
 extension Theme {
+
+    static var sectionTitleFont: UIFont {
+        return .systemFont(ofSize: 12)
+    }
 
     static func light(size: CGFloat) -> UIFont {
         return UIFont(name: "SFUIDisplay-Light", size: size) ?? UIFont.systemFont(ofSize: CGFloat(size), weight: UIFontWeightLight)

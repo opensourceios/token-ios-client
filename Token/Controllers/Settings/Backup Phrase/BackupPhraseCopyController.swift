@@ -18,7 +18,9 @@ import SweetUIKit
 
 class BackupPhraseCopyController: UIViewController {
 
-    let idAPIClient: IDAPIClient
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
+    }
 
     lazy var titleLabel: TitleLabel = {
         let view = TitleLabel("This is your backup phrase")
@@ -56,20 +58,15 @@ class BackupPhraseCopyController: UIViewController {
         return view
     }()
 
-    private init() {
-        fatalError()
+    public init() {
+        super.init(nibName: nil, bundle: nil)
+
+        self.title = "Store backup phrase"
+        self.hidesBottomBarWhenPushed = true
     }
 
     public required init?(coder _: NSCoder) {
         fatalError("")
-    }
-
-    public init(idAPIClient: IDAPIClient) {
-        self.idAPIClient = idAPIClient
-
-        super.init(nibName: nil, bundle: nil)
-        self.title = "Store backup phrase"
-        self.hidesBottomBarWhenPushed = true
     }
 
     override func viewDidLoad() {
@@ -104,7 +101,7 @@ class BackupPhraseCopyController: UIViewController {
     }
 
     func proceed(_: ActionButton) {
-        let controller = BackupPhraseVerifyController(idAPIClient: self.idAPIClient)
+        let controller = BackupPhraseVerifyController()
         self.navigationController?.pushViewController(controller, animated: true)
     }
 

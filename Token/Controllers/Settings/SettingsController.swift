@@ -23,6 +23,14 @@ public extension NSNotification.Name {
 
 open class SettingsController: UITableViewController {
 
+    fileprivate var chatAPIClient: ChatAPIClient {
+        return ChatAPIClient.shared
+    }
+
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
+    }
+
     public static let verificationStatusChanged = Notification.Name(rawValue: "VerificationStatusChanged")
 
     private let backupPhraseVerified = "BackupPhraseVerified"
@@ -65,7 +73,7 @@ open class SettingsController: UITableViewController {
     @IBOutlet weak var balanceLabel: UILabel! {
         didSet {
             self.balanceLabel.attributedText = EthereumConverter.balanceSparseAttributedString(forWei: .zero, width: self.balanceLabel.frame.width)
-            EthereumAPIClient.shared.getBalance(address: TokenUser.current?.address ?? "") { (balance, error) in
+            EthereumAPIClient.shared.getBalance(address: TokenUser.current?.address ?? "") { balance, _ in
                 self.balanceLabel.attributedText = EthereumConverter.balanceSparseAttributedString(forWei: balance, width: self.balanceLabel.frame.width)
             }
         }
@@ -78,14 +86,6 @@ open class SettingsController: UITableViewController {
 
             self.versionLabel.text = "Version \(version)"
         }
-    }
-
-    public var chatAPIClient: ChatAPIClient {
-        return ChatAPIClient.shared
-    }
-
-    public var idAPIClient: IDAPIClient {
-        return IDAPIClient.shared
     }
 
     var didVerifyBackupPhrase: Bool {
@@ -102,7 +102,19 @@ open class SettingsController: UITableViewController {
         return UIStoryboard(name: "Settings", bundle: nil).instantiateInitialViewController() as! SettingsController
     }
 
-    func updateVerificationStatus(_ notification: Notification) {
+    private init() {
+        fatalError()
+    }
+
+    private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    @objc private func updateVerificationStatus(_ notification: Notification) {
         if let verificationStatus = notification.object as? VerificationStatus {
             self.verificationStatus = verificationStatus
         }
@@ -156,5 +168,73 @@ open class SettingsController: UITableViewController {
         }
 
         return alert
+    }
+
+    // MARK: TableView methods
+
+    /// This handles the actions for cell selection.
+    ///
+    /// There's unfortunatelly way to directly add IBActions for touching a cell.
+    ///
+    func performAction(for indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                // go to user profile
+                self.navigationController?.pushViewController(ProfileController(), animated: true)
+            case 1:
+                break // go to qr code
+            default:
+                break
+            }
+        case 1:
+            switch indexPath.row {
+            case 1:
+                break // go to add money
+            default:
+                break
+            }
+
+        case 2:
+            switch indexPath.row {
+            case 0:
+                // passphrase backup
+                self.navigationController?.pushViewController(BackupPhraseEnableController(), animated: true)
+            case 1:
+                break // trusted frieds
+            default:
+                break
+            }
+
+        case 3:
+            switch indexPath.row {
+            case 0:
+                break // change currency
+            case 2:
+                // go sign out
+                self.handleSignOut()
+            default:
+                break
+            }
+
+        default:
+            break
+        }
+    }
+
+    open override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performAction(for: indexPath)
+    }
+
+    open override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 2 {
+            let view = SettingsSectionHeader(title: "Security", error: "Your account is at risk")
+            view.setErrorHidden(self.didVerifyBackupPhrase, animated: false)
+
+            return view
+        }
+
+        return super.tableView(tableView, viewForHeaderInSection: section)
     }
 }

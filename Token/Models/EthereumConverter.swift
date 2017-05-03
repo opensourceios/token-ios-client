@@ -67,11 +67,10 @@ struct EthereumConverter {
 
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .left
-        let t = NSTextTab(textAlignment: .right, location: width, options: [:])
-        paragraph.tabStops = [t]
+        let nextTabStop = NSTextTab(textAlignment: .right, location: width, options: [:])
+        paragraph.tabStops = [nextTabStop]
 
         attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraph, range: range)
-        print(attributedString)
 
         return attributedString
     }

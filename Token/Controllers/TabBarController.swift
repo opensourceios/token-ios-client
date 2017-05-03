@@ -31,11 +31,11 @@ open class TabBarController: UITabBarController {
 
     let tabBarSelectedIndexKey = "TabBarSelectedIndex"
 
-    public var chatAPIClient: ChatAPIClient {
+    fileprivate var chatAPIClient: ChatAPIClient {
         return ChatAPIClient.shared
     }
 
-    public var idAPIClient: IDAPIClient {
+    fileprivate var idAPIClient: IDAPIClient {
         return IDAPIClient.shared
     }
 
@@ -73,9 +73,9 @@ open class TabBarController: UITabBarController {
 
         // TODO: Refactor all this navigation controllers subclasses into one, they have similar code
         self.browseController = BrowseNavigationController(rootViewController: BrowseController())
-        self.messagingController = ChatsNavigationController(rootViewController: ChatsController(idAPIClient: self.idAPIClient, chatAPIClient: self.chatAPIClient))
+        self.messagingController = ChatsNavigationController(rootViewController: ChatsController())
 
-        self.favoritesController = FavoritesNavigationController(rootViewController: FavoritesController(idAPIClient: self.idAPIClient, chatAPIClient: self.chatAPIClient))
+        self.favoritesController = FavoritesNavigationController(rootViewController: FavoritesController())
         self.settingsController = SettingsNavigationController(rootViewController: SettingsController.instantiateFromNib())
 
         self.viewControllers = [
@@ -163,7 +163,7 @@ extension TabBarController: ScannerViewControllerDelegate {
 
             self.dismiss(animated: true) {
                 self.switch(to: .favorites)
-                let contactController = ContactController(contact: contact, idAPIClient: self.idAPIClient)
+                let contactController = ContactController(contact: contact)
                 self.favoritesController.pushViewController(contactController, animated: true)
             }
         }

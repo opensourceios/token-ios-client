@@ -59,7 +59,7 @@ public class ChatsNavigationController: UINavigationController {
         guard let chatsController = self.viewControllers.first as? ChatsController else { fatalError() }
 
         let thread = chatsController.thread(withAddress: address)
-        let messagesController = ChatController(thread: thread, chatAPIClient: chatsController.chatAPIClient)
+        let messagesController = ChatController(thread: thread)
 
         self.pushViewController(messagesController, animated: false)
     }
@@ -69,7 +69,7 @@ public class ChatsNavigationController: UINavigationController {
         guard let chatsController = self.viewControllers.first as? ChatsController else { fatalError() }
         guard let thread = chatsController.thread(withIdentifier: identifier) else { return }
 
-        let messagesController = ChatController(thread: thread, chatAPIClient: chatsController.chatAPIClient)
+        let messagesController = ChatController(thread: thread)
         self.pushViewController(messagesController, animated: animated)
     }
 

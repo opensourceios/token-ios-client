@@ -77,7 +77,6 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
         self.teapot.get("/v1/timestamp") { (result: NetworkResult) in
             switch result {
             case .success(let json, let response):
-                print(response)
                 guard let json = json?.dictionary else { fatalError() }
                 guard let timestamp = json["timestamp"] as? Int else { fatalError("Timestamp should be an integer") }
 
@@ -315,6 +314,39 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
                 print(response)
                 print(error.localizedDescription)
                 completion([])
+            }
+        }
+    }
+
+    public func reportUser(address: String, reason: String = "", completion: ((_ success: Bool, _ message: String) -> Void)? = nil) {
+        self.fetchTimestamp { timestamp in
+            let cereal = Cereal.shared
+            let path = "/v1/report"
+
+            let payload = [
+                "token_id": address,
+                "details": reason,
+            ]
+            let payloadData = try! JSONSerialization.data(withJSONObject: payload, options: [])
+            let payloadString = String(data: payloadData, encoding: .utf8)!
+            let hashedPayload = cereal.sha3WithID(string: payloadString)
+            let signature = "0x\(cereal.signWithID(message: "POST\n\(path)\n\(timestamp)\n\(hashedPayload)"))"
+
+            let fields: [String: String] = ["Token-ID-Address": cereal.address, "Token-Signature": signature, "Token-Timestamp": String(timestamp)]
+            let json = RequestParameter(payload)
+
+            self.teapot.post(path, parameters: json, headerFields: fields) { result in
+                switch result {
+                case .success(_, let response):
+                    guard response.statusCode == 204 else { fatalError() }
+
+                    completion?(true, "")
+                case .failure(let json, _, _):
+                    let errors = json?.dictionary?["errors"] as? [[String: Any]]
+                    let message = errors?.first?["message"] as? String
+
+                    completion?(false, message ?? "")
+                }
             }
         }
     }

@@ -17,8 +17,12 @@ import UIKit
 import SweetUIKit
 
 class AppController: UIViewController {
-    var appsAPIClient: AppsAPIClient {
+    fileprivate var appsAPIClient: AppsAPIClient {
         return AppsAPIClient.shared
+    }
+
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
     }
 
     public var app: TokenUser
@@ -140,6 +144,8 @@ class AppController: UIViewController {
         self.addSubviewsAndConstraints()
 
         self.title = self.app.displayUsername
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.displayActions))
 
         self.updateReputation()
     }
@@ -296,5 +302,29 @@ class AppController: UIViewController {
             SoundPlayer.playSound(type: .addedContact)
             self.updateButton()
         }
+    }
+
+    func displayActions() {
+        let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let blockingManager = OWSBlockingManager.shared()
+        let address = self.app.address
+
+        if self.app.isBlocked {
+            actions.addAction(UIAlertAction(title: "Unblock", style: .destructive, handler: { _ in
+                blockingManager.removeBlockedPhoneNumber(address)
+            }))
+        } else {
+            actions.addAction(UIAlertAction(title: "Block", style: .destructive, handler: { _ in
+                blockingManager.addBlockedPhoneNumber(address)
+            }))
+        }
+
+        actions.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { _ in
+            self.idAPIClient.reportUser(address: address)
+        }))
+
+        actions.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        self.present(actions, animated: true)
     }
 }

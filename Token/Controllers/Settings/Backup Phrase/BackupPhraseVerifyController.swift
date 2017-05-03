@@ -18,7 +18,9 @@ import SweetUIKit
 
 class BackupPhraseVerifyController: UIViewController {
 
-    let idAPIClient: IDAPIClient
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
+    }
 
     private let navigationBarCompensation: CGFloat = 64
     private let margin: CGFloat = 30
@@ -55,18 +57,13 @@ class BackupPhraseVerifyController: UIViewController {
         [UILayoutGuide(), UILayoutGuide(), UILayoutGuide(), UILayoutGuide(), UILayoutGuide()]
     }()
 
-    private init() {
-        fatalError()
-    }
-
     public required init?(coder _: NSCoder) {
         fatalError("")
     }
 
-    public init(idAPIClient: IDAPIClient) {
-        self.idAPIClient = idAPIClient
-
+    public init() {
         super.init(nibName: nil, bundle: nil)
+
         self.title = "Store backup phrase"
         self.hidesBottomBarWhenPushed = true
     }

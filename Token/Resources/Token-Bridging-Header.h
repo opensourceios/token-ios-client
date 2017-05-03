@@ -46,6 +46,8 @@
 #import <SignalServiceKit/OWSFingerprintBuilder.h>
 #import <SignalServiceKit/OWSFingerprint.h>
 
+#import <SignalServiceKit/OWSBlockingManager.h>
+
 #import <SignalServiceKit/TSAttachment.h>
 #import <SignalServiceKit/TSAttachmentStream.h>
 #import <SignalServiceKit/TSAttachmentPointer.h>

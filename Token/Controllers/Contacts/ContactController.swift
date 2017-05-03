@@ -18,7 +18,10 @@ import SweetUIKit
 import CoreImage
 
 public class ContactController: UIViewController {
-    var idAPIClient: IDAPIClient
+
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
+    }
 
     public var contact: TokenUser
 
@@ -131,13 +134,8 @@ public class ContactController: UIViewController {
         return view
     }()
 
-    private init() {
-        fatalError()
-    }
-
-    public init(contact: TokenUser, idAPIClient: IDAPIClient) {
+    public init(contact: TokenUser) {
         self.contact = contact
-        self.idAPIClient = idAPIClient
 
         super.init(nibName: nil, bundle: nil)
 
@@ -159,6 +157,8 @@ public class ContactController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.displayActions))
+
         self.view.backgroundColor = Theme.viewBackgroundColor
         self.addSubviewsAndConstraints()
     }
@@ -177,8 +177,6 @@ public class ContactController: UIViewController {
         self.aboutContentLabel.text = self.contact.about
         self.locationContentLabel.text = self.contact.location
         self.avatarImageView.image = self.contact.avatar
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: self.qrCode, style: .plain, target: self, action: #selector(ProfileController.displayQRCode))
 
         self.updateButton()
     }
@@ -320,5 +318,32 @@ public class ContactController: UIViewController {
             SoundPlayer.playSound(type: .addedContact)
             self.updateButton()
         }
+    }
+
+    func displayActions() {
+        let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let blockingManager = OWSBlockingManager.shared()
+        let address = self.contact.address
+
+        if self.contact.isBlocked {
+            actions.addAction(UIAlertAction(title: "Unblock", style: .destructive, handler: { _ in
+                blockingManager.removeBlockedPhoneNumber(address)
+            }))
+        } else {
+            actions.addAction(UIAlertAction(title: "Block", style: .destructive, handler: { _ in
+                blockingManager.addBlockedPhoneNumber(address)
+            }))
+        }
+
+        actions.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { _ in
+            self.idAPIClient.reportUser(address: address) { success, errorMessage in
+                print(success)
+                print(errorMessage)
+            }
+        }))
+
+        actions.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        self.present(actions, animated: true)
     }
 }

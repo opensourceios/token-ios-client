@@ -100,6 +100,12 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         }
     }
 
+    var isBlocked: Bool {
+        let blockingManager = OWSBlockingManager.shared()
+
+        return blockingManager.blockedPhoneNumbers().contains(self.address)
+    }
+
     var isCurrentUser: Bool {
         return self.address == Cereal.shared.address
     }
@@ -108,7 +114,7 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         return try! JSONSerialization.data(withJSONObject: self.asDict, options: [])
     }
 
-    init(json: [String: Any]) {
+    init(json: [String: Any], shouldUpdate: Bool = true) {
         super.init()
 
         self.address = json[Constants.address] as! String
@@ -135,7 +141,10 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
             }
         }
 
-        self.update()
+        if shouldUpdate {
+            self.update()
+        }
+
         self.setupNotifications()
     }
 
@@ -143,11 +152,11 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         return username.hasPrefix("@") ? username.substring(from: username.index(after: username.startIndex)) : username
     }
 
-    static func user(with data: Data) -> TokenUser? {
+    static func user(with data: Data, shouldUpdate: Bool = true) -> TokenUser? {
         guard let deserialised = try? JSONSerialization.jsonObject(with: data, options: []) else { return nil }
         guard let json = deserialised as? [String: Any] else { return nil }
 
-        return TokenUser(json: json)
+        return TokenUser(json: json, shouldUpdate: shouldUpdate)
     }
 
     func update(avatar: UIImage, avatarPath: String) {

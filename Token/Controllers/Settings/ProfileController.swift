@@ -19,7 +19,9 @@ import CoreImage
 
 open class ProfileController: UIViewController {
 
-    var idAPIClient: IDAPIClient
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
+    }
 
     lazy var avatarImageView: AvatarImageView = {
         let view = AvatarImageView(withAutoLayout: true)
@@ -116,13 +118,7 @@ open class ProfileController: UIViewController {
         return view
     }()
 
-    private init() {
-        fatalError()
-    }
-
-    public init(idAPIClient: IDAPIClient) {
-        self.idAPIClient = idAPIClient
-
+    public init() {
         super.init(nibName: nil, bundle: nil)
 
         self.edgesForExtendedLayout = .bottom
@@ -263,7 +259,7 @@ open class ProfileController: UIViewController {
     }
 
     func didTapEditProfileButton() {
-        let editController = ProfileEditController(idAPIClient: self.idAPIClient)
+        let editController = ProfileEditController()
         self.present(editController, animated: true)
     }
 }

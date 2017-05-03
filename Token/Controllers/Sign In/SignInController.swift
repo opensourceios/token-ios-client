@@ -22,7 +22,9 @@ extension NSNotification.Name {
 
 open class SignInController: UIViewController {
 
-    let idAPIClient: IDAPIClient
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
+    }
 
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView(withAutoLayout: true)
@@ -75,18 +77,13 @@ open class SignInController: UIViewController {
         return view
     }()
 
-    private init() {
-        fatalError()
-    }
-
     public required init?(coder _: NSCoder) {
         fatalError("")
     }
 
-    public init(idAPIClient: IDAPIClient) {
-        self.idAPIClient = idAPIClient
-
+    public init() {
         super.init(nibName: nil, bundle: nil)
+
         self.title = "Sign in"
     }
 

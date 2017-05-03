@@ -22,7 +22,7 @@ public class SignInNavigationController: UINavigationController {
     }
 
     convenience init() {
-        self.init(rootViewController: SignInController(idAPIClient: IDAPIClient.shared))
+        self.init(rootViewController: SignInController())
         self.title = "Sign in"
     }
 

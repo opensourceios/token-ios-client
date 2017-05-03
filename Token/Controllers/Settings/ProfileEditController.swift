@@ -36,7 +36,9 @@ open class ProfileEditController: UIViewController {
         return dataSource
     }()
 
-    var idAPIClient: IDAPIClient
+    fileprivate var idAPIClient: IDAPIClient {
+        return IDAPIClient.shared
+    }
 
     lazy var toolbar: UIToolbar = {
         let view = UIToolbar(withAutoLayout: true)
@@ -85,20 +87,6 @@ open class ProfileEditController: UIViewController {
 
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
-    }
-
-    init(idAPIClient: IDAPIClient) {
-        self.idAPIClient = idAPIClient
-
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    private init() {
-        fatalError()
-    }
-
-    public required init?(coder _: NSCoder) {
-        fatalError()
     }
 
     open override func viewDidLoad() {
