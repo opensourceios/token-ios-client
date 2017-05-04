@@ -29,18 +29,6 @@ open class ProfileController: UIViewController {
         return view
     }()
 
-    lazy var qrCode: UIImage = {
-        let image = UIImage.imageQRCode(for: TokenUser.current?.address ?? "", resizeRate: 0.8)
-        let filter = CIFilter(name: "CIMaskToAlpha")!
-
-        filter.setDefaults()
-        filter.setValue(CIImage(cgImage: image.cgImage!), forKey: "inputImage")
-
-        let cImage = filter.outputImage!
-
-        return UIImage(ciImage: cImage)
-    }()
-
     lazy var nameLabel: UILabel = {
         let view = UILabel(withAutoLayout: true)
         view.numberOfLines = 0
@@ -162,8 +150,6 @@ open class ProfileController: UIViewController {
         if let image = TokenUser.current?.avatar {
             self.avatarImageView.image = image
         }
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: self.qrCode, style: .plain, target: self, action: #selector(ProfileController.displayQRCode))
     }
 
     open override func viewDidAppear(_ animated: Bool) {
@@ -249,13 +235,6 @@ open class ProfileController: UIViewController {
 
     func avatarDidUpdate() {
         self.avatarImageView.image = TokenUser.current?.avatar
-    }
-
-    func displayQRCode() {
-        guard let current = TokenUser.current else { return }
-
-        let controller = QRCodeController(add: current.displayUsername)
-        self.present(controller, animated: true)
     }
 
     func didTapEditProfileButton() {

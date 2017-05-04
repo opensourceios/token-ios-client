@@ -184,7 +184,10 @@ open class SettingsController: UITableViewController {
                 // go to user profile
                 self.navigationController?.pushViewController(ProfileController(), animated: true)
             case 1:
-                break // go to qr code
+                guard let current = TokenUser.current else { return }
+                let qrCodecontroller = QRCodeController(for: current.displayUsername)
+
+                self.navigationController?.pushViewController(qrCodecontroller, animated: true)
             default:
                 break
             }
