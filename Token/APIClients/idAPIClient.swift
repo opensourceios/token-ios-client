@@ -177,7 +177,7 @@ public class IDAPIClient: NSObject, CacheExpiryDefault {
                     guard response.statusCode == 200 else { fatalError() }
                     guard let json = json?.dictionary else { fatalError() }
 
-                    TokenUser.current?.update(json: json)
+                    TokenUser.current?.update(json: json, updateAvatar: false, shouldSave: true)
 
                     completion(true, nil)
                 case .failure(let json, _, _):

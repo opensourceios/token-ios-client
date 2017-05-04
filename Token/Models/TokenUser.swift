@@ -68,6 +68,7 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
     private(set) var avatar: UIImage? {
         didSet {
             self.postAvatarUpdateNotification()
+            self.saveIfNeeded()
         }
     }
 
@@ -145,17 +146,13 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         guard let deserialised = try? JSONSerialization.jsonObject(with: data, options: []) else { return nil }
         guard let json = deserialised as? [String: Any] else { return nil }
 
-        return TokenUser(json: json, shouldUpdate: shouldUpdate)
+        return TokenUser(json: json, shouldSave: shouldUpdate)
     }
 
-    public init(json: [String: Any], shouldUpdate: Bool = true) {
+    public init(json: [String: Any], shouldSave: Bool = true) {
         super.init()
 
-        self.update(json: json, updateAvatar: true)
-
-        if shouldUpdate {
-            self.update()
-        }
+        self.update(json: json, updateAvatar: true, shouldSave: shouldSave)
 
         self.setupNotifications()
     }
@@ -203,14 +200,14 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         }
     }
 
-    func update(json: [String: Any], updateAvatar: Bool = false) {
+    func update(json: [String: Any], updateAvatar: Bool = false, shouldSave: Bool = true) {
         self.address = json[Constants.address] as! String
         self.paymentAddress = (json[Constants.paymentAddress] as? String) ?? (json[Constants.address] as! String)
         self.username = json[Constants.username] as! String
-        self.name = json[Constants.name] as? String ?? ""
-        self.location = json[Constants.location] as? String ?? ""
-        self.about = json[Constants.about] as? String ?? ""
-        self.avatarPath = json[Constants.avatar] as? String ?? ""
+        self.name = json[Constants.name] as? String ?? self.name
+        self.location = json[Constants.location] as? String ?? self.location
+        self.about = json[Constants.about] as? String ?? self.about
+        self.avatarPath = json[Constants.avatar] as? String ?? self.avatarPath
 
         if updateAvatar {
             if let avatarDataHex = (json[Constants.avatarDataHex] as? String), avatarDataHex.length > 0, let hexData = avatarDataHex.hexadecimalData {
@@ -224,11 +221,15 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
                         self.avatar = image
                     }
                 } else {
-                    IDAPIClient.shared.downloadAvatar(path: self.avatarPath) { image in
+                    IDAPIClient.shared.downloadAvatar(path: self.avatarPath, fromCache: false) { image in
                         self.avatar = image
                     }
                 }
             }
+        }
+
+        if shouldSave {
+            self.saveIfNeeded()
         }
     }
 
