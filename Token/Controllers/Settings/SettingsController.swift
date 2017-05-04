@@ -137,7 +137,6 @@ open class SettingsController: UITableViewController {
         }
     }
 
-
     private func handleSignOut() {
         guard let currentUser = TokenUser.current else {
             let alert = UIAlertController(title: "No user found!", message: "This is an error. Please report this.", preferredStyle: .alert)

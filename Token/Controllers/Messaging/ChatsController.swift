@@ -203,8 +203,8 @@ extension ChatsController: UITableViewDelegate {
         self.navigationController?.pushViewController(chatController, animated: true)
     }
 
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let action = UITableViewRowAction(style: .destructive, title: "Delete") { action, indexPath in
+    public func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let action = UITableViewRowAction(style: .destructive, title: "Delete") { _, indexPath in
             let thread = self.thread(at: indexPath)
 
             TSStorageManager.shared().dbConnection.asyncReadWrite { transaction in
