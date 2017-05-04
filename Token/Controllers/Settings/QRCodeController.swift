@@ -37,6 +37,8 @@ class QRCodeController: UIViewController {
     convenience init(for username: String) {
         self.init(nibName: nil, bundle: nil)
 
+        self.title = "My QR Code"
+
         self.qrCodeImageView.image = UIImage.imageQRCode(for: "\(QRCodeController.addUsernameBasePath)\(username)", resizeRate: 20.0)
     }
 
