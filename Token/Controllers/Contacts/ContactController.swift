@@ -31,18 +31,6 @@ public class ContactController: UIViewController {
         return view
     }()
 
-    lazy var qrCode: UIImage = {
-        let image = UIImage.imageQRCode(for: self.contact.address, resizeRate: 0.8)
-        let filter = CIFilter(name: "CIMaskToAlpha")!
-
-        filter.setDefaults()
-        filter.setValue(CIImage(cgImage: image.cgImage!), forKey: "inputImage")
-
-        let cImage = filter.outputImage!
-
-        return UIImage(ciImage: cImage)
-    }()
-
     lazy var nameLabel: UILabel = {
         let view = UILabel(withAutoLayout: true)
         view.numberOfLines = 0
@@ -267,11 +255,6 @@ public class ContactController: UIViewController {
         self.locationContentLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -marginHorizontal).isActive = true
 
         self.locationContentLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -marginVertical).isActive = true
-    }
-
-    func displayQRCode() {
-        let controller = QRCodeController(add: self.contact.displayUsername)
-        self.present(controller, animated: true)
     }
 
     func updateButton() {

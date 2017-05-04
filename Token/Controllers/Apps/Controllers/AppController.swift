@@ -247,11 +247,6 @@ class AppController: UIViewController {
         self.avatarImageView.image = self.app.avatar
     }
 
-    func displayQRCode() {
-        let controller = QRCodeController(add: TokenUser.current!.displayUsername)
-        self.present(controller, animated: true)
-    }
-
     func updateButton() {
         let isContactAdded = Yap.sharedInstance.containsObject(for: self.app.address, in: TokenUser.collectionKey)
         let fontColor = isContactAdded ? Theme.tintColor : Theme.darkTextColor
