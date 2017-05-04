@@ -48,9 +48,6 @@ class EthereumNotificationHandler: NSObject {
         }
 
         EthereumAPIClient.shared.getBalance(address: Cereal().paymentAddress) { balance, error in
-            print(balance)
-            print(error?.localizedDescription ?? "")
-
             defer {
                 completion(.newData)
             }

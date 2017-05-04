@@ -73,7 +73,7 @@ open class SettingsController: UITableViewController {
     @IBOutlet weak var balanceLabel: UILabel! {
         didSet {
             self.balanceLabel.attributedText = EthereumConverter.balanceSparseAttributedString(forWei: .zero, width: self.balanceLabel.frame.width)
-            EthereumAPIClient.shared.getBalance(address: TokenUser.current?.address ?? "") { balance, _ in
+            EthereumAPIClient.shared.getBalance(address: TokenUser.current?.paymentAddress ?? "") { balance, _ in
                 self.balanceLabel.attributedText = EthereumConverter.balanceSparseAttributedString(forWei: balance, width: self.balanceLabel.frame.width)
             }
         }
@@ -120,11 +120,20 @@ open class SettingsController: UITableViewController {
         }
     }
 
+    @objc private func handleBalanceUpdate(notification: Notification) {
+        guard notification.name == .ethereumBalanceUpdateNotification, let balance = notification.object as? NSDecimalNumber else { return }
+
+        self.balanceLabel.attributedText = EthereumConverter.balanceSparseAttributedString(forWei: balance, width: self.balanceLabel.frame.width)
+    }
+
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateVerificationStatus(_:)), name: SettingsController.verificationStatusChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.avatarDidUpdate), name: .CurrentUserDidUpdateAvatarNotification, object: nil)
+        let notificationCenter = NotificationCenter.default
+
+        notificationCenter.addObserver(self, selector: #selector(self.updateVerificationStatus(_:)), name: SettingsController.verificationStatusChanged, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(self.avatarDidUpdate), name: .CurrentUserDidUpdateAvatarNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(self.handleBalanceUpdate(notification:)), name: .ethereumBalanceUpdateNotification, object: nil)
     }
 
     func handleSignOut() {

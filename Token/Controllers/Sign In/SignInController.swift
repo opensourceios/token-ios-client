@@ -205,7 +205,7 @@ open class SignInController: UIViewController {
 
                 self.dismiss(animated: true)
             } else {
-                print("OPS! No such user")
+                print("OOPS! No such user")
             }
         }
     }
