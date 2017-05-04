@@ -107,7 +107,7 @@ open class FavoritesController: SweetTableController {
         self.definesPresentationContext = true
 
         let appearance = UIButton.appearance(whenContainedInInstancesOf: [UISearchBar.self])
-        appearance.setTitleColor(Theme.lightTextColor, for: .normal)
+        appearance.setTitleColor(Theme.greyTextColor, for: .normal)
 
         self.displayContacts()
 
