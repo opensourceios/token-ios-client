@@ -116,18 +116,6 @@ open class SettingsController: UITableViewController {
         super.init(coder: aDecoder)
     }
 
-    @objc private func updateVerificationStatus(_ notification: Notification) {
-        if let verificationStatus = notification.object as? VerificationStatus {
-            self.verificationStatus = verificationStatus
-        }
-    }
-
-    @objc private func handleBalanceUpdate(notification: Notification) {
-        guard notification.name == .ethereumBalanceUpdateNotification, let balance = notification.object as? NSDecimalNumber else { return }
-
-        self.balanceLabel.attributedText = EthereumConverter.balanceSparseAttributedString(forWei: balance, width: self.balanceLabel.frame.width)
-    }
-
     open override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -147,6 +135,12 @@ open class SettingsController: UITableViewController {
         }
     }
 
+    @objc private func updateVerificationStatus(_ notification: Notification) {
+        if let verificationStatus = notification.object as? VerificationStatus {
+            self.verificationStatus = verificationStatus
+        }
+    }
+    
     private func handleSignOut() {
         guard let currentUser = TokenUser.current else {
             let alert = UIAlertController(title: "No user found!", message: "This is an error. Please report this.", preferredStyle: .alert)
