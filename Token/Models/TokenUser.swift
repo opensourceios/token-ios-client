@@ -114,38 +114,27 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         return try! JSONSerialization.data(withJSONObject: self.asDict, options: [])
     }
 
-    init(json: [String: Any], shouldUpdate: Bool = true) {
-        super.init()
-
-        self.address = json[Constants.address] as! String
-        self.paymentAddress = (json[Constants.paymentAddress] as? String) ?? (json[Constants.address] as! String)
-        self.username = json[Constants.username] as! String
-        self.name = json[Constants.name] as? String ?? ""
-        self.location = json[Constants.location] as? String ?? ""
-        self.about = json[Constants.about] as? String ?? ""
-        self.avatarPath = json[Constants.avatar] as? String ?? ""
-
-        if let avatarDataHex = (json[Constants.avatarDataHex] as? String), avatarDataHex.length > 0, let hexData = avatarDataHex.hexadecimalData {
-            self.avatar = UIImage(data: hexData)
+    var asDict: [String: Any] {
+        var imageDataString = ""
+        if let image = self.avatar, let data = (UIImagePNGRepresentation(image) ?? UIImageJPEGRepresentation(image, 1.0)) {
+            imageDataString = data.hexadecimalString
         }
 
-        if self.avatarPath.length > 0 {
-            if self.isApp {
-                AppsAPIClient.shared.downloadImage(for: self) { image in
-                    self.avatar = image
-                }
-            } else {
-                IDAPIClient.shared.downloadAvatar(path: self.avatarPath) { image in
-                    self.avatar = image
-                }
-            }
-        }
+        return [
+            Constants.address: self.address,
+            Constants.paymentAddress: self.paymentAddress,
+            Constants.username: self.username,
+            Constants.about: self.about,
+            Constants.location: self.location,
+            Constants.name: self.name,
+            Constants.avatar: self.avatarPath,
+            Constants.avatarDataHex: imageDataString,
+            Constants.isApp: self.isApp,
+        ]
+    }
 
-        if shouldUpdate {
-            self.update()
-        }
-
-        self.setupNotifications()
+    public override var description: String {
+        return "<User: address: \(self.address), payment address: \(self.paymentAddress), name: \(self.name), username: \(username)>"
     }
 
     static func name(from username: String) -> String {
@@ -159,19 +148,16 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         return TokenUser(json: json, shouldUpdate: shouldUpdate)
     }
 
-    func update(avatar: UIImage, avatarPath: String) {
-        self.avatarPath = avatarPath
-        self.avatar = avatar
-        saveIfNeeded()
-    }
+    public init(json: [String: Any], shouldUpdate: Bool = true) {
+        super.init()
 
-    func update(username: String? = nil, name: String? = nil, about: String? = nil, location: String? = nil) {
-        self.username = username ?? self.username
-        self.name = name ?? self.name
-        self.about = about ?? self.about
-        self.location = location ?? self.location
+        self.update(json: json, updateAvatar: true)
 
-        self.saveIfNeeded()
+        if shouldUpdate {
+            self.update()
+        }
+
+        self.setupNotifications()
     }
 
     public required convenience init?(coder aDecoder: NSCoder) {
@@ -183,10 +169,6 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
 
     @objc(encodeWithCoder:) public func encode(with aCoder: NSCoder) {
         aCoder.encode(self.JSONData, forKey: "jsonData")
-    }
-
-    public override var description: String {
-        return "<User: address: \(self.address), payment address: \(self.paymentAddress), name: \(self.name), username: \(username)>"
     }
 
     private func setupNotifications() {
@@ -205,6 +187,7 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
     }
 
     private func saveIfNeeded() {
+        // TODO: only save if needed
         if self.isCurrentUser {
             Yap.sharedInstance.insert(object: self.JSONData, for: TokenUser.storedUserKey)
         } else {
@@ -220,22 +203,48 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
         }
     }
 
-    var asDict: [String: Any] {
-        var imageDataString = ""
-        if let image = self.avatar, let data = (UIImagePNGRepresentation(image) ?? UIImageJPEGRepresentation(image, 1.0)) {
-            imageDataString = data.hexadecimalString
-        }
+    func update(json: [String: Any], updateAvatar: Bool = false) {
+        self.address = json[Constants.address] as! String
+        self.paymentAddress = (json[Constants.paymentAddress] as? String) ?? (json[Constants.address] as! String)
+        self.username = json[Constants.username] as! String
+        self.name = json[Constants.name] as? String ?? ""
+        self.location = json[Constants.location] as? String ?? ""
+        self.about = json[Constants.about] as? String ?? ""
+        self.avatarPath = json[Constants.avatar] as? String ?? ""
 
-        return [
-            Constants.address: self.address,
-            Constants.paymentAddress: self.paymentAddress,
-            Constants.username: self.username,
-            Constants.about: self.about,
-            Constants.location: self.location,
-            Constants.name: self.name,
-            Constants.avatar: self.avatarPath,
-            Constants.avatarDataHex: imageDataString,
-            Constants.isApp: self.isApp,
-        ]
+        if updateAvatar {
+            if let avatarDataHex = (json[Constants.avatarDataHex] as? String), avatarDataHex.length > 0, let hexData = avatarDataHex.hexadecimalData {
+                let image = UIImage(data: hexData)
+                self.avatar = image
+            }
+
+            if self.avatarPath.length > 0 {
+                if self.isApp {
+                    AppsAPIClient.shared.downloadImage(for: self) { image in
+                        self.avatar = image
+                    }
+                } else {
+                    IDAPIClient.shared.downloadAvatar(path: self.avatarPath) { image in
+                        self.avatar = image
+                    }
+                }
+            }
+        }
+    }
+
+    func update(avatar: UIImage, avatarPath: String) {
+        self.avatarPath = avatarPath
+        self.avatar = avatar
+
+        self.saveIfNeeded()
+    }
+
+    func update(username: String? = nil, name: String? = nil, about: String? = nil, location: String? = nil) {
+        self.username = username ?? self.username
+        self.name = name ?? self.name
+        self.about = about ?? self.about
+        self.location = location ?? self.location
+
+        self.saveIfNeeded()
     }
 }

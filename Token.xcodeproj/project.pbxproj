@@ -24,7 +24,6 @@
 		149F9A661E72E29A00FB74AA /* MessageFetcherJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB8C871E682FD80088D5A6 /* MessageFetcherJob.swift */; };
 		149F9A671E72E29A00FB74AA /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAACCD61E310C1100FB871D /* SettingsNavigationController.swift */; };
 		149F9A681E72E29A00FB74AA /* BaseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4A6D1E4CC04300126217 /* BaseConverter.swift */; };
-		149F9A691E72E29A00FB74AA /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F7FA51E71B25E00A076A6 /* SettingsCell.swift */; };
 		149F9A6A1E72E29A00FB74AA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7E5DA11E4C982300543296 /* Message.swift */; };
 		149F9A6B1E72E29A00FB74AA /* BrowseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ED3ABC1E4A2B3400DF8079 /* BrowseController.swift */; };
 		149F9A6C1E72E29A00FB74AA /* TGBaseMessageCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F40F3BC1E59FE97007A7DE7 /* TGBaseMessageCellLayout.swift */; };
@@ -37,7 +36,6 @@
 		149F9A741E72E29A00FB74AA /* ControlsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDB3B181E6D648000EE5FD7 /* ControlsCollectionView.swift */; };
 		149F9A751E72E29A00FB74AA /* ChatsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F29781E26774100C652A3 /* ChatsNavigationController.swift */; };
 		149F9A761E72E29A00FB74AA /* ContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC72A431E252CFA00EF1141 /* ContactsManager.m */; };
-		149F9A771E72E29A00FB74AA /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A95D5D1E6F1114002762DA /* BaseCell.swift */; };
 		149F9A791E72E29A00FB74AA /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1426D2411E7054AB0045EF09 /* AppController.swift */; };
 		149F9A7A1E72E29A00FB74AA /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBAE01E28E71900A70E07 /* FavoritesController.swift */; };
 		149F9A7B1E72E29A00FB74AA /* ChatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F844BD41E30D880001C5498 /* ChatsController.swift */; };
@@ -48,7 +46,6 @@
 		149F9A811E72E29A00FB74AA /* FingerprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE51CE31E44E26500FCB0E2 /* FingerprintViewController.swift */; };
 		149F9A821E72E29A00FB74AA /* ChatInputTextPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F40F3B91E59FE97007A7DE7 /* ChatInputTextPanel.swift */; };
 		149F9A831E72E29A00FB74AA /* ChatsFloatingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145666031E30D24C00E52027 /* ChatsFloatingHeaderView.swift */; };
-		149F9A841E72E29A00FB74AA /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D4381E70416800CC314D /* RatingView.swift */; };
 		149F9A851E72E29A00FB74AA /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9238D31E24F42A004BEEE0 /* ChatCell.swift */; };
 		149F9A861E72E29A00FB74AA /* EthereumConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3CFDE51E5F086200E8D632 /* EthereumConverter.swift */; };
 		149F9A871E72E29A00FB74AA /* TSInteraction+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7B896C1E51C6DA009C192E /* TSInteraction+Additions.swift */; };
@@ -69,7 +66,6 @@
 		149F9A971E72E29A00FB74AA /* MessagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEFEF681E670B0A00948277 /* MessagesCollectionViewController.swift */; };
 		149F9A981E72E29A00FB74AA /* TGClockProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F40F3BD1E59FE97007A7DE7 /* TGClockProgressView.swift */; };
 		149F9A991E72E29A00FB74AA /* UserBootstrapParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC72A331E250E2D00EF1141 /* UserBootstrapParameters.swift */; };
-		149F9A9A1E72E29A00FB74AA /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A95D591E6F031F002762DA /* ProfileCell.swift */; };
 		149F9A9B1E72E29A00FB74AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9238B81E24F1D2004BEEE0 /* AppDelegate.m */; };
 		149F9A9C1E72E29A00FB74AA /* MessageCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F40F3BF1E59FE97007A7DE7 /* MessageCellLayout.swift */; };
 		149F9A9D1E72E29A00FB74AA /* ControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDB3B161E6D640900EE5FD7 /* ControlCell.swift */; };
@@ -80,7 +76,6 @@
 		149F9AA31E72E29A00FB74AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9238B51E24F1D2004BEEE0 /* main.m */; };
 		149F9AA41E72E29A00FB74AA /* EthereumNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F21625E1E5EF39B00292B14 /* EthereumNotificationHandler.swift */; };
 		149F9AA51E72E29A00FB74AA /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDBADE1E28E6DC00A70E07 /* TabBarController.swift */; };
-		149F9AA61E72E29A00FB74AA /* SecurityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A95D5B1E6F10FC002762DA /* SecurityCell.swift */; };
 		149F9AA71E72E29A00FB74AA /* NSDecimalNumber+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4A6A1E4CBFC400126217 /* NSDecimalNumber+Additions.swift */; };
 		149F9AA81E72E29A00FB74AA /* TGBaseMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F40F3BB1E59FE97007A7DE7 /* TGBaseMessageCell.swift */; };
 		149F9AA91E72E29A00FB74AA /* AppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146D564B1E4A77F200FE7944 /* AppCell.swift */; };
@@ -198,6 +193,8 @@
 		9F54A7211E951F0600FEB67B /* RateUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F54A71F1E951F0600FEB67B /* RateUserController.swift */; };
 		9F54A7231E951F1500FEB67B /* RatingsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F54A7221E951F1500FEB67B /* RatingsClient.swift */; };
 		9F54A7241E951F1500FEB67B /* RatingsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F54A7221E951F1500FEB67B /* RatingsClient.swift */; };
+		9F5B9BA11EBB530B006448F0 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B9BA01EBB530B006448F0 /* RatingView.swift */; };
+		9F5B9BA21EBB530B006448F0 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B9BA01EBB530B006448F0 /* RatingView.swift */; };
 		9F5D639D1E9231BE00FED490 /* ActionableMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D639C1E9231BE00FED490 /* ActionableMessageCell.swift */; };
 		9F5D639E1E9231BE00FED490 /* ActionableMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D639C1E9231BE00FED490 /* ActionableMessageCell.swift */; };
 		9F5D63A11E9231E100FED490 /* ImageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D63A01E9231E100FED490 /* ImageMessageCell.swift */; };
@@ -308,7 +305,6 @@
 		9FF6AF9F1E83DE04001B5907 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6AF9E1E83DE04001B5907 /* AvatarImageView.swift */; };
 		9FF6AFA01E83DE04001B5907 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6AF9E1E83DE04001B5907 /* AvatarImageView.swift */; };
 		9FF6AFA11E83E237001B5907 /* ConfirmationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94BDE141E800EF800B2F0CF /* ConfirmationButton.swift */; };
-		A91F7FA61E71B25E00A076A6 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F7FA51E71B25E00A076A6 /* SettingsCell.swift */; };
 		A921D3631E7C145E00EE3221 /* Collection+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A921D3621E7C145E00EE3221 /* Collection+Additions.swift */; };
 		A921D3641E7C145E00EE3221 /* Collection+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A921D3621E7C145E00EE3221 /* Collection+Additions.swift */; };
 		A94BDE151E800EF800B2F0CF /* ConfirmationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94BDE141E800EF800B2F0CF /* ConfirmationButton.swift */; };
@@ -350,10 +346,6 @@
 		A9F8D1C81E72B4AA003F5749 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F8D1C71E72B4AA003F5749 /* Checkbox.swift */; };
 		DF10DA99BB9ED4C75421640F /* libPods-CocoaPods-Distribution.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5CDC5628EC8E3A581DB43C /* libPods-CocoaPods-Distribution.a */; };
 		E1A95D551E6EF092002762DA /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A95D541E6EF092002762DA /* SettingsController.swift */; };
-		E1A95D5A1E6F031F002762DA /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A95D591E6F031F002762DA /* ProfileCell.swift */; };
-		E1A95D5C1E6F10FC002762DA /* SecurityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A95D5B1E6F10FC002762DA /* SecurityCell.swift */; };
-		E1A95D5E1E6F1114002762DA /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A95D5D1E6F1114002762DA /* BaseCell.swift */; };
-		E1F1D4391E70416800CC314D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D4381E70416800CC314D /* RatingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -447,6 +439,7 @@
 		9F48C1561E9CD911008BA637 /* CacheExpiry+Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CacheExpiry+Default.swift"; sourceTree = "<group>"; };
 		9F54A71F1E951F0600FEB67B /* RateUserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateUserController.swift; sourceTree = "<group>"; };
 		9F54A7221E951F1500FEB67B /* RatingsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsClient.swift; sourceTree = "<group>"; };
+		9F5B9BA01EBB530B006448F0 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		9F5D639C1E9231BE00FED490 /* ActionableMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionableMessageCell.swift; sourceTree = "<group>"; };
 		9F5D63A01E9231E100FED490 /* ImageMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMessageCell.swift; sourceTree = "<group>"; };
 		9F5D63A41E92331800FED490 /* ImageMessageCellLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMessageCellLayout.swift; sourceTree = "<group>"; };
@@ -547,7 +540,6 @@
 		9FF6AF961E83CA84001B5907 /* UICollectionViewRightAlignedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewRightAlignedLayout.h; sourceTree = "<group>"; };
 		9FF6AF971E83CA84001B5907 /* UICollectionViewRightAlignedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewRightAlignedLayout.m; sourceTree = "<group>"; };
 		9FF6AF9E1E83DE04001B5907 /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
-		A91F7FA51E71B25E00A076A6 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		A921D3621E7C145E00EE3221 /* Collection+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Additions.swift"; sourceTree = "<group>"; };
 		A94BDE141E800EF800B2F0CF /* ConfirmationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationButton.swift; sourceTree = "<group>"; };
 		A98A29CE1E9237A6003BBE8E /* RateUsersPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateUsersPresentationController.swift; sourceTree = "<group>"; };
@@ -572,10 +564,6 @@
 		A9F8D1C71E72B4AA003F5749 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		BC21FC800942A0C8C2144319 /* Pods-CocoaPods-Development.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoaPods-Development.release.xcconfig"; path = "Pods/Target Support Files/Pods-CocoaPods-Development/Pods-CocoaPods-Development.release.xcconfig"; sourceTree = "<group>"; };
 		E1A95D541E6EF092002762DA /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		E1A95D591E6F031F002762DA /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
-		E1A95D5B1E6F10FC002762DA /* SecurityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityCell.swift; sourceTree = "<group>"; };
-		E1A95D5D1E6F1114002762DA /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
-		E1F1D4381E70416800CC314D /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1127,11 +1115,7 @@
 		E1A95D581E6F031F002762DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E1A95D5D1E6F1114002762DA /* BaseCell.swift */,
-				E1A95D591E6F031F002762DA /* ProfileCell.swift */,
-				E1F1D4381E70416800CC314D /* RatingView.swift */,
-				E1A95D5B1E6F10FC002762DA /* SecurityCell.swift */,
-				A91F7FA51E71B25E00A076A6 /* SettingsCell.swift */,
+				9F5B9BA01EBB530B006448F0 /* RatingView.swift */,
 				A9F61F7E1E72E22900D892E5 /* SettingsSectionHeader.swift */,
 			);
 			path = Views;
@@ -1513,7 +1497,6 @@
 				149F9A661E72E29A00FB74AA /* MessageFetcherJob.swift in Sources */,
 				149F9A671E72E29A00FB74AA /* SettingsNavigationController.swift in Sources */,
 				149F9A681E72E29A00FB74AA /* BaseConverter.swift in Sources */,
-				149F9A691E72E29A00FB74AA /* SettingsCell.swift in Sources */,
 				149F9A6A1E72E29A00FB74AA /* Message.swift in Sources */,
 				A98A29D51E92384C003BBE8E /* RateUsersControllerTransition.swift in Sources */,
 				149F9A6B1E72E29A00FB74AA /* BrowseController.swift in Sources */,
@@ -1534,7 +1517,6 @@
 				149F9A751E72E29A00FB74AA /* ChatsNavigationController.swift in Sources */,
 				A921D3641E7C145E00EE3221 /* Collection+Additions.swift in Sources */,
 				149F9A761E72E29A00FB74AA /* ContactsManager.m in Sources */,
-				149F9A771E72E29A00FB74AA /* BaseCell.swift in Sources */,
 				149F9A791E72E29A00FB74AA /* AppController.swift in Sources */,
 				149F9A7A1E72E29A00FB74AA /* FavoritesController.swift in Sources */,
 				149F9A7B1E72E29A00FB74AA /* ChatsController.swift in Sources */,
@@ -1551,7 +1533,6 @@
 				149F9A821E72E29A00FB74AA /* ChatInputTextPanel.swift in Sources */,
 				A9AC740F1E78051F00365029 /* TitleLabel.swift in Sources */,
 				149F9A831E72E29A00FB74AA /* ChatsFloatingHeaderView.swift in Sources */,
-				149F9A841E72E29A00FB74AA /* RatingView.swift in Sources */,
 				149F9A851E72E29A00FB74AA /* ChatCell.swift in Sources */,
 				A9BF33B51E76F8D0009A51AA /* BackupPhraseVerifyController.swift in Sources */,
 				149F9A861E72E29A00FB74AA /* EthereumConverter.swift in Sources */,
@@ -1567,6 +1548,7 @@
 				149F9A8B1E72E29A00FB74AA /* SearchResultsView.swift in Sources */,
 				149F9A8C1E72E29A00FB74AA /* FavoritesNavigationController.swift in Sources */,
 				A9BF33B31E76F8D0009A51AA /* BackupPhraseEnableController.swift in Sources */,
+				9F5B9BA21EBB530B006448F0 /* RatingView.swift in Sources */,
 				149F9A8D1E72E29A00FB74AA /* Theme.swift in Sources */,
 				A9ED6CD11E83CD8400160637 /* Footnote.swift in Sources */,
 				9F5D639E1E9231BE00FED490 /* ActionableMessageCell.swift in Sources */,
@@ -1585,7 +1567,6 @@
 				149F9A971E72E29A00FB74AA /* MessagesCollectionViewController.swift in Sources */,
 				149F9A981E72E29A00FB74AA /* TGClockProgressView.swift in Sources */,
 				149F9A991E72E29A00FB74AA /* UserBootstrapParameters.swift in Sources */,
-				149F9A9A1E72E29A00FB74AA /* ProfileCell.swift in Sources */,
 				149F9A9B1E72E29A00FB74AA /* AppDelegate.m in Sources */,
 				A9BF33B81E76F918009A51AA /* CheckboxControl.swift in Sources */,
 				149F9A9C1E72E29A00FB74AA /* MessageCellLayout.swift in Sources */,
@@ -1603,7 +1584,6 @@
 				149F9AA41E72E29A00FB74AA /* EthereumNotificationHandler.swift in Sources */,
 				149F9AA51E72E29A00FB74AA /* TabBarController.swift in Sources */,
 				A9ED6CCE1E82B57E00160637 /* InputField.swift in Sources */,
-				149F9AA61E72E29A00FB74AA /* SecurityCell.swift in Sources */,
 				149F9AA71E72E29A00FB74AA /* NSDecimalNumber+Additions.swift in Sources */,
 				149F9AA81E72E29A00FB74AA /* TGBaseMessageCell.swift in Sources */,
 				A9AC74121E78064500365029 /* TextLabel.swift in Sources */,
@@ -1629,7 +1609,6 @@
 				9FEB8C881E682FD80088D5A6 /* MessageFetcherJob.swift in Sources */,
 				9FAACCD71E310C1100FB871D /* SettingsNavigationController.swift in Sources */,
 				9FAE4A6E1E4CC04300126217 /* BaseConverter.swift in Sources */,
-				A91F7FA61E71B25E00A076A6 /* SettingsCell.swift in Sources */,
 				A98A29D11E9237F1003BBE8E /* RateUsersControllerTransition.swift in Sources */,
 				9F7E5DA21E4C982300543296 /* Message.swift in Sources */,
 				A94BDE151E800EF800B2F0CF /* ConfirmationButton.swift in Sources */,
@@ -1649,7 +1628,6 @@
 				9FDB3B191E6D648000EE5FD7 /* ControlsCollectionView.swift in Sources */,
 				9F5F297A1E26774100C652A3 /* ChatsNavigationController.swift in Sources */,
 				9FC72A441E252CFA00EF1141 /* ContactsManager.m in Sources */,
-				E1A95D5E1E6F1114002762DA /* BaseCell.swift in Sources */,
 				A921D3631E7C145E00EE3221 /* Collection+Additions.swift in Sources */,
 				1426D2421E7054AB0045EF09 /* AppController.swift in Sources */,
 				9FCDBAE31E28E71900A70E07 /* FavoritesController.swift in Sources */,
@@ -1665,7 +1643,6 @@
 				9F40F3C01E59FE97007A7DE7 /* ChatInputTextPanel.swift in Sources */,
 				9FF6AF9F1E83DE04001B5907 /* AvatarImageView.swift in Sources */,
 				145666041E30D24C00E52027 /* ChatsFloatingHeaderView.swift in Sources */,
-				E1F1D4391E70416800CC314D /* RatingView.swift in Sources */,
 				9F9238D41E24F42A004BEEE0 /* ChatCell.swift in Sources */,
 				A9BF33AF1E76DF54009A51AA /* BackupPhraseCopyController.swift in Sources */,
 				9F3CFDE61E5F086200E8D632 /* EthereumConverter.swift in Sources */,
@@ -1682,6 +1659,7 @@
 				A9AC74081E77E37500365029 /* ActionButton.swift in Sources */,
 				9FAACCB31E30E1EE00FB871D /* FavoritesNavigationController.swift in Sources */,
 				9FCDBAEA1E28FD5C00A70E07 /* Theme.swift in Sources */,
+				9F5B9BA11EBB530B006448F0 /* RatingView.swift in Sources */,
 				2B355BDA1EAE356C0093FA8F /* TokenUser.swift in Sources */,
 				14ED3ABF1E4A347400DF8079 /* BrowseNavigationController.swift in Sources */,
 				9F40F3CA1E59FE97007A7DE7 /* TGDeliveryStatusView.swift in Sources */,
@@ -1701,7 +1679,6 @@
 				9F40F3C81E59FE97007A7DE7 /* TGClockProgressView.swift in Sources */,
 				A9ED6CD01E83CD8400160637 /* Footnote.swift in Sources */,
 				9FC72A341E250E2D00EF1141 /* UserBootstrapParameters.swift in Sources */,
-				E1A95D5A1E6F031F002762DA /* ProfileCell.swift in Sources */,
 				9F9238B91E24F1D2004BEEE0 /* AppDelegate.m in Sources */,
 				A9AC740E1E78051F00365029 /* TitleLabel.swift in Sources */,
 				9F40F3CC1E59FE97007A7DE7 /* MessageCellLayout.swift in Sources */,
@@ -1718,7 +1695,6 @@
 				9F9238B61E24F1D2004BEEE0 /* main.m in Sources */,
 				9F21625F1E5EF39B00292B14 /* EthereumNotificationHandler.swift in Sources */,
 				9FCDBADF1E28E6DC00A70E07 /* TabBarController.swift in Sources */,
-				E1A95D5C1E6F10FC002762DA /* SecurityCell.swift in Sources */,
 				A9ED6CCD1E82B57E00160637 /* InputField.swift in Sources */,
 				9FAE4A6B1E4CBFC400126217 /* NSDecimalNumber+Additions.swift in Sources */,
 				9F40F3C41E59FE97007A7DE7 /* TGBaseMessageCell.swift in Sources */,

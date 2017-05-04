@@ -186,8 +186,9 @@ extension ProfileEditController: ImagePickerDelegate {
         let scaledImage = image.resized(toHeight: 320)
         self.avatarImageView.image = scaledImage
 
-        self.idAPIClient.updateAvatar(scaledImage) { _ in }
-        self.dismiss(animated: true)
+        self.idAPIClient.updateAvatar(scaledImage) { success in
+            self.dismiss(animated: true)
+        }
     }
 
     public func cancelButtonDidPress(_: ImagePickerController) {

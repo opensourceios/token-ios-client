@@ -124,6 +124,7 @@ open class SettingsController: UITableViewController {
         super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateVerificationStatus(_:)), name: SettingsController.verificationStatusChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.avatarDidUpdate), name: .CurrentUserDidUpdateAvatarNotification, object: nil)
     }
 
     func handleSignOut() {
@@ -143,6 +144,11 @@ open class SettingsController: UITableViewController {
         DispatchQueue.main.async {
             self.present(alert, animated: true)
         }
+    }
+
+    func avatarDidUpdate() {
+        let avatar = TokenUser.current?.avatar
+        self.userAvatarImageVIew.image = avatar
     }
 
     func alertController(balance: NSDecimalNumber) -> UIAlertController {

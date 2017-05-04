@@ -130,6 +130,8 @@ open class ProfileController: UIViewController {
         self.view.backgroundColor = Theme.viewBackgroundColor
 
         self.addSubviewsAndConstraints()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.avatarDidUpdate), name: .CurrentUserDidUpdateAvatarNotification, object: nil)
     }
 
     open override func viewWillAppear(_ animated: Bool) {
@@ -143,13 +145,9 @@ open class ProfileController: UIViewController {
             self.nameLabel.text = username
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.avatarDidUpdate), name: .CurrentUserDidUpdateAvatarNotification, object: nil)
-
         self.aboutContentLabel.text = TokenUser.current?.about
         self.locationContentLabel.text = TokenUser.current?.location
-        if let image = TokenUser.current?.avatar {
-            self.avatarImageView.image = image
-        }
+        self.avatarImageView.image = TokenUser.current?.avatar
     }
 
     open override func viewDidAppear(_ animated: Bool) {
@@ -234,7 +232,8 @@ open class ProfileController: UIViewController {
     }
 
     func avatarDidUpdate() {
-        self.avatarImageView.image = TokenUser.current?.avatar
+        let avatar = TokenUser.current?.avatar
+        self.avatarImageView.image = avatar
     }
 
     func didTapEditProfileButton() {
