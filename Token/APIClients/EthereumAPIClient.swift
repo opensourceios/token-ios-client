@@ -77,7 +77,7 @@ public class EthereumAPIClient: NSObject {
                 completion(Decimal(Double(usd)!))
             case .failure(_, let response, let error):
                 print(response)
-                fatalError(error.localizedDescription)
+                print(error.localizedDescription)
             }
         }
     }

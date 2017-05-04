@@ -68,7 +68,6 @@ public class TokenUser: NSObject, JSONDataSerialization, NSCoding {
     private(set) var avatar: UIImage? {
         didSet {
             self.postAvatarUpdateNotification()
-            self.saveIfNeeded()
         }
     }
 

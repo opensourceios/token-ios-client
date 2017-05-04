@@ -74,13 +74,13 @@ public final class Yap: NSObject, Singleton {
     ///   - collection: Optional. The name of the collection the object belongs to. Helps with organisation.
     ///   - metadata: Optional. Any serialisable object. Could be a related object, a description, a timestamp, a dictionary, and so on.
     public final func insert(object: Any?, for key: String, in collection: String? = nil, with metadata: Any? = nil) {
-        self.mainConnection.readWrite { transaction in
+        self.mainConnection.asyncReadWrite { transaction in
             transaction.setObject(object, forKey: key, inCollection: collection, withMetadata: metadata)
         }
     }
 
     public final func removeObject(for key: String, in collection: String? = nil) {
-        self.mainConnection.readWrite { transaction in
+        self.mainConnection.asyncReadWrite { transaction in
             transaction.removeObject(forKey: key, inCollection: collection)
         }
     }
